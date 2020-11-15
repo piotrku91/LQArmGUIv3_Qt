@@ -48,62 +48,65 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.6
+import QtQuick.Controls 2.0
+import io.qt.examples.backend 1.0
+
 
 Item {
-    id: tabWidget
+    id: element
+    width: parent.width
+    height: parent.height
 
-    default property alias content: stack.children
+    Rectangle {
+        width: parent.width
+        height: parent.height
+        anchors.fill: parent; anchors.bottomMargin: 45;
+        color: "#000008"   // Color of console background
 
-    property int current: 0
+        TextEdit {
+            anchors.fill: parent
+            anchors.topMargin: 10
+            anchors.leftMargin: 5
+            text: "Witaj"
+            font.family: "Verdana"
+            font.bold: true
+            font.pointSize: 8
+            color: "#80FF00"  // Color of console font
+            readOnly: true
 
-    onCurrentChanged: setOpacities()
-    Component.onCompleted: setOpacities()
-
-    function setOpacities() {
-        for (var i = 0; i < stack.children.length; ++i) {
-            stack.children[i].opacity = (i == current ? 1 : 0)
         }
+
     }
 
-    Row {
-        id: header
 
-        Repeater {
-            model: stack.children.length
-            delegate: Rectangle {
-                width: tabWidget.width / stack.children.length; height: 60
+    TextField {
+        width: parent.width-50
+        text: backend.userName
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 1
+        anchors.verticalCenterOffset: 96
+        anchors.horizontalCenterOffset: -30
+        placeholderText: qsTr("Send some command to device")
 
-                Rectangle {
-                    width: parent.width; height: 1
-                    anchors { bottom: parent.bottom; bottomMargin: 1 }
-                    color: "#acb2c2"
-                }
-                BorderImage {
-                    anchors { fill: parent; leftMargin: 2; topMargin: 5; rightMargin: 1 }
-                    border { left: 7; right: 7 }
-                    source: "tab.png"
-                    visible: tabWidget.current == index
-                }
-                Text {
-                    horizontalAlignment: Qt.AlignHCenter; verticalAlignment: Qt.AlignVCenter
-                    anchors.fill: parent
-                    text: stack.children[index].title
-                    elide: Text.ElideRight
-                    font.bold: tabWidget.current == index
 
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: tabWidget.current = index
-                }
-            }
-        }
+
+        onTextChanged: BackEnd.userName = text
     }
 
-    Item {
-        id: stack
-        width: tabWidget.width
-        anchors.top: header.bottom; anchors.bottom: tabWidget.bottom
+    Button {
+
+        text: "OK"
+
+        width: 45
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.bottomMargin: 1
+        anchors.verticalCenterOffset: 96
+        anchors.horizontalCenterOffset: -30
+
+
+        onClicked:  BackEnd.userName = "text"
     }
+
 }

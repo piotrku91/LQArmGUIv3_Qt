@@ -51,7 +51,6 @@
 import QtQuick 2.6
 import QtQuick.Controls 2.0
 
-import io.qt.examples.backend 1.0
 
 ApplicationWindow {
     id: window
@@ -66,45 +65,38 @@ TabWidget {
     anchors.fill: parent
 
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Rectangle {
-        property string title: "Red"
+        property string title: "Konsola"
         anchors.fill: parent
         color: "#e3e3e3"
 
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
-            color: "#ff7f7f"
-            Text {
-                width: parent.width - 20
-                anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                text: "Roses are red"
-                font.pixelSize: 20
-                wrapMode: Text.WordWrap
-            }
-            BackEnd {
-                     id: backend
-                 }
+            color: "#3399FF"
 
-                TextField {
-                    text: backend.userName
-                     placeholderText: qsTr("User name")
-                   anchors.centerIn: parent
 
-                     onTextChanged: backend.userName = text
-                }
+           ConsoleTab {} // ConsoleTab.qml
+
+
 
         }
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Rectangle {
-        property string title: "Green"
+        property string title: "Stan stołu"
         anchors.fill: parent
         color: "#e3e3e3"
 
+
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
-            color: "#7fff7f"
+            color: "#3399FF"
+
+
+
+
             Text {
                 width: parent.width - 20
                 anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
@@ -117,13 +109,42 @@ TabWidget {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Rectangle {
+            property string title: "Konfiguracja"
+            anchors.fill: parent
+            color: "#e3e3e3"
+
+
+            Rectangle {
+                anchors.fill: parent; anchors.margins: 0
+                color: "#3399FF"
+
+
+
+
+                Text {
+                    width: parent.width - 20
+                    anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
+                    text: "Flower stems are green"
+                    font.pixelSize: 20
+                    wrapMode: Text.WordWrap
+                }
+
+
+            }
+        }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     Rectangle {
-        property string title: "Blue"
+        property string title: "Menedżer drinków"
         anchors.fill: parent; color: "#e3e3e3"
 
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
-            color: "#7f7fff"
+            color: "#3399FF"
             Text {
                 width: parent.width - 20
                 anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
@@ -133,6 +154,9 @@ TabWidget {
             }
         }
     }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 

@@ -53,10 +53,6 @@ import QtQuick 2.0
 Item {
     id: tabWidget
 
-    // Setting the default property to stack.children means any child items
-    // of the TabWidget are actually added to the 'stack' item's children.
-    // See the "Property Binding"
-    // documentation for details on default properties.
     default property alias content: stack.children
 
     property int current: 0
@@ -66,7 +62,7 @@ Item {
 
     function setOpacities() {
         for (var i = 0; i < stack.children.length; ++i) {
-            stack.children[i].opacity = (i == current ? 1 : 0)
+            stack.children[i].opacity = (i === current ? 1 : 0)
         }
     }
 
@@ -77,24 +73,26 @@ Item {
             model: stack.children.length
             delegate: Rectangle {
                 width: tabWidget.width / stack.children.length; height: 60
+                color: tabWidget.current == index ? "#000033":"#00376F"
+              //  border.color: "white"
+              //      border.width: 1
+
+
 
                 Rectangle {
                     width: parent.width; height: 1
                     anchors { bottom: parent.bottom; bottomMargin: 1 }
-                    color: "#acb2c2"
+                    color: "#FFFFFF"
                 }
-                BorderImage {
-                    anchors { fill: parent; leftMargin: 2; topMargin: 5; rightMargin: 1 }
-                    border { left: 7; right: 7 }
-                    source: "tab.png"
-                    visible: tabWidget.current == index
-                }
+
                 Text {
                     horizontalAlignment: Qt.AlignHCenter; verticalAlignment: Qt.AlignVCenter
                     anchors.fill: parent
                     text: stack.children[index].title
                     elide: Text.ElideRight
+                    color: tabWidget.current == index ? "#80FF00":"white"
                     font.bold: tabWidget.current == index
+
 
                 }
                 MouseArea {

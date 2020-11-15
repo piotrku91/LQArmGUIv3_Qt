@@ -7,7 +7,7 @@ BackEnd::BackEnd(QObject *parent) :
 
 QString BackEnd::userName()
 {
-    return (m_userName+"hehe");
+    return (m_userName);
 }
 
 void BackEnd::setUserName(const QString &userName)

@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>TabWidget.qml</file>
+        <file>ConsoleTab.qml</file>
     </qresource>
 </RCC>
