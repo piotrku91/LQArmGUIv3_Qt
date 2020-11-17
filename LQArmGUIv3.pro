@@ -1,7 +1,9 @@
 QT += quick
+QT += serialport
 
 CONFIG += c++11
 CONFIG += qmltypes
+
 
 QML_IMPORT_NAME = io.qt.examples.backend
 QML_IMPORT_MAJOR_VERSION = 1
@@ -18,8 +20,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        backend.cpp \
-        main.cpp
+        clock.cpp \
+        main.cpp \
+        serialx.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,8 +40,19 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
+DISTFILES += \
+    static/cmp.png \
+    static/console.png \
+    static/cpu.png \
+    static/list.png \
+    static/s.png \
+    static/shot-glass_empty.png \
+    static/shot-glass_full.png \
+    static/solar-system.png \
+    static/table.png \
+    static/whiskey.png
 
 HEADERS += \
-    backend.h
+    clock.h \
+    serialx.h
 

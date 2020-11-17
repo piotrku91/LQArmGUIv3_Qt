@@ -68,8 +68,11 @@ TabWidget {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Rectangle {
         property string title: "Konsola"
+        property string img: "console"
         anchors.fill: parent
         color: "#e3e3e3"
+
+
 
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
@@ -86,6 +89,7 @@ TabWidget {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Rectangle {
         property string title: "Stan stołu"
+        property string img: "table"
         anchors.fill: parent
         color: "#e3e3e3"
 
@@ -112,6 +116,7 @@ TabWidget {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Rectangle {
             property string title: "Konfiguracja"
+            property string img: "solar-system"
             anchors.fill: parent
             color: "#e3e3e3"
 
@@ -140,6 +145,7 @@ TabWidget {
 
     Rectangle {
         property string title: "Menedżer drinków"
+        property string img: "cocktail"
         anchors.fill: parent; color: "#e3e3e3"
 
         Rectangle {

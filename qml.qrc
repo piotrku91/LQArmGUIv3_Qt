@@ -3,5 +3,18 @@
         <file>main.qml</file>
         <file>TabWidget.qml</file>
         <file>ConsoleTab.qml</file>
+        <file>static/bottle.png</file>
+        <file>static/cmp.png</file>
+        <file>static/cocktail.png</file>
+        <file>static/console.png</file>
+        <file>static/cpu.png</file>
+        <file>static/list.png</file>
+        <file>static/prototype.js</file>
+        <file>static/s.png</file>
+        <file>static/shot-glass_empty.png</file>
+        <file>static/shot-glass_full.png</file>
+        <file>static/solar-system.png</file>
+        <file>static/table.png</file>
+        <file>static/whiskey.png</file>
     </qresource>
 </RCC>

@@ -50,10 +50,22 @@
 
 import QtQuick 2.6
 import QtQuick.Controls 2.0
-import io.qt.examples.backend 1.0
+import QtQuick.Layouts 1.0
+//import io.qt.examples.backend 1.0
 
 
 Item {
+    property alias newcmd: newcmd
+    property alias sendTrigger: sendTrigger
+    property alias mainconsole: mainconsole
+
+
+    Connections {
+        target: serial
+        onGetNewData: {  mainconsole.newLine(data,"DEVICE","pink")}
+        onGetLog: { mainconsole.newLine(Line,"SYSTEM","yellow") }
+                }
+
     id: element
     width: parent.width
     height: parent.height
@@ -65,15 +77,28 @@ Item {
         color: "#000008"   // Color of console background
 
         TextEdit {
+            id: mainconsole
+            textFormat: TextEdit.RichText
             anchors.fill: parent
             anchors.topMargin: 10
             anchors.leftMargin: 5
-            text: "Witaj"
+            text: "["+clocky.getTime() +"] ** Witaj w LQArmGUI :) \n"
             font.family: "Verdana"
             font.bold: true
             font.pointSize: 8
             color: "#80FF00"  // Color of console font
             readOnly: true
+
+            function newLine(cmd,ifc,clr)
+            {
+              cmd = cmd.replace("<","&lt;")
+              cmd =  cmd.replace(">","&gt;")
+              cmd = cmd.replace("\n","<br>")
+              append('<font style="color:'+clr+';">['+clocky.getTime()+ '] '+ifc+": "+cmd+'</font>')
+
+
+            }
+
 
         }
 
@@ -81,8 +106,9 @@ Item {
 
 
     TextField {
-        width: parent.width-50
-        text: backend.userName
+        id: newcmd
+        width: parent.width-150
+        text: "<cmp;3;3;>";
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 1
         anchors.verticalCenterOffset: 96
@@ -91,11 +117,11 @@ Item {
 
 
 
-        onTextChanged: BackEnd.userName = text
+        onTextChanged:;
     }
 
     Button {
-
+        id: sendTrigger
         text: "OK"
 
         width: 45
@@ -106,7 +132,14 @@ Item {
         anchors.horizontalCenterOffset: -30
 
 
-        onClicked:  BackEnd.userName = "text"
+        onClicked: {
+            mainconsole.newLine(newcmd.text,"GUI","red")
+            serial.writeSlot(newcmd.text+"\r\n")
+        newcmd.text=""
+
+        }
+
     }
+
 
 }

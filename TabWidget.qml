@@ -74,6 +74,8 @@ Item {
             delegate: Rectangle {
                 width: tabWidget.width / stack.children.length; height: 60
                 color: tabWidget.current == index ? "#000033":"#00376F"
+
+
               //  border.color: "white"
               //      border.width: 1
 
@@ -83,6 +85,16 @@ Item {
                     width: parent.width; height: 1
                     anchors { bottom: parent.bottom; bottomMargin: 1 }
                     color: "#FFFFFF"
+                }
+
+                Image {
+                   // horizontalAlignment: Qt.AlignHCenter; verticalAlignment: Qt.AlignVCenter
+
+                  anchors {top: parent.top; topMargin:10; left: parent.left ; leftMargin: 50;}
+
+                    source: "static/"+stack.children[index].img+".png"
+                    width: 32;
+                    height: 32;
                 }
 
                 Text {
