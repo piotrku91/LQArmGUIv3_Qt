@@ -48,76 +48,86 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.6
+import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.0
+//import io.qt.examples.backend 1.0
+
 
 Item {
-    id: tabWidget
+    anchors.fill: parent
 
-    default property alias content: stack.children
 
-    property int current: 0
+    Rectangle {
 
-    onCurrentChanged: setOpacities()
-    Component.onCompleted: setOpacities()
+        x: (parent.width/2-parent.width/3)-50
+        y: (parent.height/2-parent.height/3)-50
+        id: rectangle
+        width: 100
+        height: 100
+        color: "#17b1aa"
+        radius: 20
 
-    function setOpacities() {
-        for (var i = 0; i < stack.children.length; ++i) {
-            stack.children[i].opacity = (i === current ? 1 : 0)
+        Image {
+            id: image
+            x: rectangle.width/2-width/2
+            y: rectangle.height/2-height/2
+            width: 64
+            height: 64
+            source: "static/shot-glass_full.png"
+            //fillMode: Image.PreserveAspectFit
         }
+
     }
 
-    Row {
-        id: header
-
-        Repeater {
-            model: stack.children.length
-            delegate: Rectangle {
-                width: tabWidget.width / stack.children.length; height: 60
-                color: tabWidget.current == index ? layout_color_main1:layout_color_main2
-
-
-              //  border.color: "white"
-              //      border.width: 1
-
-
-
-                Rectangle {
-                    width: parent.width; height: 1
-                    anchors { bottom: parent.bottom; bottomMargin: 1 }
-                    color: "#FFFFFF"
-                }
-
-                Image {
-                   // horizontalAlignment: Qt.AlignHCenter; verticalAlignment: Qt.AlignVCenter
-
-                  anchors {top: parent.top; topMargin:10; left: parent.left ; leftMargin: 40;}
-
-                    source: "static/"+stack.children[index].img+".png"
-                    width: 32;
-                    height: 32;
-                }
-
-                Text {
-                    horizontalAlignment: Qt.AlignHCenter; verticalAlignment: Qt.AlignVCenter
-                    anchors.fill: parent
-                    text: stack.children[index].title
-                    elide: Text.ElideRight
-                    color: tabWidget.current == index ? "black":"white"
-                    font.bold: tabWidget.current == index
-
-
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: tabWidget.current = index
-                }
-            }
-        }
+    Rectangle {
+        id: rectangle1
+        x: (parent.width/2-parent.width/6)-50
+        y: (parent.height/2-parent.height/6)-50
+        width: 100
+        height: 100
+        color: "#17b1aa"
+        radius: 20
     }
 
-    Item {
-        id: stack
-        width: tabWidget.width
-        anchors.top: header.bottom; anchors.bottom: tabWidget.bottom
+    Rectangle {
+        id: rectangle2
+        x: (parent.width/2)-50
+        y: (parent.height/2)-50
+        width: 100
+        height: 100
+        color: "#17b1aa"
+        radius: 20
     }
+
+    Rectangle {
+        id: rectangle3
+        x: (parent.width/2+parent.width/6)-50
+        y: (parent.height/2-parent.height/6)-50
+        width: 100
+        height: 100
+        color: "#17b1aa"
+        radius: 20
+    }
+
+    Rectangle {
+        id: rectangle4
+        x: (parent.width/2+parent.width/3)-50
+        y: (parent.height/2-parent.height/3)-50
+        width: 100
+        height: 100
+        color: "#17b1aa"
+        radius: 20
+    }
+
+
+
+
+
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/

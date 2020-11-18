@@ -7,6 +7,8 @@
 
 //#include "backend.h"
 
+#define LAYOUT_COLOR_MAIN1 #f9842d
+
 
 int main(int argc, char *argv[])
 {
@@ -25,7 +27,6 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
         SerialX serial;
         Clock clocky;
-
         context->setContextProperty("serial",&serial);
         context->setContextProperty("clocky",&clocky);
     engine.load(url);

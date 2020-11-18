@@ -60,6 +60,17 @@ Item {
     property alias mainconsole: mainconsole
 
 
+   Item {
+       anchors.fill: parent
+       focus: true
+       Keys.onPressed: {
+       if (event.key === Qt.Key_Left) {
+             mainconsole.newLine("move left","SYSTEM","red");
+                event.accepted = true;
+           }
+       }
+  }
+
     Connections {
         target: serial
         onGetNewData: {  mainconsole.newLine(data,"DEVICE","pink")}
@@ -70,37 +81,85 @@ Item {
     width: parent.width
     height: parent.height
 
+
+
     Rectangle {
         width: parent.width
         height: parent.height
         anchors.fill: parent; anchors.bottomMargin: 45;
         color: "#000008"   // Color of console background
 
-        TextEdit {
-            id: mainconsole
-            textFormat: TextEdit.RichText
+        Flickable {
+            id: flickable
+            clip:true
+            //contentWidth: mainconsole.width
+          //  contentHeight: mainconsole.height
+            flickableDirection: Flickable.VerticalFlick
             anchors.fill: parent
-            anchors.topMargin: 10
-            anchors.leftMargin: 5
+
+         TextArea.flickable: TextArea {
+            id: mainconsole
+            textFormat: TextArea.RichText
+            anchors.fill: parent
             text: "["+clocky.getTime() +"] ** Witaj w LQArmGUI :) \n"
             font.family: "Verdana"
             font.bold: true
             font.pointSize: 8
-            color: "#80FF00"  // Color of console font
+            color: layout_color_main1 // Color of console font
             readOnly: true
+
+// Nice solution of scrolling down from: https://stackoverflow.com/questions/25362957/qml-move-to-top-bottom-of-flickable . Thanks a lot! :)
+
+            function currPos(){
+                    return flickable.contentY
+                }
+
+                function setPos(pos){
+                    flickable.contentY = pos;
+                }
+
+                function getEndPos(){
+                    var ratio = 1.0 - flickable.visibleArea.heightRatio;
+                    var endPos = flickable.contentHeight * ratio;
+                    return endPos;
+                }
+
+                function scrollToEnd(){
+                    flickable.contentY = getEndPos();
+                }
+
+
 
             function newLine(cmd,ifc,clr)
             {
-              cmd = cmd.replace("<","&lt;")
-              cmd =  cmd.replace(">","&gt;")
-              cmd = cmd.replace("\n","<br>")
-              append('<font style="color:'+clr+';">['+clocky.getTime()+ '] '+ifc+": "+cmd+'</font>')
+                var pos, endPos, value;
+
+                cmd = cmd.replace("<","&lt;")
+                cmd =  cmd.replace(">","&gt;")
+                cmd = cmd.replace("\n","<br>")
+
+               cmd='<font style="color:'+clr+';">['+clocky.getTime()+ '] '+ifc+": "+cmd+'</font>'
 
 
+                value = mainconsole.text + String(cmd);
+
+
+                endPos = getEndPos();
+                pos = currPos();
+
+                mainconsole.text = value;
+
+                if(pos == endPos){
+                    scrollToEnd();
+                } else {
+                    setPos(pos);
+                }
             }
 
 
         }
+ScrollBar.vertical: ScrollBar {}
+    }
 
     }
 
@@ -117,7 +176,7 @@ Item {
 
 
 
-        onTextChanged:;
+        onAccepted: sendTrigger.clicked()
     }
 
     Button {
@@ -133,10 +192,12 @@ Item {
 
 
         onClicked: {
+              if (newcmd.text !== "") {
             mainconsole.newLine(newcmd.text,"GUI","red")
             serial.writeSlot(newcmd.text+"\r\n")
         newcmd.text=""
 
+        }
         }
 
     }

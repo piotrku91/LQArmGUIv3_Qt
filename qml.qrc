@@ -16,5 +16,6 @@
         <file>static/solar-system.png</file>
         <file>static/table.png</file>
         <file>static/whiskey.png</file>
+        <file>StatusTableTab.qml</file>
     </qresource>
 </RCC>

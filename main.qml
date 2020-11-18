@@ -53,6 +53,11 @@ import QtQuick.Controls 2.0
 
 
 ApplicationWindow {
+    property color layout_color_main1: "#f9842d"
+    property color layout_color_main2: "#47b2ce"
+    property color layout_color_backgrounds: "#f7d9bc"
+
+
     id: window
     visible: true
     visibility: "FullScreen"
@@ -76,7 +81,7 @@ TabWidget {
 
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
-            color: "#3399FF"
+            color: layout_color_backgrounds
 
 
            ConsoleTab {} // ConsoleTab.qml
@@ -96,18 +101,12 @@ TabWidget {
 
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
-            color: "#3399FF"
+            color: layout_color_backgrounds
 
 
 
 
-            Text {
-                width: parent.width - 20
-                anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                text: "Flower stems are green"
-                font.pixelSize: 20
-                wrapMode: Text.WordWrap
-            }
+          StatusTableTab {}
 
 
         }
@@ -123,7 +122,7 @@ TabWidget {
 
             Rectangle {
                 anchors.fill: parent; anchors.margins: 0
-                color: "#3399FF"
+                color: layout_color_backgrounds
 
 
 
@@ -143,6 +142,39 @@ TabWidget {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            Rectangle {
+                property string title: "Magazyn napojów"
+                property string img: "whiskey"
+                anchors.fill: parent
+                color: "#e3e3e3"
+
+
+                Rectangle {
+                    anchors.fill: parent; anchors.margins: 0
+                    color: layout_color_backgrounds
+
+
+
+
+                    Text {
+                        width: parent.width - 20
+                        anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
+                        text: "Flower stems are green"
+                        font.pixelSize: 20
+                        wrapMode: Text.WordWrap
+                    }
+
+
+                }
+            }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
     Rectangle {
         property string title: "Menedżer drinków"
         property string img: "cocktail"
@@ -150,7 +182,7 @@ TabWidget {
 
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
-            color: "#3399FF"
+            color: layout_color_backgrounds
             Text {
                 width: parent.width - 20
                 anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
