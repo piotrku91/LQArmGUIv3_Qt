@@ -12,8 +12,11 @@ class Clock: public QObject
 public:
     explicit Clock(QObject *parent = nullptr);
 
+
     public slots:
     QString getTime();
+
+
 };
 
 #endif // CLOCK_H

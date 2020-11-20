@@ -17,5 +17,8 @@
         <file>static/table.png</file>
         <file>static/whiskey.png</file>
         <file>StatusTableTab.qml</file>
+        <file>LQStorageTab.qml</file>
+        <file>ConfigurationTab.qml</file>
+        <file>MixerTab.qml</file>
     </qresource>
 </RCC>

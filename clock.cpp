@@ -17,3 +17,8 @@ QString Clock::getTime()
     return QString::fromStdString(oss.str());
 
 }
+
+
+
+
+

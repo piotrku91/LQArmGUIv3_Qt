@@ -1,52 +1,3 @@
-/****************************************************************************
-**
-** Copyright (C) 2017 The Qt Company Ltd.
-** Contact: https://www.qt.io/licensing/
-**
-** This file is part of the examples of the Qt Toolkit.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** Commercial License Usage
-** Licensees holding valid commercial Qt licenses may use this file in
-** accordance with the commercial license agreement provided with the
-** Software or, alternatively, in accordance with the terms contained in
-** a written agreement between you and The Qt Company. For licensing terms
-** and conditions see https://www.qt.io/terms-conditions. For further
-** information use the contact form at https://www.qt.io/contact-us.
-**
-** BSD License Usage
-** Alternatively, you may use this file under the terms of the BSD license
-** as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of The Qt Company Ltd nor the names of its
-**     contributors may be used to endorse or promote products derived
-**     from this software without specific prior written permission.
-**
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-**
-** $QT_END_LICENSE$
-**
-****************************************************************************/
 
 import QtQuick 2.6
 import QtQuick.Controls 2.0
@@ -55,69 +6,266 @@ import QtQuick.Layouts 1.0
 
 
 Item {
+    id: table
     anchors.fill: parent
+    property int boxWidth:100
+    property int boxHeight:150
+default property alias boxA: table.children
 
+
+ListModel { id: drinkMixList }
+
+//////////////////////////////////////////////////////////////////// FUNCTIONS /////////////////////////////////////////////////////////////////////
+
+    function setImage(id,status)
+    {
+        var tmpname;
+
+       tmpname = (status===true ? "full.png" : "empty.png")
+   boxA[id].children[0].source="static/shot-glass_"+tmpname
+
+
+    }
+
+    function fillLists(listmodel)
+    {
+        // Test  version
+        for (var i = 0; i < 5; i++) {
+          boxA[i].children[1].model=drinkMixList
+            drinkMixList.clear()
+
+            for (var j = 0; j < 3; j++) {
+                drinkMixList.append({text: "Drink"+j})
+            }
+
+        }
+
+
+
+    }
+
+//////////////////////////////////////////////////////////////////// BOX 0 /////////////////////////////////////////////////////////////////////
+    Rectangle {
+        id: box0
+        x: (parent.width/2-parent.width/3)-width/2
+        y: (parent.height/2-parent.height/3)-height/2
+        width: boxWidth
+        height: boxHeight
+        color: "#17b1aa"
+        radius: 20
+
+
+        Image {
+            id: box0_ico
+            x: parent.width/2-width/2
+            y: parent.height/2-height/2
+            width: 64
+            height: 64
+            source: "static/shot-glass_empty.png"
+            fillMode: Image.PreserveAspectFit
+            mipmap: true
+        }
+
+
+        ComboBox {
+            id: box0_list
+            y: (parent.height)
+            width: boxWidth
+            model: ["First", "Second", "Third"]
+        }
+
+        Button {
+            id: box0_buttonun
+            text: qsTr("ODBLOKUJ")
+            height: 20
+            y: parent.height+box0_list.height+10
+
+        }
+
+        Button {
+            id: box0_buttonexe
+            text: qsTr("NALEJ")
+            height: 20
+            y: parent.height+box0_list.height+10+20+10
+
+        }
+
+
+
+
+
+
+
+
+    }
+
+
+//////////////////////////////////////////////////////////////////// BOX 1 /////////////////////////////////////////////////////////////////////
 
     Rectangle {
-
-        x: (parent.width/2-parent.width/3)-50
-        y: (parent.height/2-parent.height/3)-50
-        id: rectangle
-        width: 100
-        height: 100
+        id: box1
+        x: (parent.width/2-parent.width/6)-width/2
+        y: (parent.height/2-parent.height/6)-height/2
+        width: boxWidth
+        height: boxHeight
         color: "#17b1aa"
         radius: 20
 
         Image {
-            id: image
-            x: rectangle.width/2-width/2
-            y: rectangle.height/2-height/2
+            id: box1_ico
+            x: parent.width/2-width/2
+            y: parent.height/2-height/2
             width: 64
             height: 64
-            source: "static/shot-glass_full.png"
-            //fillMode: Image.PreserveAspectFit
+            source: "static/shot-glass_empty.png"
+            fillMode: Image.PreserveAspectFit
+            mipmap: true
+        }
+
+        ComboBox {
+            id: box1_list
+            y: (parent.height)
+            width: boxWidth
+            model: ["First", "Second", "Third"]
         }
 
     }
 
-    Rectangle {
-        id: rectangle1
-        x: (parent.width/2-parent.width/6)-50
-        y: (parent.height/2-parent.height/6)-50
-        width: 100
-        height: 100
-        color: "#17b1aa"
-        radius: 20
-    }
+//////////////////////////////////////////////////////////////////// BOX 2 /////////////////////////////////////////////////////////////////////
 
     Rectangle {
-        id: rectangle2
-        x: (parent.width/2)-50
+        id: box2
+        x: (parent.width/2)-width/2
         y: (parent.height/2)-50
-        width: 100
-        height: 100
+        width: boxWidth
+        height: boxHeight
         color: "#17b1aa"
         radius: 20
+
+        Image {
+            id: box2_ico
+            x: parent.width/2-width/2
+            y: parent.height/2-height/2
+            width: 64
+            height: 64
+            source: "static/shot-glass_empty.png"
+            fillMode: Image.PreserveAspectFit
+            mipmap: true
+        }
+
+
+        ComboBox {
+            id: box2_list
+            y: (parent.height)
+            width: boxWidth
+            model: ["First", "Second", "Third"]
+        }
+
+
+
+
     }
 
-    Rectangle {
-        id: rectangle3
-        x: (parent.width/2+parent.width/6)-50
-        y: (parent.height/2-parent.height/6)-50
-        width: 100
-        height: 100
-        color: "#17b1aa"
-        radius: 20
-    }
+//////////////////////////////////////////////////////////////////// BOX 3 /////////////////////////////////////////////////////////////////////
 
     Rectangle {
-        id: rectangle4
-        x: (parent.width/2+parent.width/3)-50
-        y: (parent.height/2-parent.height/3)-50
-        width: 100
-        height: 100
+        id: box3
+        x: (parent.width/2+parent.width/6)-width/2
+        y: (parent.height/2-parent.height/6)-height/2
+        width: boxWidth
+        height: boxHeight
         color: "#17b1aa"
         radius: 20
+
+        Image {
+            id: box3_ico
+            x: parent.width/2-width/2
+            y: parent.height/2-height/2
+            width: 64
+            height: 64
+            source: "static/shot-glass_empty.png"
+            fillMode: Image.PreserveAspectFit
+            mipmap: true
+        }
+
+        ComboBox {
+            id: box3_list
+            y: (parent.height)
+            width: boxWidth
+            model: ["First", "Second", "Third"]
+        }
+
+
+    }
+
+//////////////////////////////////////////////////////////////////// BOX 4 /////////////////////////////////////////////////////////////////////
+
+    Rectangle {
+        id: box4
+        x: (parent.width/2+parent.width/3)-width/2
+        y: (parent.height/2-parent.height/3)-height/2
+        width: boxWidth
+        height: boxHeight
+        color: "#17b1aa"
+        radius: 20
+
+
+        Image {
+            id: box4_ico
+            x: parent.width/2-width/2
+            y: parent.height/2-height/2
+            width: 64
+            height: 64
+            source: "static/shot-glass_empty.png"
+            fillMode: Image.PreserveAspectFit
+            mipmap: true
+        }
+
+        ComboBox {
+            id: box4_list
+            y: (parent.height)
+            width: boxWidth
+            model: ["First", "Second", "Third"]
+        }
+
+
+    }
+
+    Button {
+        id: guzik
+        text: "patrz"
+
+        width: 45
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.bottomMargin: 1
+        anchors.verticalCenterOffset: 96
+        anchors.horizontalCenterOffset: -30
+
+
+        onClicked: {
+            setImage(0,true)
+            fillLists(["First1", "Second", "Third"])
+
+        }
+
+
+    }
+
+    Text {
+        id: element
+        x: parent.width/2-width/2
+        y: parent.height/4
+        width: 52
+        height: 37
+        text: qsTr("LQArm ")
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        styleColor: "#650000"
+        style: Text.Outline
+        font.bold: true
+        font.family: "Verdana"
+        font.pixelSize: 36
     }
 
 
@@ -125,6 +273,7 @@ Item {
 
 
 }
+
 
 /*##^##
 Designer {

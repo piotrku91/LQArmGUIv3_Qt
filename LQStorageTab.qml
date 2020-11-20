@@ -6,12 +6,38 @@ import QtQuick.Layouts 1.0
 
 Item {
     id: lqstorage
-    anchors.fill: parent
+    width: 640; height: 480
+
+    Button {
+        x: 400
+        y: 400
+        text: "eeeeeeee"
+
+        onClicked: {slots.itemAt(0).color="red"}
 
 
+    }
+
+
+    Row {
+        Repeater {
+            id: slots
+            model: 9
+            Rectangle {
+                width: lqstorage.width/9; height: 300
+                border.width: 1
+                color: "white"
+
+
+            }
+
+
+        }
+    }
 
 
 }
+
 
 
 /*##^##

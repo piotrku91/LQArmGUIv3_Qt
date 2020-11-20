@@ -47,7 +47,8 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
-
+import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.0
 import QtQuick 2.0
 
 Item {
@@ -64,6 +65,7 @@ Item {
         for (var i = 0; i < stack.children.length; ++i) {
             stack.children[i].opacity = (i === current ? 1 : 0)
         }
+
     }
 
     Row {
@@ -76,8 +78,6 @@ Item {
                 color: tabWidget.current == index ? layout_color_main1:layout_color_main2
 
 
-              //  border.color: "white"
-              //      border.width: 1
 
 
 
@@ -88,13 +88,15 @@ Item {
                 }
 
                 Image {
-                   // horizontalAlignment: Qt.AlignHCenter; verticalAlignment: Qt.AlignVCenter
 
-                  anchors {top: parent.top; topMargin:10; left: parent.left ; leftMargin: 40;}
+
+                    anchors {top: parent.top; topMargin:10; left: parent.left ; leftMargin: 40;}
 
                     source: "static/"+stack.children[index].img+".png"
                     width: 32;
                     height: 32;
+                    fillMode: Image.PreserveAspectFit
+                   // mipmap: true
                 }
 
                 Text {
@@ -109,6 +111,7 @@ Item {
                 }
                 MouseArea {
                     anchors.fill: parent
+
                     onClicked: tabWidget.current = index
                 }
             }
@@ -119,5 +122,6 @@ Item {
         id: stack
         width: tabWidget.width
         anchors.top: header.bottom; anchors.bottom: tabWidget.bottom
+
     }
 }

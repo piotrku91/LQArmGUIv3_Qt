@@ -4,6 +4,7 @@
 #include <QDebug>
 #include "serialx.h"
 #include "clock.h"
+#include "mixer.h"
 
 //#include "backend.h"
 
@@ -25,10 +26,14 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+
         SerialX serial;
         Clock clocky;
+        Mixer mixer;
         context->setContextProperty("serial",&serial);
         context->setContextProperty("clocky",&clocky);
+        context->setContextProperty("mixer",&mixer);
+
     engine.load(url);
     serial.begin("ttyACM0",9600);
 

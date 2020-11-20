@@ -72,6 +72,7 @@ TabWidget {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Rectangle {
+
         property string title: "Konsola"
         property string img: "console"
         anchors.fill: parent
@@ -82,6 +83,7 @@ TabWidget {
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
             color: layout_color_backgrounds
+            enabled: (tabs.current===0) ? true:false
 
 
            ConsoleTab {} // ConsoleTab.qml
@@ -102,6 +104,7 @@ TabWidget {
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
             color: layout_color_backgrounds
+            enabled: (tabs.current===1) ? true:false
 
 
 
@@ -123,6 +126,7 @@ TabWidget {
             Rectangle {
                 anchors.fill: parent; anchors.margins: 0
                 color: layout_color_backgrounds
+                enabled: (tabs.current===2) ? true:false
 
 
 
@@ -153,17 +157,12 @@ TabWidget {
                 Rectangle {
                     anchors.fill: parent; anchors.margins: 0
                     color: layout_color_backgrounds
+                    enabled: (tabs.current===3) ? true:false
 
 
 
 
-                    Text {
-                        width: parent.width - 20
-                        anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                        text: "Flower stems are green"
-                        font.pixelSize: 20
-                        wrapMode: Text.WordWrap
-                    }
+               LQStorageTab {}
 
 
                 }
@@ -183,13 +182,8 @@ TabWidget {
         Rectangle {
             anchors.fill: parent; anchors.margins: 0
             color: layout_color_backgrounds
-            Text {
-                width: parent.width - 20
-                anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                text: "Violets are blue"
-                font.pixelSize: 20
-                wrapMode: Text.WordWrap
-            }
+            enabled: (tabs.current===4) ? true:false
+            MixerTab{}
         }
     }
 
