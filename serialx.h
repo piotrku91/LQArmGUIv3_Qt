@@ -3,6 +3,7 @@
 
 #include <QtSerialPort/QSerialPort>
 #include <QObject>
+#include "/home/piotr/Arduino/libraries/ParamPart/src/parampart_pcs.h"
 
 class SerialX : public QObject
 {
@@ -16,6 +17,7 @@ public:
     void begin(const QString& dev, const int& baudrate);
     void end();
     void write(const QString& msg);
+    ParamPart proba;
 
 
 public slots:

@@ -20,8 +20,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        ../Arduino/libraries/ParamPart/src/parampart_pcs.cpp \
         clock.cpp \
         main.cpp \
+        mixer.cpp \
         serialx.cpp
 
 RESOURCES += qml.qrc
@@ -53,6 +55,8 @@ DISTFILES += \
     static/whiskey.png
 
 HEADERS += \
+    ../Arduino/libraries/ParamPart/src/parampart_pcs.h \
     clock.h \
+    mixer.h \
     serialx.h
 

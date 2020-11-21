@@ -136,7 +136,7 @@ Item {
 
                 cmd = cmd.replace("<","&lt;")
                 cmd =  cmd.replace(">","&gt;")
-                cmd = cmd.replace("\n","<br>")
+                //cmd = cmd.replace("\n","<br>")
 
                cmd='<font style="color:'+clr+';">['+clocky.getTime()+ '] '+ifc+": "+cmd+'</font>'
 
@@ -149,7 +149,7 @@ Item {
 
                 mainconsole.text = value;
 
-                if(pos == endPos){
+                if(pos === endPos){
                     scrollToEnd();
                 } else {
                     setPos(pos);
@@ -166,7 +166,7 @@ ScrollBar.vertical: ScrollBar {}
 
     TextField {
         id: newcmd
-        width: parent.width-150
+        width: parent.width-50
         text: "<cmp;3;3;>";
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 1

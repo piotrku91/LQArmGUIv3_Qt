@@ -1,6 +1,9 @@
 #include "serialx.h"
 #include <QtSerialPort/QSerialPort>
 
+extern ParamPart Reader;
+extern void Reaction(ParamPart& P);
+
 SerialX::SerialX(): sP(new QSerialPort(this))
 {
 
@@ -73,17 +76,19 @@ void SerialX::closeSlot(){
 
 void SerialX::readData(){
 
-    if ((sP->isOpen()) && (sP->waitForReadyRead())) {
+    if ((sP->isOpen()) && (sP->canReadLine())) {
 
-        QByteArray requestData = sP->readAll();
-        while (sP->waitForReadyRead(10))
-            requestData += sP->readAll();
+        QByteArray requestData = 0;
+        if (sP->canReadLine())
+            requestData = sP->readLine(64);
+    const QString request = QString::fromUtf8(requestData);
+    std::string inter=request.toStdString();
+    Reader << inter;
 
-   const QString request = QString::fromUtf8(requestData);
+    Reader.Interpreter(Reaction);
 
 
-
-        emit getNewData(request);
+        if (request!="") emit getNewData(request);
     }
 
 }

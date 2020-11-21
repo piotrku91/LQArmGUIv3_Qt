@@ -2,14 +2,34 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDebug>
+#include "/home/piotr/Arduino/libraries/ParamPart/src/parampart_pcs.h"
 #include "serialx.h"
 #include "clock.h"
 #include "mixer.h"
 
+
+SerialX serial;
+ParamPart Reader;
 //#include "backend.h"
 
 #define LAYOUT_COLOR_MAIN1 #f9842d
 
+
+void Reaction(ParamPart& P) { //temporary place for this function, (move to another cpp file)
+
+    if (P.Header("artn")) {
+
+  emit serial.getNewData("jest zwrot!");
+    };
+
+
+
+    P.ReadDone();
+
+
+
+
+};
 
 int main(int argc, char *argv[])
 {
@@ -27,9 +47,12 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
 
-        SerialX serial;
+
+
         Clock clocky;
         Mixer mixer;
+
+
         context->setContextProperty("serial",&serial);
         context->setContextProperty("clocky",&clocky);
         context->setContextProperty("mixer",&mixer);
