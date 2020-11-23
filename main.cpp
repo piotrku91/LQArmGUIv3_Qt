@@ -3,33 +3,18 @@
 #include <QQmlContext>
 #include <QDebug>
 #include "/home/piotr/Arduino/libraries/ParamPart/src/parampart_pcs.h"
+
+
 #include "serialx.h"
+#include "tmanager.h"
+
 #include "clock.h"
 #include "mixer.h"
 
 
-SerialX serial;
-ParamPart Reader;
-//#include "backend.h"
 
 #define LAYOUT_COLOR_MAIN1 #f9842d
 
-
-void Reaction(ParamPart& P) { //temporary place for this function, (move to another cpp file)
-
-    if (P.Header("artn")) {
-
-  emit serial.getNewData("jest zwrot!");
-    };
-
-
-
-    P.ReadDone();
-
-
-
-
-};
 
 int main(int argc, char *argv[])
 {
@@ -51,14 +36,22 @@ int main(int argc, char *argv[])
 
         Clock clocky;
         Mixer mixer;
+        SerialX serial;
+        ParamPart Reader;
+        SlotMaster SlotM;
+        TManager Manager(&Reader,&SlotM,&serial);
+        serial.InstallToManager(&Manager);
 
 
         context->setContextProperty("serial",&serial);
         context->setContextProperty("clocky",&clocky);
         context->setContextProperty("mixer",&mixer);
+       context->setContextProperty("manager",&Manager);
 
     engine.load(url);
     serial.begin("ttyACM0",9600);
+
+
 
     return app.exec();
 }

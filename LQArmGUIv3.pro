@@ -24,7 +24,8 @@ SOURCES += \
         clock.cpp \
         main.cpp \
         mixer.cpp \
-        serialx.cpp
+        serialx.cpp \
+        tmanager.cpp
 
 RESOURCES += qml.qrc
 
@@ -58,5 +59,6 @@ HEADERS += \
     ../Arduino/libraries/ParamPart/src/parampart_pcs.h \
     clock.h \
     mixer.h \
-    serialx.h
+    serialx.h \
+    tmanager.h
 

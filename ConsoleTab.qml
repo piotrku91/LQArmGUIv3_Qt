@@ -72,9 +72,8 @@ Item {
   }
 
     Connections {
-        target: serial
-        onGetNewData: {  mainconsole.newLine(data,"DEVICE","pink")}
-        onGetLog: { mainconsole.newLine(Line,"SYSTEM","yellow") }
+        target: manager
+        onAddLog: { mainconsole.newLine(Line,Interface,Color) }
                 }
 
     id: element
@@ -193,7 +192,7 @@ ScrollBar.vertical: ScrollBar {}
 
         onClicked: {
               if (newcmd.text !== "") {
-            mainconsole.newLine(newcmd.text,"GUI","red")
+           // mainconsole.newLine(newcmd.text,"GUI","red")
             serial.writeSlot(newcmd.text+"\r\n")
         newcmd.text=""
 
