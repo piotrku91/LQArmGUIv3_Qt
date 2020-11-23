@@ -2,9 +2,9 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDebug>
-#include "/home/piotr/Arduino/libraries/ParamPart/src/parampart_pcs.h"
+#include "lib/ParamPart/src/parampart_pcs.h"
 
-
+#include "slotmaster.h"
 #include "serialx.h"
 #include "tmanager.h"
 

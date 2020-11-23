@@ -3,7 +3,7 @@
 
 #include <QtSerialPort/QSerialPort>
 #include <QObject>
-#include "/home/piotr/Arduino/libraries/ParamPart/src/parampart_pcs.h"
+#include "lib/ParamPart/src/parampart_pcs.h"
 
 class TManager;
 

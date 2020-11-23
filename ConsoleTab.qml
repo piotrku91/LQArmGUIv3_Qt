@@ -66,6 +66,7 @@ Item {
        Keys.onPressed: {
        if (event.key === Qt.Key_Left) {
              mainconsole.newLine("move left","SYSTEM","red");
+
                 event.accepted = true;
            }
        }

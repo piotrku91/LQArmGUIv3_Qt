@@ -84,6 +84,7 @@ void SerialX::readData(){
     //Reader << inter;
 
    // Reader.Interpreter(Reaction);
+    m_Manager_ptr->newJob(request);
 
     m_Manager_ptr->Log(request,3);
 
