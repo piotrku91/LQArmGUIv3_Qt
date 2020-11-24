@@ -1,4 +1,5 @@
 #include "serialx.h"
+#include "slotmaster.h"
 #include "tmanager.h"
 
 void TManager::Reaction(ParamPart &P)
@@ -12,6 +13,7 @@ void TManager::Reaction(ParamPart &P)
 
         if (P.UseAsHeader("cmp"))
         {
+          m_SM_ptr->ImportFromParams(P[1].toInt(),P[0],0,0);
             Log("jestem");
             P.ReadDone(false); //Mark as Read but nothing to return
         };

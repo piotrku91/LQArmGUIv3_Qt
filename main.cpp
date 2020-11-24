@@ -46,10 +46,11 @@ int main(int argc, char *argv[])
         context->setContextProperty("serial",&serial);
         context->setContextProperty("clocky",&clocky);
         context->setContextProperty("mixer",&mixer);
+        context->setContextProperty("slotmaster",&SlotM);
        context->setContextProperty("manager",&Manager);
 
     engine.load(url);
-    serial.begin("ttyACM0",9600);
+    serial.begin("ttyACM1",9600);
 
 
 

@@ -3,27 +3,37 @@
 
 #include <QObject>
 
+struct TSlot
+{
+public:
+    QString IdName;
+    int MaxML;
+    int ActualML;
+public:
+    TSlot():IdName("BRAK"),MaxML(1500),ActualML(750) {};
+};
+
 class SlotMaster : public QObject
 {
     Q_OBJECT
 
 public:
     explicit SlotMaster(QObject *parent = nullptr);
+    TSlot Slot[9];
+    void ImportFromParams(const int& Index, const QString& IDName, const int& ActualML, const int& MaxML);
+    void ExportToParams(const int& Index, QString& IDName, int& ActualML, int& MaxML);
 
-    struct TSlot
-    {
-    private:
-        QString IdName;
-        int MaxML;
-        int ActualML;
+public slots:
+    QString getIDName(const int& idx) {return Slot[idx].IdName;};
+    int getMaxML(const int& idx) {return Slot[idx].MaxML;};
+    int getActualML(const int& idx) {return Slot[idx].ActualML;};
 
-public:
-        TSlot():IdName("BRAK"),MaxML(0),ActualML(0) {};
-    };
-
-TSlot Slot[9];
+    void setIDName(const int& idx, const QString& NewName) {Slot[idx].IdName=NewName.toUpper();};
+    void setMaxML(const int& idx, const int& NewMaxML) {Slot[idx].MaxML=NewMaxML;};
+    void setActualML(const int& idx, const int& NewActualML) {Slot[idx].ActualML=NewActualML;};
 
 signals:
+    QString pushUpdate();
 
 };
 

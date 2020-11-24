@@ -10,17 +10,55 @@ Item {
     anchors.fill: parent
     anchors.margins: 20
 
-
-
-    Button {
-        x: 400
-        y: 400
-        text: "eeeeeeee"
-
-        onClicked: {slots.itemAt(0).color="red"}
-
+    function updatesl()
+    {
+        for (var i = 0; i < 9; i++) {
+           slots.itemAt(i).children[5].text=slotmaster.getIDName(i);
+           slots.itemAt(i).children[6].text=slotmaster.getActualML(i);
+           slots.itemAt(i).children[7].text=slotmaster.getMaxML(i);
+        }
 
     }
+
+    function updatess()
+    {
+        for (var i = 0; i < 9; i++) {
+
+           slotmaster.setIDName(i,slots.itemAt(i).children[5].text);
+           slotmaster.setActualML(i,slots.itemAt(i).children[6].text);
+           slotmaster.setMaxML(i,slots.itemAt(i).children[7].text);
+        }
+
+    }
+
+    Connections {
+        target: slotmaster
+
+
+        onPushUpdate:
+        {
+          updatesl();
+        }
+                }
+
+    Button {
+        x: 500
+        y: 500
+        text: "Przywróć ostatnie"
+
+        onClicked: {   updatesl(); }
+
+    }
+
+    Button {
+        x: 650
+        y: 500
+        text: "Zapisz"
+
+        onClicked: {   updatess(); }
+
+    }
+
 
 
     Row {
@@ -32,12 +70,14 @@ Item {
                 border.width: 1
                 color: "white"
 
-                TextArea
-                { text: index
+                TextArea // # children: 0
+                {
+                    id: slot_no
+                    text: index
                     readOnly: true
                 }
 
-                Image {
+                Image { // # children: 1
                     id: slot_ico
                     x: parent.width/2-width/2
                     y: parent.height/2-height/2
@@ -48,7 +88,7 @@ Item {
                     mipmap: true
                 }
 
-                TextArea
+                TextArea // # children: 2
                 {
                     id: slot_ml
 
@@ -61,7 +101,7 @@ Item {
 
                 }
 
-                ProgressBar {
+                ProgressBar { // # children: 3
                     id: slot_pgbar
                     value: slot_actualml.text
                     to: slot_maxml.text
@@ -73,7 +113,7 @@ Item {
 
 
 
-                TextField
+                TextField // # children: 4
                 {
                     id: slot_name
 
@@ -84,37 +124,41 @@ Item {
 
                 }
 
-                TextField
+                TextField // # children: 5
                 {
                     id: slot_id
                     font.capitalization: Font.AllUppercase
                     y: parent.height
-                    text: "BRAK"
+                    text: slotmaster.getIDName(index);
                     width: parent.width
                     maximumLength: 4
                     color: "red"
+                  //  onTextChanged: {slotmaster.setIDName(index,text); slot_no.text=index+": "+slotmaster.getIDName(index);}
+
 
                 }
 
-                TextField
+                TextField // # children: 6
                 {
                     id: slot_actualml
                     inputMethodHints: Qt.ImhDigitsOnly
                     y: parent.height+35
-                    text: "0"
+                    text: slotmaster.getActualML(index);
                     width: parent.width
                     color: "black"
+                //    onTextChanged: {slotmaster.setActualML(index,text);}
+
 
                 }
-                TextField
+                TextField // # children: 7
                 {
                     id: slot_maxml
                     inputMethodHints: Qt.ImhDigitsOnly
                     y: slot_actualml.y+35
-                    text: "1500"
+                    text: slotmaster.getMaxML(index);
                     width: parent.width
                     color: "black"
-
+                   // onTextChanged: {slotmaster.setMaxML(index,text);}
                 }
 
 
