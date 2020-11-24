@@ -3,15 +3,27 @@
 
 void TManager::Reaction(ParamPart &P)
 {
-Log("jestem");
-    if (P.Header("artn")) {
-     Log("przyszłooooooooooooooooooooooo");
+  //  Log(P[1]);
+
+    if (P.Header("artn")) { // Line from Arduino return
+// -----------------------------------------------------------------------------------------
+
+// #########################################################################################
+
+        if (P.UseAsHeader("cmp"))
+        {
+            Log("jestem");
+            P.ReadDone(false); //Mark as Read but nothing to return
+        };
+
+// #########################################################################################
 
 
-    };
 
 
 
+// -----------------------------------------------------------------------------------------
+    }; // artn header end
 }
 
 
@@ -22,21 +34,20 @@ bool TManager::newJob(const QString& requestLine){
 
     typedef void (TManager::*ReaPTR)(ParamPart &PP);
     ReaPTR MemberReactionPointer= &TManager::Reaction;
-
-    m_ParamPart_ptr->Interpreter(this,MemberReactionPointer);
+    QString Return = QString::fromStdString(m_ParamPart_ptr->Interpreter(this,MemberReactionPointer));
 
    return 1;
 }
 
 void TManager::Log(const QString& Line, const int& Interface){
     QString IFCName="SYSTEM";
-    QString Color="red";
+    QString Color="yellow";
 
     switch (Interface) {
 
     case 0:
     {
-        IFCName="SYTEM";
+        IFCName="SYSTEM";
         Color="yellow";
         break;
     };
@@ -44,7 +55,7 @@ void TManager::Log(const QString& Line, const int& Interface){
 
     case 1:
     {
-        IFCName="GUI";
+        IFCName="SYSTEM ERROR";
         Color="red";
         break;
 
@@ -62,6 +73,14 @@ void TManager::Log(const QString& Line, const int& Interface){
     {
         IFCName="DEVICE";
         Color="pink";
+        break;
+
+    };
+
+    case 4:
+    {
+        IFCName="GUI";
+        Color="lime";
         break;
 
     };

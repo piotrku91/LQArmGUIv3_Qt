@@ -21,7 +21,7 @@ void SerialX::begin(const QString& dev, const int& baudrate){
     connect(sP,SIGNAL(readyRead()),this,SLOT(readData()));
 
 
- if (!sP->open(QIODevice::ReadWrite)) {m_Manager_ptr->Log("** Błąd - połączenie nieudane.",0);} else {m_Manager_ptr->Log("** Sukces - połączenie ustanowione.",0);};
+ if (!sP->open(QIODevice::ReadWrite)) {m_Manager_ptr->Log("** Błąd - połączenie nieudane.",1);} else {m_Manager_ptr->Log("** Sukces - połączenie ustanowione.",0);};
 
 }
 
@@ -78,17 +78,15 @@ void SerialX::readData(){
 
         QByteArray requestData = 0;
         if (sP->canReadLine())
-            requestData = sP->readLine(64);
+            requestData = sP->readLine(256);
     const QString request = QString::fromUtf8(requestData);
-    std::string inter=request.toStdString();
-    //Reader << inter;
 
    // Reader.Interpreter(Reaction);
+    m_Manager_ptr->Log(request,3);
     m_Manager_ptr->newJob(request);
 
-    m_Manager_ptr->Log(request,3);
 
-     //   if (request!="") emit getNewData(request);
+
     }
 
 }
