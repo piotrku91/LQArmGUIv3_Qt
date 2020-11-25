@@ -2,6 +2,7 @@
 #define SLOTMASTER_H
 
 #include <QObject>
+#include <mixer.h>
 
 struct TSlot
 {
@@ -16,21 +17,32 @@ public:
 class SlotMaster : public QObject
 {
     Q_OBJECT
+private:
+    TSlot Slot[9];
+    Mixer* m_Mixer_ptr;
+    QStringList ActualIDs;
+    friend class Mixer;
 
 public:
-    explicit SlotMaster(QObject *parent = nullptr);
-    TSlot Slot[9];
+    // Constructor
+    explicit SlotMaster(Mixer *Mixer, QObject *parent = nullptr): QObject(parent),m_Mixer_ptr(Mixer)
+    {GetActualIDs(); m_Mixer_ptr->ListPtr=&ActualIDs; m_Mixer_ptr->pushUpdate();};
+
+
     void ImportFromParams(const int& Index, const QString& IDName, const int& ActualML, const int& MaxML);
     void ExportToParams(const int& Index, QString& IDName, int& ActualML, int& MaxML);
+    QStringList* GetActualIDs();
+
 
 public slots:
-    QString getIDName(const int& idx) {return Slot[idx].IdName;};
-    int getMaxML(const int& idx) {return Slot[idx].MaxML;};
-    int getActualML(const int& idx) {return Slot[idx].ActualML;};
-
-    void setIDName(const int& idx, const QString& NewName) {Slot[idx].IdName=NewName.toUpper();};
-    void setMaxML(const int& idx, const int& NewMaxML) {Slot[idx].MaxML=NewMaxML;};
-    void setActualML(const int& idx, const int& NewActualML) {Slot[idx].ActualML=NewActualML;};
+    //Get functions
+    QString getIDName(const int& idx);
+    int getMaxML(const int& idx);
+    int getActualML(const int& idx);
+    //Set functions
+    void setIDName(const int& idx, const QString& NewName);
+    void setMaxML(const int& idx, const int& NewMaxML);
+    void setActualML(const int& idx, const int& NewActualML);
 
 signals:
     QString pushUpdate();

@@ -6,8 +6,10 @@
 #include <sstream>
 #include <iostream>
 
+
 class Mixer: public QObject
 {
+
     Q_OBJECT
         Q_PROPERTY(int itemIndex READ itemIndex WRITE setItemIndex NOTIFY itemIndexChanged)
 
@@ -27,20 +29,24 @@ class Mixer: public QObject
 
 public:
     explicit Mixer(QObject *parent = nullptr);
+    const QStringList *ListPtr;
 
-    ActualView AV;
+
     int itemIndex();
     void setItemIndex(const int &itemIndex);
+
 
     public slots:
     QStringList getTest();
 
 signals:
     void itemIndexChanged();
+    QString pushUpdate();
 
 
 private:
     int m_itemIndex;
+
 };
 
 #endif // MIXER_H

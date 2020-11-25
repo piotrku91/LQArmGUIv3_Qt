@@ -8,6 +8,16 @@ Item {
     id: mixert
     anchors.fill: parent
 
+    Connections {
+        target: mixer
+
+
+        onPushUpdate:
+        {
+          kombo.model=mixer.getTest();
+        }
+                }
+
     ComboBox {
         id: kombo
         x: 20

@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
         Mixer mixer;
         SerialX serial;
         ParamPart Reader;
-        SlotMaster SlotM;
+        SlotMaster SlotM(&mixer);
         TManager Manager(&Reader,&SlotM,&serial);
         serial.InstallToManager(&Manager);
 

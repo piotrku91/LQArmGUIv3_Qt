@@ -10,7 +10,6 @@ class SlotMaster;
 class TManager:public QObject
 
 {
-       friend class SerialX;
     Q_OBJECT
   private:
   //Managed object pointers
@@ -22,7 +21,7 @@ class TManager:public QObject
 
   //Constructor
   TManager()=delete;
-  explicit TManager(ParamPart* PP, SlotMaster* SM, SerialX* QSP): m_ParamPart_ptr(PP),m_SM_ptr(SM),m_Serial_ptr(QSP){};
+  explicit TManager(ParamPart* PP, SlotMaster* SM, SerialX* QSP,QObject *parent = nullptr): m_ParamPart_ptr(PP),m_SM_ptr(SM),m_Serial_ptr(QSP){};
 
 
   //Functions
