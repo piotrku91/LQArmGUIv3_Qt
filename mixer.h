@@ -43,30 +43,45 @@ class Mixer: public QObject
 {
     Q_OBJECT
 public:
-    // Views
-    TView * ActualView; // Show choosed item by this pointer (Point to Views item which is TView)
-    std::vector<TView>* ViewsPtr; // Views
-    QStringList NamesList; // List of names of drink generated from Views stored in vector.
-
-    void AddDrinkFromParams();
-    QStringList* GetActualNames();
-
     // Slots from Slotmaster
     const QStringList *IDListPtr; // Pointer to external list of slots (slotmaster.ActualList)
 
 
 
 
+    // Views functions
+    void AddDrinkFromParams();
+    QStringList* GetActualNames();
+    const TView* getView() {return ActualView;}
+
+
+
 public slots:
     QStringList getIDList();
-    QStringList& getDrinkList();
+    QStringList getDrinkList();
+    void callNewViewUpdate() {pushNewViewUpdate(0,75,2,30,4,70,7,100);};
+    void itemIndexChanged(const int& NewItemIndex=0);
+
+
 
 signals:
-    void itemIndexChanged();
-    QString pushUpdate();
+    QString pushIDListUpdate();
+    QString pushDrinkListUpdate(int idxrtn);
+    void pushNewViewUpdate(int AV_LQ1_itemIndex, int LQ1_amo,
+                           int AV_LQ2_itemIndex, int LQ2_amo,
+                           int AV_LQ3_itemIndex, int LQ3_amo,
+                           int AV_LQ4_itemIndex, int LQ4_amo);
+
 
 
 private:
+    int m_ItemIndex; // Synchronization itemIndex
+
+    // Views variables/types
+    std::vector<TView> Views;
+    TView * ActualView; // Show choosed item by this pointer (Point to Views item which is TView)
+    QStringList DrinkList; // List of names of drink generated from Views stored in vector.
+
 
 
 public:

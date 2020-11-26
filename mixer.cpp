@@ -3,8 +3,8 @@
 Mixer::Mixer(QObject *parent) :
     QObject(parent),IDListPtr(nullptr)
 {
-     std::vector<TView> Views;
-     ViewsPtr=&Views;
+
+
 
 AddDrinkFromParams(); // for debugging
 AddDrinkFromParams();// for debugging
@@ -19,18 +19,18 @@ AddDrinkFromParams();// for debugging
 void Mixer::AddDrinkFromParams()
 {
     TView TmpView; // Put variables from in values in to this class object
-    ViewsPtr->insert(ViewsPtr->end(),TmpView); // and then add to list of objects.
+    Views.insert(Views.end(),TmpView); // and then add to list of objects.
     GetActualNames(); // get only names to NamesList
 
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QStringList* Mixer::GetActualNames() {
-    NamesList.clear();
-    for (const TView& ViewM : *ViewsPtr) {
-    NamesList.append(ViewM.m_Name);
+    DrinkList.clear();
+    for (const TView& ViewM : Views) {
+    DrinkList.append(ViewM.m_Name);
     };
-  return &NamesList ;
+  return &DrinkList ;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,16 +39,24 @@ QStringList Mixer::getIDList()
 {
     if (IDListPtr) return *IDListPtr;
 
-    return {"braki"};
+    return {"brak wkaznika listy slotpw"};
 
 }
 
-QStringList& Mixer::getDrinkList()
+QStringList Mixer::getDrinkList()
 {
-     return NamesList;
-
+     return DrinkList;
 
 }
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+void Mixer::itemIndexChanged(const int& NewItemIndex)
+{
+m_ItemIndex=NewItemIndex;
+ActualView = &Views[m_ItemIndex];
+GetActualNames();
+callNewViewUpdate();
+};
 

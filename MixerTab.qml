@@ -14,14 +14,38 @@ Item {
         target: mixer
 
 
-        onPushUpdate:
+        onPushIDListUpdate:
         {
         //  kombo.model=mixer.getIDList();
             comboslots.itemAt(0).children[0].model=mixer.getIDList();
             comboslots.itemAt(1).children[0].model=mixer.getIDList();
             comboslots.itemAt(2).children[0].model=mixer.getIDList();
             comboslots.itemAt(3).children[0].model=mixer.getIDList();
+            mixer.callNewViewUpdate();
         }
+
+
+        onPushNewViewUpdate:
+        {
+        comboslots.itemAt(0).children[0].currentIndex=AV_LQ1_itemIndex;
+        comboslots.itemAt(0).children[1].text=LQ1_amo;
+        comboslots.itemAt(1).children[0].currentIndex=AV_LQ2_itemIndex;
+        comboslots.itemAt(1).children[1].text=LQ2_amo;
+        comboslots.itemAt(2).children[0].currentIndex=AV_LQ3_itemIndex;
+        comboslots.itemAt(2).children[1].text=LQ3_amo;
+        comboslots.itemAt(3).children[0].currentIndex=AV_LQ4_itemIndex;
+        comboslots.itemAt(3).children[1].text=LQ4_amo;
+
+        }
+
+        onPushDrinkListUpdate:
+        {
+
+            kombo.model=mixer.getDrinkList()
+
+        }
+
+
                 }
 
     Rectangle {
@@ -41,7 +65,7 @@ Item {
         model: mixer.getDrinkList()
 
 
-      //  onCurrentIndexChanged: {mixer.itemIndex=currentIndex}
+        onCurrentIndexChanged: {mixer.itemIndexChanged(currentIndex);}
     }
 
 

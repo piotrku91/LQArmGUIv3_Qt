@@ -26,7 +26,7 @@ private:
 public:
     // Constructor
     explicit SlotMaster(Mixer *Mixer, QObject *parent = nullptr): QObject(parent),m_Mixer_ptr(Mixer)
-    {GetActualIDs(); m_Mixer_ptr->IDListPtr=&ActualIDs; m_Mixer_ptr->pushUpdate();};
+    {GetActualIDs(); m_Mixer_ptr->IDListPtr=&ActualIDs; m_Mixer_ptr->pushIDListUpdate();};
 
 
     void ImportFromParams(const int& Index, const QString& IDName, const int& ActualML, const int& MaxML);
