@@ -16,11 +16,11 @@ Item {
 
         onPushUpdate:
         {
-        //  kombo.model=mixer.getList();
-            comboslots.itemAt(0).children[0].model=mixer.getList();
-            comboslots.itemAt(1).children[0].model=mixer.getList();
-            comboslots.itemAt(2).children[0].model=mixer.getList();
-            comboslots.itemAt(3).children[0].model=mixer.getList();
+        //  kombo.model=mixer.getIDList();
+            comboslots.itemAt(0).children[0].model=mixer.getIDList();
+            comboslots.itemAt(1).children[0].model=mixer.getIDList();
+            comboslots.itemAt(2).children[0].model=mixer.getIDList();
+            comboslots.itemAt(3).children[0].model=mixer.getIDList();
         }
                 }
 
@@ -38,7 +38,7 @@ Item {
         height: 40
         anchors.top: parent.top
         anchors.topMargin: 20
-        model: mixer.getList()
+        model: mixer.getDrinkList()
 
 
       //  onCurrentIndexChanged: {mixer.itemIndex=currentIndex}
@@ -90,7 +90,7 @@ Row {
                 width: 200
                 height: 40
 
-                model: mixer.getList()
+                model: mixer.getIDList()
 
 
               //  onCurrentIndexChanged: {mixer.itemIndex=currentIndex}

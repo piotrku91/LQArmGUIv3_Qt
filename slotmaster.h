@@ -4,7 +4,7 @@
 #include <QObject>
 #include <mixer.h>
 
-struct TSlot
+class TSlot
 {
 public:
     QString IdName;
@@ -26,11 +26,11 @@ private:
 public:
     // Constructor
     explicit SlotMaster(Mixer *Mixer, QObject *parent = nullptr): QObject(parent),m_Mixer_ptr(Mixer)
-    {GetActualIDs(); m_Mixer_ptr->ListPtr=&ActualIDs; m_Mixer_ptr->pushUpdate();};
+    {GetActualIDs(); m_Mixer_ptr->IDListPtr=&ActualIDs; m_Mixer_ptr->pushUpdate();};
 
 
     void ImportFromParams(const int& Index, const QString& IDName, const int& ActualML, const int& MaxML);
-    void ExportToParams(const int& Index, QString& IDName, int& ActualML, int& MaxML);
+    void ExportToParams(const int& Index, QString& IDName, int& ActualML, int& MaxML) ;
     QStringList* GetActualIDs();
 
 
