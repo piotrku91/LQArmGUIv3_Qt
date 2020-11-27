@@ -6,6 +6,21 @@ void TManager::Reaction(ParamPart &P)
 {
   //  Log(P[1]);
 
+    if ((P.Header("lq_i")) && P.Integrity(4,NUMBER,STRING,NUMBER,NUMBER))
+    {
+      m_SM_ptr->ImportFromParams(P[0].toInt(),P[1],P[2].toInt(),P[3].toInt());
+//Log(P[2]);
+        P.ReadDone(true);
+    };
+
+    if (P.Header("drn"))
+    {
+     m_Mixer_ptr->AddDrinkFromParams(P[0],P[1],P[2].toInt(),P[3],P[4].toInt(),P[5],P[6].toInt(),P[7],P[8].toInt());
+//Log(P[2]);
+        P.ReadDone(true);
+    };
+
+
     if (P.Header("artn")) { // Line from Arduino return
 // -----------------------------------------------------------------------------------------
 
@@ -37,7 +52,7 @@ bool TManager::newJob(const QString& requestLine){
     typedef void (TManager::*ReaPTR)(ParamPart &PP);
     ReaPTR MemberReactionPointer= &TManager::Reaction;
     QString Return = QString::fromStdString(m_ParamPart_ptr->Interpreter(this,MemberReactionPointer));
-
+    Log(Return);
    return 1;
 }
 

@@ -35,6 +35,7 @@ Item {
         comboslots.itemAt(2).children[1].text=LQ3_amo;
         comboslots.itemAt(3).children[0].currentIndex=AV_LQ4_itemIndex;
         comboslots.itemAt(3).children[1].text=LQ4_amo;
+        statustxt.text=mixer.getStatusTxt();
 
         }
 
@@ -54,6 +55,20 @@ Item {
         height: mixert.height;
         border.width: 1
         color: "white"
+
+        Text {
+          id: statustxt
+          x: 300
+          y: 300
+          width: 52
+          height: 37
+          text: qsTr("debug")
+
+          styleColor: "red"
+          font.bold: true
+          font.family: "Verdana"
+          font.pixelSize: 14
+      }
 
     ComboBox {
         id: kombo

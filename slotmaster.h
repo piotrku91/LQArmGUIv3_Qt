@@ -21,7 +21,6 @@ private:
     TSlot Slot[9];
     Mixer* m_Mixer_ptr;
     QStringList ActualIDs;
-    friend class Mixer;
 
 public:
     // Constructor

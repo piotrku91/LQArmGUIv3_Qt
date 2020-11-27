@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
         SerialX serial;
         ParamPart Reader;
         SlotMaster SlotM(&mixer);
-        TManager Manager(&Reader,&SlotM,&serial);
+        TManager Manager(&Reader,&SlotM, &mixer, &serial);
         serial.InstallToManager(&Manager);
 
 
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
        context->setContextProperty("manager",&Manager);
 
     engine.load(url);
-    serial.begin("ttyACM1",9600);
+    serial.begin("ttyACM0",9600);
 
 
 

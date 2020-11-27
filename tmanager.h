@@ -6,6 +6,7 @@
 
 class SerialX;
 class SlotMaster;
+class Mixer;
 
 class TManager:public QObject
 
@@ -16,12 +17,13 @@ class TManager:public QObject
   ParamPart *m_ParamPart_ptr;
   SlotMaster *m_SM_ptr;
   SerialX *m_Serial_ptr;
+  Mixer *m_Mixer_ptr;
 
   public:
 
   //Constructor
   TManager()=delete;
-  explicit TManager(ParamPart* PP, SlotMaster* SM, SerialX* QSP,QObject *parent = nullptr): m_ParamPart_ptr(PP),m_SM_ptr(SM),m_Serial_ptr(QSP){};
+  explicit TManager(ParamPart* PP, SlotMaster* SM, Mixer* M, SerialX* QSP, QObject *parent = nullptr): m_ParamPart_ptr(PP),m_SM_ptr(SM),m_Serial_ptr(QSP),m_Mixer_ptr(M) {};
 
 
   //Functions
