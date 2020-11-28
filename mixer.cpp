@@ -4,7 +4,7 @@ Mixer::Mixer(QObject *parent) :
     QObject(parent),IDListPtr(nullptr)
 {
 
-
+//AddDrinkFromParams("robur","VOD1",20,"VOD1",20,"VOD1",20,"VOD1",20);
 
 //AddDrinkFromParams(); // for debugging
 //AddDrinkFromParams();// for debugging
@@ -27,8 +27,9 @@ void Mixer::AddDrinkFromParams(const QString& DrinkName,
     GetActualNames(); // get only names to NamesList
     pushDrinkListUpdate(0);
     itemIndexChanged(0);
-    callNewViewUpdate();
+  //  callNewViewUpdate();
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QStringList* Mixer::GetActualNames() {

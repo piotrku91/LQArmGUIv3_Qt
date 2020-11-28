@@ -12,6 +12,18 @@ Item {
     property int boxHeight:150
 default property alias boxA: table.children
 
+    // Position arrays
+    property variant sX: [((positionrow.width/2-positionrow.width/3)-boxWidth/2), // X0
+                          ((positionrow.width/2-positionrow.width/6)-boxWidth/2), // X1
+                          (positionrow.width/2-boxWidth/2),                       // X2
+                          ((positionrow.width/2+positionrow.width/6)-boxWidth/2), // X3
+                          ((positionrow.width/2+positionrow.width/3)-boxWidth/2)] // X4
+
+    property variant sY: [((positionrow.height/2-positionrow.height/3)-boxHeight/2),  // Y0
+                          ((positionrow.height/2-positionrow.height/6)-boxHeight/2), // Y1
+                          (positionrow.height/2-boxHeight/2),                        // Y2
+                          ((positionrow.height/2-positionrow.height/6)-boxHeight/2), // Y3
+                          ((positionrow.height/2-positionrow.height/3)-boxHeight/2)] // Y4
 
 ListModel { id: drinkMixList }
 
@@ -21,34 +33,37 @@ ListModel { id: drinkMixList }
     {
         var tmpname;
 
-       tmpname = (status===true ? "full.png" : "empty.png")
-   boxA[id].children[0].source="static/shot-glass_"+tmpname
+     //  tmpname = (status===true ? "full.png" : "empty.png")
+   //boxA[id].children[0].source="static/shot-glass_"+tmpname
 
 
     }
 
-    function fillLists(listmodel)
+    function fillLists()
     {
-        // Test  version
-        for (var i = 0; i < 5; i++) {
-          boxA[i].children[1].model=drinkMixList
-            drinkMixList.clear()
-
-            for (var j = 0; j < 3; j++) {
-                drinkMixList.append({text: "Drink"+j})
-            }
+      slotsr.itemAt(0).children[1].model=mixer.getDrinkList();
+        slotsr.itemAt(1).children[1].model=mixer.getDrinkList();
+        slotsr.itemAt(2).children[1].model=mixer.getDrinkList();
+        slotsr.itemAt(3).children[1].model=mixer.getDrinkList();
+        slotsr.itemAt(4).children[1].model=mixer.getDrinkList();
 
         }
 
 
 
-    }
 
-//////////////////////////////////////////////////////////////////// BOX 0 /////////////////////////////////////////////////////////////////////
+
+    Row {
+        id: positionrow
+         anchors.fill: parent
+        Repeater {
+            id: slotsr
+            model: 5
+
     Rectangle {
         id: box0
-        x: (parent.width/2-parent.width/3)-width/2
-        y: (parent.height/2-parent.height/3)-height/2
+        x: sX[index]
+        y: sY[index]
         width: boxWidth
         height: boxHeight
         color: "#17b1aa"
@@ -71,7 +86,7 @@ ListModel { id: drinkMixList }
             id: box0_list
             y: (parent.height)
             width: boxWidth
-            model: ["First", "Second", "Third"]
+            model: mixer.getDrinkList()
         }
 
         Button {
@@ -92,144 +107,18 @@ ListModel { id: drinkMixList }
 
 
 
-
-
-
-
-
     }
 
 
-//////////////////////////////////////////////////////////////////// BOX 1 /////////////////////////////////////////////////////////////////////
-
-    Rectangle {
-        id: box1
-        x: (parent.width/2-parent.width/6)-width/2
-        y: (parent.height/2-parent.height/6)-height/2
-        width: boxWidth
-        height: boxHeight
-        color: "#17b1aa"
-        radius: 20
-
-        Image {
-            id: box1_ico
-            x: parent.width/2-width/2
-            y: parent.height/2-height/2
-            width: 64
-            height: 64
-            source: "static/shot-glass_empty.png"
-            fillMode: Image.PreserveAspectFit
-            mipmap: true
         }
-
-        ComboBox {
-            id: box1_list
-            y: (parent.height)
-            width: boxWidth
-            model: ["First", "Second", "Third"]
-        }
-
     }
 
-//////////////////////////////////////////////////////////////////// BOX 2 /////////////////////////////////////////////////////////////////////
-
-    Rectangle {
-        id: box2
-        x: (parent.width/2)-width/2
-        y: (parent.height/2)-50
-        width: boxWidth
-        height: boxHeight
-        color: "#17b1aa"
-        radius: 20
-
-        Image {
-            id: box2_ico
-            x: parent.width/2-width/2
-            y: parent.height/2-height/2
-            width: 64
-            height: 64
-            source: "static/shot-glass_empty.png"
-            fillMode: Image.PreserveAspectFit
-            mipmap: true
-        }
-
-
-        ComboBox {
-            id: box2_list
-            y: (parent.height)
-            width: boxWidth
-            model: ["First", "Second", "Third"]
-        }
 
 
 
 
-    }
 
-//////////////////////////////////////////////////////////////////// BOX 3 /////////////////////////////////////////////////////////////////////
-
-    Rectangle {
-        id: box3
-        x: (parent.width/2+parent.width/6)-width/2
-        y: (parent.height/2-parent.height/6)-height/2
-        width: boxWidth
-        height: boxHeight
-        color: "#17b1aa"
-        radius: 20
-
-        Image {
-            id: box3_ico
-            x: parent.width/2-width/2
-            y: parent.height/2-height/2
-            width: 64
-            height: 64
-            source: "static/shot-glass_empty.png"
-            fillMode: Image.PreserveAspectFit
-            mipmap: true
-        }
-
-        ComboBox {
-            id: box3_list
-            y: (parent.height)
-            width: boxWidth
-            model: ["First", "Second", "Third"]
-        }
-
-
-    }
-
-//////////////////////////////////////////////////////////////////// BOX 4 /////////////////////////////////////////////////////////////////////
-
-    Rectangle {
-        id: box4
-        x: (parent.width/2+parent.width/3)-width/2
-        y: (parent.height/2-parent.height/3)-height/2
-        width: boxWidth
-        height: boxHeight
-        color: "#17b1aa"
-        radius: 20
-
-
-        Image {
-            id: box4_ico
-            x: parent.width/2-width/2
-            y: parent.height/2-height/2
-            width: 64
-            height: 64
-            source: "static/shot-glass_empty.png"
-            fillMode: Image.PreserveAspectFit
-            mipmap: true
-        }
-
-        ComboBox {
-            id: box4_list
-            y: (parent.height)
-            width: boxWidth
-            model: ["First", "Second", "Third"]
-        }
-
-
-    }
+    ///////////////
 
     Button {
         id: guzik
@@ -245,7 +134,8 @@ ListModel { id: drinkMixList }
 
         onClicked: {
             setImage(0,true)
-            fillLists(["First1", "Second", "Third"])
+
+           fillLists()
 
         }
 

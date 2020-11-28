@@ -52,6 +52,7 @@ public:
                             const QString& AV_LQ2, const int& LQ2_amo,
                             const QString& AV_LQ3, const int& LQ3_amo,
                             const QString& AV_LQ4, const int& LQ4_amo);
+    void AddDefault();
 
     QStringList* GetActualNames(); // Generate list of names in QStringList DrinkList;
     const TView* getView() {return ActualView;}

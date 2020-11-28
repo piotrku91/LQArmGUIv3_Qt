@@ -21,6 +21,7 @@ Item {
             comboslots.itemAt(1).children[0].model=mixer.getIDList();
             comboslots.itemAt(2).children[0].model=mixer.getIDList();
             comboslots.itemAt(3).children[0].model=mixer.getIDList();
+            //table.filllist();
             mixer.callNewViewUpdate();
         }
 
