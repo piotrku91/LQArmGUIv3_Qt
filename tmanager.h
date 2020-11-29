@@ -23,16 +23,30 @@ class TManager:public QObject
 
   //Constructor
   TManager()=delete;
-  explicit TManager(ParamPart* PP, SlotMaster* SM, Mixer* M, SerialX* QSP, QObject *parent = nullptr): m_ParamPart_ptr(PP),m_SM_ptr(SM),m_Serial_ptr(QSP),m_Mixer_ptr(M) {};
+  explicit TManager(ParamPart* PP, SlotMaster* SM, Mixer* M, SerialX* QSP, QObject *parent = nullptr): m_ParamPart_ptr(PP),m_SM_ptr(SM),m_Serial_ptr(QSP),m_Mixer_ptr(M)
+  {
+
+
+
+
+
+  };
 
 
   //Functions
 
   bool newJob(const QString& requestLine);
   void Reaction(ParamPart &P);
-  void SendSaveSlots();
-  void SendSaveDrink();
+
+
   void Log(const QString& Line,const int& Interface=0);
+
+public slots:
+  void sendToDevice(const QString& cmd, const int& Interface);
+  void slots_Save() {};
+  void slots_Load() {sendToDevice("<db;>",4);};
+  void drink_Save() {};
+  void drink_Load() {};
 
 signals:
    QString addLog(const QString& Line, const QString& Interface="SYSTEM", const QString& Color="red");

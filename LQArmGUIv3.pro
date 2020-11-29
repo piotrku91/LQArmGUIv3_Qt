@@ -26,7 +26,8 @@ SOURCES += \
         mixer.cpp \
         serialx.cpp \
         slotmaster.cpp \
-        tmanager.cpp
+        tmanager.cpp \
+        tstatustable.cpp
 
 RESOURCES += qml.qrc
 
@@ -62,5 +63,6 @@ HEADERS += \
     mixer.h \
     serialx.h \
     slotmaster.h \
-    tmanager.h
+    tmanager.h \
+    tstatustable.h
 

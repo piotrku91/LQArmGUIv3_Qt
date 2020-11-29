@@ -9,6 +9,7 @@ Item {
     anchors.fill: parent
     anchors.margins: 20
     width: 640; height: 480
+    property bool savingstate: false;
 
     Connections {
         target: mixer
@@ -56,6 +57,25 @@ Item {
         height: mixert.height;
         border.width: 1
         color: "white"
+
+        Button {
+            x: 500
+            y: 500
+            text: "Zapis"
+
+            onClicked: {  savingstate=true;
+
+                                              mixer.saveChanges(kombo.text,
+                                             comboslots.itemAt(0).children[0].currentIndex,comboslots.itemAt(0).children[1].text,
+                                             comboslots.itemAt(1).children[0].currentIndex,comboslots.itemAt(1).children[1].text,
+                                             comboslots.itemAt(2).children[0].currentIndex,comboslots.itemAt(2).children[1].text,
+                                             comboslots.itemAt(3).children[0].currentIndex,comboslots.itemAt(3).children[1].text)
+
+                           savingstate=false;
+
+            }
+
+        }
 
         Text {
           id: statustxt

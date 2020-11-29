@@ -37,7 +37,7 @@ int SlotMaster::getActualML(const int& idx) {return Slot[idx].ActualML;};
 void SlotMaster::setIDName(const int& idx, const QString& NewName) {
     Slot[idx].IdName=NewName.toUpper();
     GetActualIDs();
-    m_Mixer_ptr->pushIDListUpdate();
+  m_Mixer_ptr->pushIDListUpdate();
 
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

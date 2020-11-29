@@ -41,6 +41,16 @@ Item {
         }
                 }
 
+
+    Button {
+        x: 300
+        y: 500
+        text: "Wczytaj z urządzenia"
+
+        onClicked: {   manager.slots_Load(); }
+
+    }
+
     Button {
         x: 500
         y: 500

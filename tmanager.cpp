@@ -58,6 +58,15 @@ bool TManager::newJob(const QString& requestLine){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+void TManager::sendToDevice(const QString& cmd, const int& Interface)
+{
+
+   m_Serial_ptr->write(cmd,Interface);
+
+}
+
+
 void TManager::Log(const QString& Line, const int& Interface){
     QString IFCName="SYSTEM";
     QString Color="yellow";
@@ -99,7 +108,7 @@ void TManager::Log(const QString& Line, const int& Interface){
     case 4:
     {
         IFCName="GUI";
-        Color="lime";
+        Color="orange";
         break;
 
     };

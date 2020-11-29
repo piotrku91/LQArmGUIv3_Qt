@@ -86,7 +86,7 @@ ListModel { id: drinkMixList }
             id: box0_list
             y: (parent.height)
             width: boxWidth
-            model: mixer.getDrinkList()
+            model:;// mixer.getDrinkList()
         }
 
         Button {

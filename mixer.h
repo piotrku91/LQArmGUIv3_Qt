@@ -52,11 +52,14 @@ public:
                             const QString& AV_LQ2, const int& LQ2_amo,
                             const QString& AV_LQ3, const int& LQ3_amo,
                             const QString& AV_LQ4, const int& LQ4_amo);
-    void AddDefault();
+
 
     QStringList* GetActualNames(); // Generate list of names in QStringList DrinkList;
     const TView* getView() {return ActualView;}
     bool isNotEmpty() {if (Views.size()) return 1; else return 0;} ; //Check if is any item on drinklist
+    int LocalizeSlot(const QString& Code);
+    int isOnDrinkList(const QString& NameIn);
+
 
 
 public slots:
@@ -65,7 +68,12 @@ public slots:
     QString getStatusTxt() {return StatusTxt;};
     void callNewViewUpdate();
     void itemIndexChanged(const int& NewItemIndex=0);
-    int LocalizeSlot(const QString& Code);
+    void saveChanges(const QString& DrinkName,
+                                   const int& nidx1, const int& LQ1_amo,
+                                   const int& nidx2, const int& LQ2_amo,
+                                   const int& nidx3, const int& LQ3_amo,
+                                   const int& nidx4, const int& LQ4_amo);
+
 
 signals:
     QString pushIDListUpdate();
@@ -74,6 +82,8 @@ signals:
                            int AV_LQ2_itemIndex, int LQ2_amo,
                            int AV_LQ3_itemIndex, int LQ3_amo,
                            int AV_LQ4_itemIndex, int LQ4_amo);
+
+
 
 private:
     int m_ItemIndex; // Synchronization itemIndex
