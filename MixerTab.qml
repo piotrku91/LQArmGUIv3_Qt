@@ -59,13 +59,13 @@ Item {
         color: "white"
 
         Button {
-            x: 500
-            y: 500
+            x: 225
+            y: 493
             text: "Zapis"
 
             onClicked: {  savingstate=true;
 
-                                              mixer.saveChanges(kombo.text,
+                                              mixer.saveChanges(kombo.currentText,
                                              comboslots.itemAt(0).children[0].currentIndex,comboslots.itemAt(0).children[1].text,
                                              comboslots.itemAt(1).children[0].currentIndex,comboslots.itemAt(1).children[1].text,
                                              comboslots.itemAt(2).children[0].currentIndex,comboslots.itemAt(2).children[1].text,

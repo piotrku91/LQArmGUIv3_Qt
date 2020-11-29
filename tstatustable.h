@@ -23,16 +23,15 @@ public:
     explicit TStatusTable(QObject *parent = nullptr);
 
 public:
+    QStringList *m_DrinkList_ptr;
     TGlassInfo Glass[5];
 
     void ImportFromParams();
     void DrinkSchemeChanged();
 
 
-
-
 signals:
-
+    void pushSchemesUpdate();
 };
 
 #endif // TSTATUSTABLE_H

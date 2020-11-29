@@ -8,7 +8,7 @@ import QtQuick.Layouts 1.0
 Item {
     id: table
     anchors.fill: parent
-    property int boxWidth:100
+    property int boxWidth:125
     property int boxHeight:150
 default property alias boxA: table.children
 
@@ -48,6 +48,16 @@ ListModel { id: drinkMixList }
         slotsr.itemAt(4).children[1].model=mixer.getDrinkList();
 
         }
+
+    Connections {
+        target: gtable
+
+
+        onPushSchemesUpdate:
+        {
+       fillLists();
+        }
+    }
 
 
 

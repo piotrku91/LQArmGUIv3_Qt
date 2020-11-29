@@ -7,7 +7,7 @@
 #include "slotmaster.h"
 #include "serialx.h"
 #include "tmanager.h"
-
+#include "tstatustable.h"
 #include "clock.h"
 #include "mixer.h"
 
@@ -35,14 +35,15 @@ int main(int argc, char *argv[])
 
 
         Clock clocky;
-        Mixer mixer;
+        TStatusTable gtable;
+        Mixer mixer(&gtable);
         SerialX serial;
         ParamPart Reader;
         SlotMaster SlotM(&mixer);
         TManager Manager(&Reader,&SlotM, &mixer, &serial);
         serial.InstallToManager(&Manager);
 
-
+        context->setContextProperty("gtable",&gtable);
         context->setContextProperty("serial",&serial);
         context->setContextProperty("clocky",&clocky);
         context->setContextProperty("mixer",&mixer);

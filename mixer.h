@@ -6,7 +6,10 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include "tstatustable.h"
 
+
+class TStatusTable;
 
 class TView
 {
@@ -44,6 +47,7 @@ class Mixer: public QObject
 public:
     // Slots from Slotmaster
     const QStringList *IDListPtr; // Pointer to external list of slots (slotmaster.ActualList)
+    const QStringList *DrinkListPtr;
 
 
     // Views functions
@@ -88,6 +92,7 @@ signals:
 private:
     int m_ItemIndex; // Synchronization itemIndex
     QString StatusTxt;
+    TStatusTable *m_Table_ptr;
 
     // Views variables/types
     std::vector<TView> Views;
@@ -96,7 +101,7 @@ private:
 
 
 public:
-    explicit Mixer(QObject *parent = nullptr);  //Constructor
+    explicit Mixer(TStatusTable *STP, QObject *parent = nullptr):IDListPtr(nullptr),m_Table_ptr(STP),QObject(parent) {m_Table_ptr->m_DrinkList_ptr=&DrinkList;};//Constructor
 
 };
 
