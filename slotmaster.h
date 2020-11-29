@@ -18,8 +18,8 @@ class SlotMaster : public QObject
 {
     Q_OBJECT
 private:
-    TSlot Slot[9];
-    Mixer* m_Mixer_ptr;
+    TSlot Slot[9]; //Slots array
+    Mixer* m_Mixer_ptr; // Pointer to Mixer object (for push slots list update)
     QStringList ActualIDs;
 
 public:

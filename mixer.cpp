@@ -28,11 +28,11 @@ void Mixer::saveChanges(const QString& DrinkName,
    ActualView->m_Name=DrinkName,
    ActualView->m_LQ1_Code=IDListPtr->at(nidx1);
    ActualView->m_LQ1_amount=LQ1_amo;
-  ActualView->m_LQ2_Code=IDListPtr->at(nidx2);
+   ActualView->m_LQ2_Code=IDListPtr->at(nidx2);
    ActualView->m_LQ2_amount=LQ2_amo,
    ActualView->m_LQ3_Code=IDListPtr->at(nidx3);
-    ActualView->m_LQ3_amount=LQ3_amo;
-    ActualView->m_LQ4_Code=IDListPtr->at(nidx4);
+   ActualView->m_LQ3_amount=LQ3_amo;
+   ActualView->m_LQ4_Code=IDListPtr->at(nidx4);
    ActualView->m_LQ4_amount=LQ4_amo;
 }
 

@@ -47,7 +47,6 @@ class Mixer: public QObject
 public:
     // Slots from Slotmaster
     const QStringList *IDListPtr; // Pointer to external list of slots (slotmaster.ActualList)
-    const QStringList *DrinkListPtr;
 
 
     // Views functions
@@ -91,8 +90,8 @@ signals:
 
 private:
     int m_ItemIndex; // Synchronization itemIndex
-    QString StatusTxt;
-    TStatusTable *m_Table_ptr;
+    QString StatusTxt; //Variable to show status of load data about actual view.
+    TStatusTable *m_Table_ptr; // Pointer to Table (for push drinklist update)
 
     // Views variables/types
     std::vector<TView> Views;

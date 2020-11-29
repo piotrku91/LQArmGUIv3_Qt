@@ -49,6 +49,41 @@ ListModel { id: drinkMixList }
 
         }
 
+
+    function fillImages()
+    {
+
+        for (var i = 0; i < 5; i++) {
+
+         if  (gtable.getLockFlag(i))
+                 {
+            slotsr.itemAt(i).children[0].source="static/shot-glass_full.png"
+                 }
+                     else {
+                      slotsr.itemAt(i).children[0].source="static/shot-glass_empty.png" ;
+         }
+
+        }
+
+        }
+
+    function fillStates()
+    {
+
+        for (var i = 0; i < 5; i++) {
+
+         if  (gtable.getActiveState(i))
+                 {
+            slotsr.itemAt(i).color="lime";
+                 }
+                     else {
+                      slotsr.itemAt(i).color="#17b1aa";
+         }
+
+        }
+
+        }
+
     Connections {
         target: gtable
 
@@ -57,6 +92,17 @@ ListModel { id: drinkMixList }
         {
        fillLists();
         }
+
+        onPushImagesUpdate:
+        {
+       fillImages();
+        }
+
+        onPushStatesUpdate:
+        {
+       fillStates();
+        }
+
     }
 
 
@@ -65,7 +111,8 @@ ListModel { id: drinkMixList }
 
     Row {
         id: positionrow
-         anchors.fill: parent
+        anchors.fill: parent
+        anchors.left: parent.left
         Repeater {
             id: slotsr
             model: 5
@@ -78,6 +125,9 @@ ListModel { id: drinkMixList }
         height: boxHeight
         color: "#17b1aa"
         radius: 20
+
+
+
 
 
         Image {
@@ -99,25 +149,14 @@ ListModel { id: drinkMixList }
             model:;// mixer.getDrinkList()
         }
 
-        Button {
-            id: box0_buttonun
-            text: qsTr("ODBLOKUJ")
-            height: 20
-            y: parent.height+box0_list.height+10
+        MouseArea {
+            anchors.fill: parent
 
-        }
-
-        Button {
-            id: box0_buttonexe
-            text: qsTr("NALEJ")
-            height: 20
-            y: parent.height+box0_list.height+10+20+10
-
+            onClicked: {gtable.setActiveState(index)}
         }
 
 
 
-    }
 
 
         }
@@ -130,27 +169,145 @@ ListModel { id: drinkMixList }
 
     ///////////////
 
+
+Row {
+    anchors.bottom: parent.bottom
+    anchors.left: parent.left
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 105
     Button {
-        id: guzik
-        text: "patrz"
-
-        width: 45
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
+        id: btn_ulck
+        text: qsTr("ODBLOKUJ")
+        height: 100
+        width: 100
+      //  anchors.bottom: parent.bottom
+      //  anchors.left: parent.left
         anchors.bottomMargin: 1
-        anchors.verticalCenterOffset: 96
-        anchors.horizontalCenterOffset: -30
 
-
-        onClicked: {
-            setImage(0,true)
-
-           fillLists()
-
-        }
-
+        onClicked: { gtable.setLockForActive(false)}
+    }
 
     }
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 105
+    Button {
+        id: btn_lck
+        text: qsTr("ZABLOKUJ")
+        height: 100
+        width: 100
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { gtable.setLockForActive(true);
+
+
+
+        }
+    }
+
+}
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 105
+    Button {
+        id: btn_selall
+        text: qsTr("ZAZNACZ \n WSZYSTKIE")
+        height: 100
+        width: 100
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { gtable.setActiveStateALL(true)
+
+
+
+        }
+    }
+
+}
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:layout_color_backgrounds
+        height: 100
+        width: 150
+    Button {
+        id: btn_unselall
+        text: qsTr("ODZNACZ \n WSZYSTKIE")
+        height: 100
+        width: 100
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { gtable.setActiveStateALL(false)
+
+
+
+        }
+    }
+
+}
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 150
+    Button {
+        id: btn_execute
+        text: qsTr("NALEWANIE")
+        font.bold: true
+        height: 100
+        width: 150
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { gtable.setActiveStateALL(false)
+
+
+
+        }
+    }
+
+}
+
+
+
+
+
+}
 
     Text {
         id: element
@@ -180,3 +337,4 @@ Designer {
     D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/
+}
