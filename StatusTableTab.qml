@@ -259,9 +259,9 @@ Row {
     ////////////////////////////////////////// BUTTON
 
     Rectangle {
-        color:layout_color_backgrounds
+        color:"black"
         height: 100
-        width: 150
+        width: 105
     Button {
         id: btn_unselall
         text: qsTr("ODZNACZ \n WSZYSTKIE")
@@ -288,13 +288,13 @@ Row {
     Rectangle {
         color:"black"
         height: 100
-        width: 150
+        width: 105
     Button {
         id: btn_execute
-        text: qsTr("NALEWANIE")
+        text: qsTr("NALEWANIE \n AKTYWNYCH")
         font.bold: true
         height: 100
-        width: 150
+        width: 100
 
 
     //    anchors.bottom: parent.bottom
@@ -310,6 +310,62 @@ Row {
     }
 
 }
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 105
+    Button {
+        id: btn_exeone
+        text: qsTr("NALEWANIE \n KROKOWE")
+        font.bold: true
+        height: 100
+        width: 100
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { gtable.setActiveStateALL(false)
+
+
+
+        }
+    }
+
+}
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 105
+    Button {
+        id: btn_go
+        text: qsTr("JEDŹ\n DO \n NASTĘPNEGO")
+        font.bold: true
+        height: 100
+        width: 100
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { gtable.setActiveStateALL(false)
+
+
+
+        }
+    }
+
+}
+
 
 
 

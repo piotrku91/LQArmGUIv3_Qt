@@ -53,6 +53,8 @@ Item {
 
     Rectangle {
         id: framemixer
+        x: 0
+        y: 0
         width: mixert.width;
         height: mixert.height;
       //  border.width: 1
@@ -66,7 +68,7 @@ Item {
           y: 300
           width: 52
           height: 37
-          text: qsTr("debug")
+          text: qsTr("STATUS ODCZYTU")
 
           styleColor: "red"
           font.bold: true
@@ -175,7 +177,7 @@ Row {
             width: 105
         Button {
             id: btn_savedrinks
-            text: qsTr("ZAPISZ / WYŚLIJ \n DO \n URZĄDZENIA")
+            text: qsTr(" WYŚLIJ \n DO \n URZĄDZENIA")
             height: 100
             width: 100
           //  anchors.bottom: parent.bottom
@@ -278,8 +280,4 @@ Row {
 
 
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}
-}
-##^##*/
+

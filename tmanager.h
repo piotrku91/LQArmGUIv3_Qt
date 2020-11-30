@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include "lib/ParamPart/src/parampart_pcs.h"
+ #include <QtMultimedia/QMediaPlayer>
+
 
 class SerialX;
 class SlotMaster;
@@ -20,6 +22,8 @@ class TManager:public QObject
   SerialX *m_Serial_ptr;
   Mixer *m_Mixer_ptr;
   TStatusTable *m_Table_ptr;
+  QMediaPlayer *player = new QMediaPlayer(NULL,QMediaPlayer::LowLatency);
+
 
   public:
 
@@ -40,15 +44,22 @@ class TManager:public QObject
 
   bool newJob(const QString& requestLine);
   void Reaction(ParamPart &P);
-  void DeviceReady() {unlockApp();};
+  void DeviceReady() {unlockApp();
 
+
+                                      player->setMedia(QUrl::fromLocalFile("/home/piotr/Pobrane/ding2.wav"));
+
+                                                      player->setVolume(30); player->play(); //player->stop();
+
+
+};
 
   void Log(const QString& Line,const int& Interface=0);
 
 public slots:
   void sendToDevice(const QString& cmd, const int& Interface);
   void slots_Save() {};
-  void slots_Load() {sendToDevice("<db;>",4);};
+  void slots_Load() {sendToDevice("<db;>",4); };
   void drink_Save() {};
   void drink_Load() {};
   void schemeChange_Save(const int& GlassIdx);

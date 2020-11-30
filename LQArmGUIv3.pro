@@ -1,5 +1,6 @@
 QT += quick
 QT += serialport
+QT += multimedia
 
 CONFIG += c++11
 CONFIG += qmltypes

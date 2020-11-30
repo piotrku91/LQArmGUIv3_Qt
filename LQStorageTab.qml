@@ -9,6 +9,8 @@ Item {
     width: 640; height: 480
     anchors.fill: parent
     anchors.margins: 20
+    anchors.bottomMargin: 0
+    anchors.leftMargin: 0
 
     function updatesl()
     {
@@ -42,36 +44,12 @@ Item {
                 }
 
 
-    Button {
-        x: 300
-        y: 500
-        text: "Wczytaj z urządzenia"
 
-        onClicked: {   manager.slots_Load(); }
-
-    }
-
-    Button {
-        x: 500
-        y: 500
-        text: "Przywróć ostatnie"
-
-        onClicked: {   updatesl(); }
-
-    }
-
-    Button {
-        x: 650
-        y: 500
-        text: "Zapisz"
-
-        onClicked: {   updatess(); }
-
-    }
 
 
 
     Row {
+        anchors.leftMargin: 20
         Repeater {
             id: slots
             model: 9
@@ -176,6 +154,92 @@ Item {
 
 
         }
+    }
+
+
+
+
+
+
+    Row {
+        anchors.bottom: lqstorage.bottom
+        anchors.left: lqstorage.left
+
+        ////////////////////////////////////////// BUTTON
+
+        Rectangle {
+            color:"black"
+            height: 100
+            width: 105
+        Button {
+            id: btn_savelqslots
+            text: qsTr("WYŚLIJ \n DO \n URZĄDZENIA")
+            height: 100
+            width: 100
+          //  anchors.bottom: parent.bottom
+          //  anchors.left: parent.left
+            anchors.bottomMargin: 1
+
+            onClicked: { updatess();
+
+            }
+        }
+
+        }
+
+        ////////////////////////////////////////// BUTTON
+
+        Rectangle {
+            color:"black"
+            height: 100
+            width: 105
+        Button {
+            id: btn_loadlqslots
+            text: qsTr("WCZYTAJ \n Z \n URZĄDZENIA")
+            height: 100
+            width: 100
+          //  anchors.bottom: parent.bottom
+          //  anchors.left: parent.left
+            anchors.bottomMargin: 1
+
+            onClicked: {  manager.slots_Load();  }
+        }
+
+        }
+
+        ////////////////////////////////////////// BUTTON
+
+        Rectangle {
+            color:"black"
+            height: 100
+            width: 105
+        Button {
+            id: btn_backlqslots
+            text: qsTr("PRZYWRÓC \n OSTATNIO \n ODCZYTANE")
+            height: 100
+            width: 100
+          //  anchors.bottom: parent.bottom
+          //  anchors.left: parent.left
+            anchors.bottomMargin: 1
+
+            onClicked: {  updatesl();   }
+        }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
