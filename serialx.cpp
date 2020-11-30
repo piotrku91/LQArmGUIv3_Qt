@@ -21,7 +21,7 @@ void SerialX::begin(const QString& dev, const int& baudrate){
     connect(sP,SIGNAL(readyRead()),this,SLOT(readData()));
 
 
- if (!sP->open(QIODevice::ReadWrite)) {m_Manager_ptr->Log("** Błąd - połączenie nieudane.",1);} else {m_Manager_ptr->Log("** Sukces - połączenie ustanowione.",0);};
+ if (!sP->open(QIODevice::ReadWrite)) {m_Manager_ptr->Log("** Błąd - połączenie nieudane.",1);} else {m_Manager_ptr->Log("** Sukces - połączenie ustanowione.",0); m_Manager_ptr->DeviceReady();};
 
 }
 

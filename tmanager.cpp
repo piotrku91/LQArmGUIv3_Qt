@@ -1,6 +1,13 @@
 #include "serialx.h"
 #include "slotmaster.h"
 #include "tmanager.h"
+#include "tstatustable.h"
+
+ void TManager::schemeChange_Save(const int& GlassIdx)
+ {
+     sendToDevice("<n_sch;"+ QString::number(GlassIdx) + ";"+m_Table_ptr->Glass[GlassIdx].DrinkScheme+";>",4);
+ };
+
 
 void TManager::Reaction(ParamPart &P)
 {

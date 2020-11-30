@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
         SerialX serial;
         ParamPart Reader;
         SlotMaster SlotM(&mixer);
-        TManager Manager(&Reader,&SlotM, &mixer, &serial);
+        TManager Manager(&Reader,&SlotM, &mixer, &serial, &gtable);
         serial.InstallToManager(&Manager);
 
         context->setContextProperty("gtable",&gtable);

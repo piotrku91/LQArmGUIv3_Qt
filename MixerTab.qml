@@ -7,7 +7,7 @@ import QtQuick.Layouts 1.0
 Item {
     id: mixert
     anchors.fill: parent
-    anchors.margins: 20
+    anchors.margins: 0
     width: 640; height: 480
     property bool savingstate: false;
 
@@ -55,27 +55,10 @@ Item {
         id: framemixer
         width: mixert.width;
         height: mixert.height;
-        border.width: 1
-        color: "white"
+      //  border.width: 1
+        color: layout_color_backgrounds
 
-        Button {
-            x: 225
-            y: 493
-            text: "Zapis"
 
-            onClicked: {  savingstate=true;
-
-                                              mixer.saveChanges(kombo.currentText,
-                                             comboslots.itemAt(0).children[0].currentIndex,comboslots.itemAt(0).children[1].text,
-                                             comboslots.itemAt(1).children[0].currentIndex,comboslots.itemAt(1).children[1].text,
-                                             comboslots.itemAt(2).children[0].currentIndex,comboslots.itemAt(2).children[1].text,
-                                             comboslots.itemAt(3).children[0].currentIndex,comboslots.itemAt(3).children[1].text)
-
-                           savingstate=false;
-
-            }
-
-        }
 
         Text {
           id: statustxt
@@ -175,6 +158,106 @@ Row {
 
         }
     }
+
+
+    }
+
+
+    Row {
+        anchors.bottom: mixert.bottom
+        anchors.left: mixert.left
+
+        ////////////////////////////////////////// BUTTON
+
+        Rectangle {
+            color:"black"
+            height: 100
+            width: 105
+        Button {
+            id: btn_savedrinks
+            text: qsTr("ZAPISZ / WYŚLIJ \n DO \n URZĄDZENIA")
+            height: 100
+            width: 100
+          //  anchors.bottom: parent.bottom
+          //  anchors.left: parent.left
+            anchors.bottomMargin: 1
+
+            onClicked: {  savingstate=true;
+
+                                              mixer.saveChanges(kombo.currentText,
+                                             comboslots.itemAt(0).children[0].currentIndex,comboslots.itemAt(0).children[1].text,
+                                             comboslots.itemAt(1).children[0].currentIndex,comboslots.itemAt(1).children[1].text,
+                                             comboslots.itemAt(2).children[0].currentIndex,comboslots.itemAt(2).children[1].text,
+                                             comboslots.itemAt(3).children[0].currentIndex,comboslots.itemAt(3).children[1].text)
+
+                           savingstate=false;
+
+            }
+        }
+
+        }
+        ////////////////////////////////////////// BUTTON
+
+        Rectangle {
+            color:"black"
+            height: 100
+            width: 105
+        Button {
+            id: btn_saveandsend
+            text: qsTr("WCZYTAJ \n Z \n URZĄDZENIA")
+            height: 100
+            width: 100
+          //  anchors.bottom: parent.bottom
+          //  anchors.left: parent.left
+            anchors.bottomMargin: 1
+
+            onClicked: {
+
+            }
+        }
+
+        }
+
+        ////////////////////////////////////////// BUTTON
+
+        Rectangle {
+            color:"black"
+            height: 100
+            width: 105
+        Button {
+            id: btn_create
+            text: qsTr("STWÓRZ \n NOWY \n DRINK")
+            height: 100
+            width: 100
+          //  anchors.bottom: parent.bottom
+          //  anchors.left: parent.left
+            anchors.bottomMargin: 1
+
+            onClicked: {
+
+            }
+        }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
@@ -182,7 +265,15 @@ Row {
 
 
 
+    ////////////////
+
+
+
 }
+
+
+
+
 
 
 

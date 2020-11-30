@@ -47,6 +47,12 @@ ListModel { id: drinkMixList }
         slotsr.itemAt(3).children[1].model=mixer.getDrinkList();
         slotsr.itemAt(4).children[1].model=mixer.getDrinkList();
 
+         slotsr.itemAt(0).children[1].currentIndex=gtable.getSchemeIDX(0);
+        slotsr.itemAt(1).children[1].currentIndex=gtable.getSchemeIDX(1);
+        slotsr.itemAt(2).children[1].currentIndex=gtable.getSchemeIDX(2);
+        slotsr.itemAt(3).children[1].currentIndex=gtable.getSchemeIDX(3);
+        slotsr.itemAt(4).children[1].currentIndex=gtable.getSchemeIDX(4);
+
         }
 
 
@@ -147,6 +153,8 @@ ListModel { id: drinkMixList }
             y: (parent.height)
             width: boxWidth
             model:;// mixer.getDrinkList()
+            onCurrentIndexChanged: {gtable.setSchemeByIDX(index,currentIndex); manager.schemeChange_Save(index);}
+
         }
 
         MouseArea {

@@ -52,6 +52,20 @@ import QtQuick.Layouts 1.0
 import QtQuick 2.0
 
 Item {
+
+    Connections {
+        target: manager
+
+
+        onUnlockApp:
+        {
+        header.enabled=true;
+        tabWidget.current=1;
+        }
+
+    }
+
+
     id: tabWidget
 
     default property alias content: stack.children
@@ -70,6 +84,7 @@ Item {
 
     Row {
         id: header
+        enabled: false  // lock everything on start and wait for load all data from device.
 
         Repeater {
             model: stack.children.length
