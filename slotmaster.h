@@ -15,14 +15,16 @@ public:
 };
 
 class SlotMaster : public QObject
+
 {
     Q_OBJECT
 private:
-    TSlot Slot[9]; //Slots array
+
     Mixer* m_Mixer_ptr; // Pointer to Mixer object (for push slots list update)
     QStringList ActualIDs;
 
 public:
+    TSlot Slot[9]; //Slots array
     // Constructor
     explicit SlotMaster(Mixer *Mixer, QObject *parent = nullptr): QObject(parent),m_Mixer_ptr(Mixer)
     {GetActualIDs(); m_Mixer_ptr->IDListPtr=&ActualIDs; m_Mixer_ptr->pushIDListUpdate();};

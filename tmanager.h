@@ -4,6 +4,8 @@
 #include <QObject>
 #include "lib/ParamPart/src/parampart_pcs.h"
  #include <QtMultimedia/QMediaPlayer>
+#include "tstatustable.h"
+#include <unistd.h>
 
 
 class SerialX;
@@ -15,6 +17,8 @@ class TManager:public QObject
 
 {
     Q_OBJECT
+    friend class SlotMaster;
+
   private:
   //Managed object pointers
   ParamPart *m_ParamPart_ptr;
@@ -44,12 +48,13 @@ class TManager:public QObject
 
   bool newJob(const QString& requestLine);
   void Reaction(ParamPart &P);
-  void DeviceReady() {unlockApp();
+  void DeviceReady() {
 
+      player->setMedia(QUrl::fromLocalFile("/home/piotr/Pobrane/ding2.wav"));
+      player->setVolume(30); player->play(); //player->stop();
+   //   usleep(1000000);
+      sendToDevice("<boot;>",4);
 
-                                      player->setMedia(QUrl::fromLocalFile("/home/piotr/Pobrane/ding2.wav"));
-
-                                                      player->setVolume(30); player->play(); //player->stop();
 
 
 };
@@ -57,12 +62,19 @@ class TManager:public QObject
   void Log(const QString& Line,const int& Interface=0);
 
 public slots:
+
+  // Send to device functions
   void sendToDevice(const QString& cmd, const int& Interface);
-  void slots_Save() {};
+  void slots_Save();
   void slots_Load() {sendToDevice("<db;>",4); };
   void drink_Save() {};
   void drink_Load() {};
-  void schemeChange_Save(const int& GlassIdx);
+
+  void schemeChange_Save(const int& GlassIdx); // unused for now
+  void execute();
+
+  //////////////////////////////////
+
 
 signals:
    QString addLog(const QString& Line, const QString& Interface="SYSTEM", const QString& Color="red");

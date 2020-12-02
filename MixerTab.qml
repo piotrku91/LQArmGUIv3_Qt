@@ -91,6 +91,7 @@ Item {
 
 
  Column {
+
      Text {
        id: label1
        x: framemixer.width/2+(framemixer.width/8);
@@ -159,7 +160,9 @@ Row {
 
 
         }
-    }
+ }
+
+
 
 
     }

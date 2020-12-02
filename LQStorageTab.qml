@@ -29,7 +29,9 @@ Item {
            slotmaster.setIDName(i,slots.itemAt(i).children[5].text);
            slotmaster.setActualML(i,slots.itemAt(i).children[6].text);
            slotmaster.setMaxML(i,slots.itemAt(i).children[7].text);
+
         }
+         manager.slots_Save();
 
     }
 

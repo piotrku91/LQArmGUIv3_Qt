@@ -157,6 +157,7 @@ ListModel { id: drinkMixList }
 
         }
 
+
         MouseArea {
             anchors.fill: parent
 
@@ -177,6 +178,16 @@ ListModel { id: drinkMixList }
 
     ///////////////
 
+        Switch {
+            id: safelock
+            x: 0
+            y: table.height-150;
+            width: 200
+            height: 40
+
+            position: 0
+            onCheckedChanged: { btn_lck.enabled=position }
+        }
 
 Row {
     anchors.bottom: parent.bottom
@@ -190,9 +201,10 @@ Row {
         width: 105
     Button {
         id: btn_ulck
-        text: qsTr("ODBLOKUJ")
+        text: qsTr("ODBLOKUJ \n (PUSTY)")
         height: 100
         width: 100
+        enabled: safelock.position;
       //  anchors.bottom: parent.bottom
       //  anchors.left: parent.left
         anchors.bottomMargin: 1
@@ -210,10 +222,10 @@ Row {
         width: 105
     Button {
         id: btn_lck
-        text: qsTr("ZABLOKUJ")
+        text: qsTr("ZABLOKUJ \n (PEŁNY)")
         height: 100
         width: 100
-
+        enabled: safelock.position;
 
     //    anchors.bottom: parent.bottom
      //   anchors.left: parent.left
@@ -288,13 +300,13 @@ Row {
     Rectangle {
         color:"black"
         height: 100
-        width: 105
+        width: 130
     Button {
         id: btn_execute
         text: qsTr("NALEWANIE \n AKTYWNYCH")
         font.bold: true
         height: 100
-        width: 100
+        width: 125
 
 
     //    anchors.bottom: parent.bottom
@@ -302,8 +314,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { gtable.setActiveStateALL(false)
-
+        onClicked: { manager.execute()
 
 
         }
@@ -316,13 +327,13 @@ Row {
     Rectangle {
         color:"black"
         height: 100
-        width: 105
+        width: 130
     Button {
         id: btn_exeone
         text: qsTr("NALEWANIE \n KROKOWE")
         font.bold: true
         height: 100
-        width: 100
+        width: 125
 
 
     //    anchors.bottom: parent.bottom
@@ -343,13 +354,13 @@ Row {
     Rectangle {
         color:"black"
         height: 100
-        width: 105
+        width: 130
     Button {
         id: btn_go
         text: qsTr("JEDŹ\n DO \n NASTĘPNEGO")
         font.bold: true
         height: 100
-        width: 100
+        width: 125
 
 
     //    anchors.bottom: parent.bottom
@@ -365,6 +376,93 @@ Row {
     }
 
 }
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 130
+    Button {
+        id: btn_escape
+        text: qsTr("ODJAZD")
+        font.bold: true
+        height: 100
+        width: 125
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { gtable.setActiveStateALL(false)
+
+
+
+        }
+    }
+
+}
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 130
+    Button {
+        id: btn_home
+        text: qsTr("POZYCJA \n DOMOWA")
+        font.bold: true
+        height: 100
+        width: 125
+
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { gtable.setActiveStateALL(false)
+
+
+
+        }
+    }
+
+}
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 130
+    Button {
+        id: btn_stop
+        text: qsTr("STOP")
+        font.bold: true
+        height: 100
+        width: 125
+
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { gtable.setActiveStateALL(false)
+
+
+
+        }
+    }
+
+}
+
 
 
 

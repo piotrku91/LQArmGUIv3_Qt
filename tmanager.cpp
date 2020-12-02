@@ -5,13 +5,49 @@
 
  void TManager::schemeChange_Save(const int& GlassIdx)
  {
-     sendToDevice("<n_sch;"+ QString::number(GlassIdx) + ";"+m_Table_ptr->Glass[GlassIdx].DrinkScheme+";>",4);
+    // sendToDevice("<n_sch;"+ QString::number(GlassIdx) + ";"+m_Table_ptr->Glass[GlassIdx].DrinkScheme+";>",4);
+ };
+
+
+ void TManager::execute()
+ {
+     QString tmpString;
+     for (auto &oneShot : m_Table_ptr->Glass)
+     { tmpString+=QString::number(oneShot.Checked)+';'; }
+
+     sendToDevice("<n_que;"+tmpString+'>',4);
+
+     for (int i=0; i < 5; i++)
+     {
+         if (m_Table_ptr->Glass[i].Checked)
+         {
+             sendToDevice("<n_set;"+QString::number(i)+';'+QString::number(m_Table_ptr->Glass[i].MaxCap)+';'+QString::number(m_Table_ptr->Glass[i].Locked)+';'+m_Table_ptr->Glass[i].DrinkScheme+";>",4);
+         }
+     }
+     sendToDevice("<srv_nalall>",4);
+ };
+
+
+ void TManager::slots_Save()
+ {
+
+     for (int i=0; i < 9; i++)
+     {
+             sendToDevice("<lq_s;"+QString::number(i)+';'+m_SM_ptr->Slot[i].IdName+';'+QString::number(m_SM_ptr->Slot[i].ActualML)+";>",4);
+     }
  };
 
 
 void TManager::Reaction(ParamPart &P)
 {
   //  Log(P[1]);
+
+    if (P.Header("boot_ok"))
+    {
+      slots_Load();
+unlockApp();
+        P.ReadDone(true);
+    };
 
     if ((P.Header("lq_i")) && P.Integrity(4,NUMBER,STRING,NUMBER,NUMBER))
     {
@@ -59,7 +95,7 @@ bool TManager::newJob(const QString& requestLine){
     typedef void (TManager::*ReaPTR)(ParamPart &PP);
     ReaPTR MemberReactionPointer= &TManager::Reaction;
     QString Return = QString::fromStdString(m_ParamPart_ptr->Interpreter(this,MemberReactionPointer));
-    Log(Return);
+   // Log(Return);
    return 1;
 }
 
