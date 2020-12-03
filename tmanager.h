@@ -29,17 +29,15 @@ class TManager:public QObject
   QMediaPlayer *player = new QMediaPlayer(NULL,QMediaPlayer::LowLatency);
 
 
+
   public:
+
 
   //Constructor
   TManager()=delete;
   explicit TManager(ParamPart *PP, SlotMaster *SM, Mixer *M, SerialX *QSP, TStatusTable *ST, QObject *parent = nullptr)
       : QObject(parent),m_ParamPart_ptr(PP),m_SM_ptr(SM),m_Serial_ptr(QSP),m_Mixer_ptr(M),m_Table_ptr(ST)
   {
-
-
-
-
 
   };
 
@@ -52,13 +50,11 @@ class TManager:public QObject
 
       player->setMedia(QUrl::fromLocalFile("/home/piotr/Pobrane/ding2.wav"));
       player->setVolume(30); player->play(); //player->stop();
-   //   usleep(1000000);
-      sendToDevice("<boot;>",4);
-
-
+    // usleep(2000000);
+    //  sendToDevice("<boot;>",4);
+unlockApp();
 
 };
-
   void Log(const QString& Line,const int& Interface=0);
 
 public slots:

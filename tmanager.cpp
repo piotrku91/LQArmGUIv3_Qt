@@ -15,17 +15,19 @@
      for (auto &oneShot : m_Table_ptr->Glass)
      { tmpString+=QString::number(oneShot.Checked)+';'; }
 
-     sendToDevice("<n_que;"+tmpString+'>',4);
+     m_Serial_ptr->Transaction("<n_que;"+tmpString+'>');
+
 
      for (int i=0; i < 5; i++)
      {
          if (m_Table_ptr->Glass[i].Checked)
          {
-             sendToDevice("<n_set;"+QString::number(i)+';'+QString::number(m_Table_ptr->Glass[i].MaxCap)+';'+QString::number(m_Table_ptr->Glass[i].Locked)+';'+m_Table_ptr->Glass[i].DrinkScheme+";>",4);
-         }
-     }
-     sendToDevice("<srv_nalall>",4);
+            m_Serial_ptr->Transaction("<n_set;"+QString::number(i)+';'+QString::number(m_Table_ptr->Glass[i].MaxCap)+';'+QString::number(m_Table_ptr->Glass[i].Locked)+';'+m_Table_ptr->Glass[i].DrinkScheme+";>");
+        }
+    }
+     m_Serial_ptr->Transaction("<srv;>");
  };
+
 
 
  void TManager::slots_Save()
@@ -105,7 +107,8 @@ bool TManager::newJob(const QString& requestLine){
 void TManager::sendToDevice(const QString& cmd, const int& Interface)
 {
 
-   m_Serial_ptr->write(cmd,Interface);
+   m_Serial_ptr->write(cmd+"\t\n",Interface);
+  // usleep(500000);
 
 }
 

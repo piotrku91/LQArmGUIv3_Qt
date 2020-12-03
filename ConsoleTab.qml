@@ -194,8 +194,8 @@ ScrollBar.vertical: ScrollBar {}
         onClicked: {
               if (newcmd.text !== "") {
            // mainconsole.newLine(newcmd.text,"GUI","red")
-            serial.writeSlot(newcmd.text+"\r\n")
-        newcmd.text=""
+            serial.writeSlot(newcmd.text+"\n")
+      // newcmd.text=""
 
         }
         }

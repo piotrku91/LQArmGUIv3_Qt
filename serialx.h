@@ -18,6 +18,7 @@ protected:
 
 private:
  TManager * m_Manager_ptr;
+ bool IsTransaction;
 
 public:
     SerialX();
@@ -25,18 +26,19 @@ public:
     void begin(const QString& dev, const int& baudrate);
     void end();
     void write(const QString& msg,const int& LogAs=2);
+    void Transaction(const QString& cmd);  // Writing data to serial and wait for response (disabling Read free mode for a moment)
 
 
 public slots:
     void beginSlot(const QString& dev, const int& baudrate);
     void closeSlot();
     void writeSlot(const QString& msg);
-    void readData();
-  //  void Log(const QString& Line);
+    void readData(); // Reading data from serial (free mode)
+
 
 signals:
     QString getNewData(const QString& data);
-  //  QString getLog(const QString& Line);
+
 
 
 
