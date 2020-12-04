@@ -32,12 +32,14 @@ public:
 public slots:
     void beginSlot(const QString& dev, const int& baudrate);
     void closeSlot();
-    void writeSlot(const QString& msg);
+    void writeSlot(const QString& msg); // Write slot (access from qml)
     void readData(); // Reading data from serial (free mode)
 
 
 signals:
     QString getNewData(const QString& data);
+    QString startBusy();
+    QString stopBusy();
 
 
 

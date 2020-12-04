@@ -25,6 +25,7 @@ void Mixer::saveChanges(const QString& DrinkName,
                                const int& nidx4, const int& LQ4_amo)
 {
 
+   if (ActualView!=nullptr) {
    ActualView->m_Name=DrinkName,
    ActualView->m_LQ1_Code=IDListPtr->at(nidx1);
    ActualView->m_LQ1_amount=LQ1_amo;
@@ -34,6 +35,7 @@ void Mixer::saveChanges(const QString& DrinkName,
    ActualView->m_LQ3_amount=LQ3_amo;
    ActualView->m_LQ4_Code=IDListPtr->at(nidx4);
    ActualView->m_LQ4_amount=LQ4_amo;
+   }
 }
 
 

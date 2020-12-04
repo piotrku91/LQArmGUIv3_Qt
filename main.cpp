@@ -19,8 +19,6 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
-   //qmlRegisterType<BackEnd>("io.qt.examples.backend",1,0,"BackEnd");
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
@@ -33,25 +31,28 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
 
 
-
+        // Objects initialization
         Clock clocky;
         TStatusTable gtable;
         Mixer mixer(&gtable);
         SerialX serial;
         ParamPart Reader;
         SlotMaster SlotM(&mixer);
-        TManager Manager(&Reader,&SlotM, &mixer, &serial, &gtable);
-        serial.InstallToManager(&Manager);
 
+        TManager Manager(&Reader,&SlotM, &mixer, &serial, &gtable); // Push pointers of main objects to Manager object
+        serial.InstallToManager(&Manager); // Connect callback pointer to Manager from serial.
+
+        // Give access to main objects from QML
         context->setContextProperty("gtable",&gtable);
         context->setContextProperty("serial",&serial);
         context->setContextProperty("clocky",&clocky);
         context->setContextProperty("mixer",&mixer);
         context->setContextProperty("slotmaster",&SlotM);
-       context->setContextProperty("manager",&Manager);
+        context->setContextProperty("manager",&Manager);
 
     engine.load(url);
-    serial.begin("ttyACM0",9600);
+
+    serial.begin("ttyACM0",9600); // Connect serial port
 
 
 

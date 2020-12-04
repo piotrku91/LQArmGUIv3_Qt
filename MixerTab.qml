@@ -197,6 +197,8 @@ Row {
 
                            savingstate=false;
 
+                                                manager.drink_Save();
+
             }
         }
 
@@ -216,8 +218,7 @@ Row {
           //  anchors.left: parent.left
             anchors.bottomMargin: 1
 
-            onClicked: {
-
+            onClicked: { manager.drink_Load();
             }
         }
 

@@ -47,27 +47,26 @@ class TManager:public QObject
   bool newJob(const QString& requestLine);
   void Reaction(ParamPart &P);
   void DeviceReady() {
-
       player->setMedia(QUrl::fromLocalFile("/home/piotr/Pobrane/ding2.wav"));
-      player->setVolume(30); player->play(); //player->stop();
+      player->setVolume(30); player->play();
     // usleep(2000000);
     //  sendToDevice("<boot;>",4);
-unlockApp();
+        unlockApp();
 
 };
   void Log(const QString& Line,const int& Interface=0);
 
 public slots:
 
-  // Send to device functions
-  void sendToDevice(const QString& cmd, const int& Interface);
-  void slots_Save();
-  void slots_Load() {sendToDevice("<db;>",4); };
-  void drink_Save() {};
-  void drink_Load() {};
-
-  void schemeChange_Save(const int& GlassIdx); // unused for now
-  void execute();
+  // Communication with device - main function
+  void sendToDevice(const QString& cmd, const int& Interface); // Send normal message to device
+  void slots_Save();                                           // Send slots to device
+  void slots_Load() {sendToDevice("<db;>",4); };             // Load slots from device
+  void drink_Save();                                        // Save drink schemes to device
+  void drink_Load() {sendToDevice("<sch_ls;>",4);};            // Load drink schemes from device
+  void glass_Save();                                           // Save glass settings to device
+  void glass_Load() {sendToDevice("<n_i;>",4);};               // Load glass settings from device
+  void executeDisp();                                          // Start action (move and dispense)
 
   //////////////////////////////////
 

@@ -64,10 +64,14 @@ ApplicationWindow {
     width: 640
     height: 480
 
+
+
 TabWidget {
     id: tabs
     width: 640; height: 480
     anchors.fill: parent
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,7 +90,8 @@ TabWidget {
             enabled: (tabs.current===0) ? true:false
 
 
-           ConsoleTab {} // ConsoleTab.qml
+            ConsoleTab {
+                } // ConsoleTab.qml
 
 
 
@@ -109,7 +114,7 @@ TabWidget {
 
 
 
-          StatusTableTab {}
+          StatusTableTab { }
 
 
         }

@@ -28,6 +28,7 @@ SOURCES += \
         serialx.cpp \
         slotmaster.cpp \
         tmanager.cpp \
+        tmanager_reaction.cpp \
         tstatustable.cpp
 
 RESOURCES += qml.qrc

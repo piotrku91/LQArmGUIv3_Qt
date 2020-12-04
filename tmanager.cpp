@@ -3,92 +3,73 @@
 #include "tmanager.h"
 #include "tstatustable.h"
 
- void TManager::schemeChange_Save(const int& GlassIdx)
- {
-    // sendToDevice("<n_sch;"+ QString::number(GlassIdx) + ";"+m_Table_ptr->Glass[GlassIdx].DrinkScheme+";>",4);
- };
+
+void TManager::glass_Save()
+{
+    for (int i=0; i < 5; i++)
+    {
+        if (m_Table_ptr->Glass[i].Checked)
+        {
+           m_Serial_ptr->Transaction("<n_set;"+QString::number(i)+';'+QString::number(m_Table_ptr->Glass[i].MaxCap)+';'+QString::number(m_Table_ptr->Glass[i].Locked)+';'+m_Table_ptr->Glass[i].DrinkScheme+";>");
+       }
+   }
+};
 
 
- void TManager::execute()
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief TManager::executeDisp
+///
+///
+///
+
+ void TManager::executeDisp()
  {
+      m_Serial_ptr->startBusy();
      QString tmpString;
      for (auto &oneShot : m_Table_ptr->Glass)
      { tmpString+=QString::number(oneShot.Checked)+';'; }
-
      m_Serial_ptr->Transaction("<n_que;"+tmpString+'>');
 
+     glass_Save();
 
-     for (int i=0; i < 5; i++)
-     {
-         if (m_Table_ptr->Glass[i].Checked)
-         {
-            m_Serial_ptr->Transaction("<n_set;"+QString::number(i)+';'+QString::number(m_Table_ptr->Glass[i].MaxCap)+';'+QString::number(m_Table_ptr->Glass[i].Locked)+';'+m_Table_ptr->Glass[i].DrinkScheme+";>");
-        }
-    }
      m_Serial_ptr->Transaction("<srv;>");
+
+     m_Serial_ptr->stopBusy();
  };
 
-
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /// \brief TManager::slots_Save
+ ///
 
  void TManager::slots_Save()
  {
 
      for (int i=0; i < 9; i++)
      {
-             sendToDevice("<lq_s;"+QString::number(i)+';'+m_SM_ptr->Slot[i].IdName+';'+QString::number(m_SM_ptr->Slot[i].ActualML)+";>",4);
+             m_Serial_ptr->Transaction("<lq_s;"+QString::number(i)+';'+m_SM_ptr->Slot[i].IdName+';'+QString::number(m_SM_ptr->Slot[i].ActualML)+";>");
      }
  };
 
 
-void TManager::Reaction(ParamPart &P)
-{
-  //  Log(P[1]);
+ void TManager::drink_Save()
+ {
+ // Tworzy nowy plik schematu lub nadpisuje wprowadzonymi ustawieniami -> <sch_new;baranga;VOD3;22;WHS;53;BRAK;0;BRAK;0;>
+  sendToDevice("<sch_new;"+m_Mixer_ptr->getView()->m_Name+";"+
+               m_Mixer_ptr->getView()->m_LQ1_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ1_amount)+";"+
+               m_Mixer_ptr->getView()->m_LQ2_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ2_amount) +";"+
+               m_Mixer_ptr->getView()->m_LQ3_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ3_amount) +";"+
+               m_Mixer_ptr->getView()->m_LQ4_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ4_amount) +
+               ";>",4);
 
-    if (P.Header("boot_ok"))
-    {
-      slots_Load();
-unlockApp();
-        P.ReadDone(true);
-    };
-
-    if ((P.Header("lq_i")) && P.Integrity(4,NUMBER,STRING,NUMBER,NUMBER))
-    {
-      m_SM_ptr->ImportFromParams(P[0].toInt(),P[1],P[2].toInt(),P[3].toInt());
-//Log(P[2]);
-        P.ReadDone(true);
-    };
-
-    if (P.Header("drn"))
-    {
-     m_Mixer_ptr->AddDrinkFromParams(P[0],P[1],P[2].toInt(),P[3],P[4].toInt(),P[5],P[6].toInt(),P[7],P[8].toInt());
-//Log(P[2]);
-        P.ReadDone(true);
-    };
-
-
-    if (P.Header("artn")) { // Line from Arduino return
-// -----------------------------------------------------------------------------------------
-
-// #########################################################################################
-
-        if (P.UseAsHeader("cmp"))
-        {
-          m_SM_ptr->ImportFromParams(P[1].toInt(),P[0],0,0);
-            Log("jestem");
-            P.ReadDone(false); //Mark as Read but nothing to return
-        };
-
-// #########################################################################################
+ };
 
 
 
-
-
-// -----------------------------------------------------------------------------------------
-    }; // artn header end
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /// \brief TManager::newJob
+ /// \param requestLine
+ /// \return
+ ///
 bool TManager::newJob(const QString& requestLine){
 
     *m_ParamPart_ptr << requestLine;
@@ -101,18 +82,25 @@ bool TManager::newJob(const QString& requestLine){
    return 1;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief TManager::sendToDevice
+/// \param cmd
+/// \param Interface
+///
 
 void TManager::sendToDevice(const QString& cmd, const int& Interface)
 {
 
    m_Serial_ptr->write(cmd+"\t\n",Interface);
-  // usleep(500000);
+
 
 }
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief TManager::Log
+/// \param Line
+/// \param Interface
+///
 void TManager::Log(const QString& Line, const int& Interface){
     QString IFCName="SYSTEM";
     QString Color="yellow";

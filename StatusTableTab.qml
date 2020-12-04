@@ -12,6 +12,8 @@ Item {
     property int boxHeight:150
 default property alias boxA: table.children
 
+
+
     // Position arrays
     property variant sX: [((positionrow.width/2-positionrow.width/3)-boxWidth/2), // X0
                           ((positionrow.width/2-positionrow.width/6)-boxWidth/2), // X1
@@ -91,13 +93,32 @@ ListModel { id: drinkMixList }
         }
 
     Connections {
+        target: serial
+
+        onStartBusy:
+        {
+       busy.visible=true;
+        }
+
+        onStopBusy:
+        {
+       busy.visible=false;
+        }
+
+    }
+
+    Connections {
         target: gtable
+
+
 
 
         onPushSchemesUpdate:
         {
        fillLists();
         }
+
+
 
         onPushImagesUpdate:
         {
@@ -116,6 +137,8 @@ ListModel { id: drinkMixList }
 
 
     Row {
+
+
         id: positionrow
         anchors.fill: parent
         anchors.left: parent.left
@@ -188,6 +211,14 @@ ListModel { id: drinkMixList }
             position: 0
             onCheckedChanged: { btn_lck.enabled=position }
         }
+
+        BusyIndicator {
+           id: busy
+           x: 400
+           y: table.height-200;
+           visible: true;
+           running: false;
+       }
 
 Row {
     anchors.bottom: parent.bottom
@@ -314,7 +345,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { manager.execute()
+        onClicked: { busy.running=true; manager.executeDisp()
 
 
         }
