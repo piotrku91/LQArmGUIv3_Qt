@@ -13,7 +13,7 @@ public:
 
     bool Checked;
 
-    TGlassInfo():MaxCap(50),Locked(false),DrinkScheme("default"),Checked(false) {}
+    TGlassInfo():MaxCap(150),Locked(false),DrinkScheme("default"),Checked(false) {}
 
 
 };

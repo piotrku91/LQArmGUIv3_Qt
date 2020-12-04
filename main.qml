@@ -63,6 +63,7 @@ ApplicationWindow {
     visibility: "FullScreen"
     width: 640
     height: 480
+    onClosing: { manager.saveLogToFile(consoleacc.mainconsole.text);}
 
 
 
@@ -90,7 +91,7 @@ TabWidget {
             enabled: (tabs.current===0) ? true:false
 
 
-            ConsoleTab {
+            ConsoleTab { id: consoleacc
                 } // ConsoleTab.qml
 
 

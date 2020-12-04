@@ -10,9 +10,10 @@ TStatusTable::TStatusTable(QObject *parent) : QObject(parent)
 
 void TStatusTable::ImportFromParams(const int& Index, const bool& LockState, const int& MaxCap, const QString& SchemeName)
 {
+
     setLockFlag(Index,LockState);
     setMaxCap(Index,MaxCap);
-    setSchemeByIDX(Index,LocalizeDrink(SchemeName));
+  //  setSchemeByIDX(Index,LocalizeDrink(SchemeName));
 
 };
 

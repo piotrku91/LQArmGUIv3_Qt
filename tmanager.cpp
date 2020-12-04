@@ -32,7 +32,7 @@ void TManager::glass_Save()
 
      glass_Save();
 
-     m_Serial_ptr->Transaction("<srv;>");
+     m_Serial_ptr->Transaction("<srv_nalall;>");
 
      m_Serial_ptr->stopBusy();
  };

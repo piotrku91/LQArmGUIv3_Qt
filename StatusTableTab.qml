@@ -176,7 +176,7 @@ ListModel { id: drinkMixList }
             y: (parent.height)
             width: boxWidth
             model:;// mixer.getDrinkList()
-            onCurrentIndexChanged: {gtable.setSchemeByIDX(index,currentIndex); manager.schemeChange_Save(index);}
+            onCurrentIndexChanged: {gtable.setSchemeByIDX(index,currentIndex);}
 
         }
 
@@ -186,7 +186,6 @@ ListModel { id: drinkMixList }
 
             onClicked: {gtable.setActiveState(index)}
         }
-
 
 
 

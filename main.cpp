@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
 
 
+
         // Objects initialization
         Clock clocky;
         TStatusTable gtable;
@@ -39,7 +40,7 @@ int main(int argc, char *argv[])
         ParamPart Reader;
         SlotMaster SlotM(&mixer);
 
-        TManager Manager(&Reader,&SlotM, &mixer, &serial, &gtable); // Push pointers of main objects to Manager object
+        TManager Manager(&Reader,&SlotM, &mixer, &serial, &gtable, &clocky); // Push pointers of main objects to Manager object
         serial.InstallToManager(&Manager); // Connect callback pointer to Manager from serial.
 
         // Give access to main objects from QML
@@ -52,7 +53,7 @@ int main(int argc, char *argv[])
 
     engine.load(url);
 
-    serial.begin("ttyACM0",9600); // Connect serial port
+    serial.begin("ttyUSB0",9600); // Connect serial port
 
 
 

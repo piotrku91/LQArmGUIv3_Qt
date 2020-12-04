@@ -2,9 +2,12 @@
 #define TMANAGER_H
 
 #include <QObject>
+#include <QFile>
+#include <QDir>
 #include "lib/ParamPart/src/parampart_pcs.h"
  #include <QtMultimedia/QMediaPlayer>
 #include "tstatustable.h"
+#include "clock.h"
 #include <unistd.h>
 
 
@@ -25,6 +28,7 @@ class TManager:public QObject
   SlotMaster *m_SM_ptr;
   SerialX *m_Serial_ptr;
   Mixer *m_Mixer_ptr;
+  Clock *m_clocky_ptr;
   TStatusTable *m_Table_ptr;
   QMediaPlayer *player = new QMediaPlayer(NULL,QMediaPlayer::LowLatency);
 
@@ -35,8 +39,8 @@ class TManager:public QObject
 
   //Constructor
   TManager()=delete;
-  explicit TManager(ParamPart *PP, SlotMaster *SM, Mixer *M, SerialX *QSP, TStatusTable *ST, QObject *parent = nullptr)
-      : QObject(parent),m_ParamPart_ptr(PP),m_SM_ptr(SM),m_Serial_ptr(QSP),m_Mixer_ptr(M),m_Table_ptr(ST)
+  explicit TManager(ParamPart *PP, SlotMaster *SM, Mixer *M, SerialX *QSP, TStatusTable *ST, Clock *CL, QObject *parent = nullptr)
+      : QObject(parent),m_ParamPart_ptr(PP),m_SM_ptr(SM),m_Serial_ptr(QSP),m_Mixer_ptr(M),m_Table_ptr(ST),m_clocky_ptr(CL)
   {
 
   };
@@ -56,6 +60,8 @@ class TManager:public QObject
 };
   void Log(const QString& Line,const int& Interface=0);
 
+
+
 public slots:
 
   // Communication with device - main function
@@ -69,6 +75,17 @@ public slots:
   void executeDisp();                                          // Start action (move and dispense)
 
   //////////////////////////////////
+
+  void saveLogToFile(const QString m_text)
+  {
+      QDir directory(".");
+      QString Header="<body bgcolor='black'>";
+      QFile file(directory.absolutePath()+"/logs/log"+m_clocky_ptr->getDateReformated()+".html");
+      if(file.open(QIODevice::WriteOnly)) {
+          QTextStream stream(&file);
+          stream << Header << m_text;
+      }
+  }
 
 
 signals:

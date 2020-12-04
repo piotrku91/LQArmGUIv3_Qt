@@ -15,7 +15,7 @@ public:
 
     public slots:
     QString getTime();
-
+    QString getDateReformated();
 
 };
 

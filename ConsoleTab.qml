@@ -60,6 +60,7 @@ Item {
     property alias mainconsole: mainconsole
 
 
+
    Item {
        anchors.fill: parent
        focus: true
@@ -148,6 +149,7 @@ Item {
                 pos = currPos();
 
                 mainconsole.text = value;
+
 
                 if(pos === endPos){
                     scrollToEnd();

@@ -20,6 +20,18 @@ QString Clock::getTime()
 
 }
 
+QString Clock::getDateReformated()
+{
+
+    std::time_t t = std::time(nullptr);
+    std::tm tm = *std::localtime(&t);
+     std::ostringstream oss;
+         oss << std::put_time(&tm, "%m%d%y_%H%M%S");
+
+    return QString::fromStdString(oss.str());
+
+}
+
 
 
 
