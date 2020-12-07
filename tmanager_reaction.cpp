@@ -13,6 +13,7 @@ void TManager::Reaction(ParamPart &P)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
     if (P.Header("boot_ok"))
     {
       slots_Load();
@@ -22,7 +23,7 @@ void TManager::Reaction(ParamPart &P)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if ((P.Header("lq_i")) && P.Integrity(4,NUMBER,STRING,NUMBER,NUMBER))
+    if ((P.Header("lq_i")) && P.Integrity(3,NUMBER,STRING,NUMBER))
     {
       m_SM_ptr->ImportFromParams(P[0].toInt(),P[1],P[2].toInt(),P[3].toInt());
 //Log(P[2]);

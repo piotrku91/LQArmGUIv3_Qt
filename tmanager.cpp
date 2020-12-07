@@ -78,7 +78,7 @@ bool TManager::newJob(const QString& requestLine){
     typedef void (TManager::*ReaPTR)(ParamPart &PP);
     ReaPTR MemberReactionPointer= &TManager::Reaction;
     QString Return = QString::fromStdString(m_ParamPart_ptr->Interpreter(this,MemberReactionPointer));
-   // Log(Return);
+    Log(Return);
    return 1;
 }
 
@@ -148,6 +148,8 @@ void TManager::Log(const QString& Line, const int& Interface){
     };
 
 };
+
+    if (Line!="")
         emit addLog(Line,IFCName,Color);
 
 };

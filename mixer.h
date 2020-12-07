@@ -73,16 +73,13 @@ public slots:
     void setActualName(const QString& newName,const int& backIdx=0)
     {
         if (ActualView){
-
             if (ActualView->m_Name!=newName)
             ActualView->m_Name=newName;
-
-
     }
          GetActualNames();
-       //  itemIndexChanged(backIdx);
          pushDrinkListUpdate(backIdx);
     };
+    void DeleteDrink(){};
     void callNewViewUpdate();
     void itemIndexChanged(const int& NewItemIndex=0);
     void saveChanges(const QString& DrinkName,

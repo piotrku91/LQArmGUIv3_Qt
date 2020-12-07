@@ -249,6 +249,28 @@ Row {
             height: 100
             width: 105
         Button {
+            id: btn_delete
+            text: qsTr("USUŃ \n DRINK")
+            height: 100
+            width: 100
+          //  anchors.bottom: parent.bottom
+          //  anchors.left: parent.left
+            anchors.bottomMargin: 1
+
+            onClicked: {
+
+            }
+        }
+
+        }
+
+        ////////////////////////////////////////// BUTTON
+
+        Rectangle {
+            color:"black"
+            height: 100
+            width: 105
+        Button {
             id: btn_create
             text: qsTr("STWÓRZ \n NOWY \n DRINK")
             height: 100
