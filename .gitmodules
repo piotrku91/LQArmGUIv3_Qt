@@ -1,0 +1,3 @@
+[submodule "lib/ParamPart_PCSide"]
+	path = lib/ParamPart_PCSide
+	url = https://github.com/piotrku91/ParamPartPCSide
