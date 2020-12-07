@@ -70,7 +70,7 @@ public slots:
     QStringList getDrinkList();
     QString getStatusTxt() {return StatusTxt;};
     QString getActualName() {if (ActualView) return ActualView->m_Name; else return "default";};
-    void setActualName(const QString& newName)
+    void setActualName(const QString& newName,const int& backIdx=0)
     {
         if (ActualView){
 
@@ -80,7 +80,8 @@ public slots:
 
     }
          GetActualNames();
-         pushDrinkListUpdate(0);
+       //  itemIndexChanged(backIdx);
+         pushDrinkListUpdate(backIdx);
     };
     void callNewViewUpdate();
     void itemIndexChanged(const int& NewItemIndex=0);

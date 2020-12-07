@@ -39,7 +39,7 @@ Item {
         comboslots.itemAt(3).children[0].currentIndex=AV_LQ4_itemIndex;
         comboslots.itemAt(3).children[1].text=LQ4_amo;
         statustxt.text=mixer.getStatusTxt();
-            textchan.text=mixer.getactualName();
+            //textchan.text=mixer.getactualName();
 
 
 
@@ -49,7 +49,8 @@ Item {
         {
 
             kombo.model=mixer.getDrinkList()
-             textchan.text=mixer.getactualName();
+            kombo.currentIndex=idxrtn;
+         //   textchan.text=mixer.getActualName();
 
 
         }
@@ -204,14 +205,14 @@ Row {
             anchors.bottomMargin: 1
 
             onClicked: {  savingstate=true;
-                                            mixer.setActualName(textchan.text);
+
 
                                               mixer.saveChanges(textchan.text,
                                              comboslots.itemAt(0).children[0].currentIndex,comboslots.itemAt(0).children[1].text,
                                              comboslots.itemAt(1).children[0].currentIndex,comboslots.itemAt(1).children[1].text,
                                              comboslots.itemAt(2).children[0].currentIndex,comboslots.itemAt(2).children[1].text,
                                              comboslots.itemAt(3).children[0].currentIndex,comboslots.itemAt(3).children[1].text)
-
+                                             mixer.setActualName(textchan.text,kombo.currentIndex);
                            savingstate=false;
 
                                                 manager.drink_Save();
