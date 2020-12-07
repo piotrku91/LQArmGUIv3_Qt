@@ -69,6 +69,19 @@ public slots:
     QStringList getIDList();
     QStringList getDrinkList();
     QString getStatusTxt() {return StatusTxt;};
+    QString getActualName() {if (ActualView) return ActualView->m_Name; else return "default";};
+    void setActualName(const QString& newName)
+    {
+        if (ActualView){
+
+            if (ActualView->m_Name!=newName)
+            ActualView->m_Name=newName;
+
+
+    }
+         GetActualNames();
+         pushDrinkListUpdate(0);
+    };
     void callNewViewUpdate();
     void itemIndexChanged(const int& NewItemIndex=0);
     void saveChanges(const QString& DrinkName,

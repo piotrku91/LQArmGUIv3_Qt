@@ -23,6 +23,7 @@ Item {
             comboslots.itemAt(2).children[0].model=mixer.getIDList();
             comboslots.itemAt(3).children[0].model=mixer.getIDList();
             //table.filllist();
+
             mixer.callNewViewUpdate();
         }
 
@@ -38,6 +39,9 @@ Item {
         comboslots.itemAt(3).children[0].currentIndex=AV_LQ4_itemIndex;
         comboslots.itemAt(3).children[1].text=LQ4_amo;
         statustxt.text=mixer.getStatusTxt();
+            textchan.text=mixer.getactualName();
+
+
 
         }
 
@@ -45,6 +49,8 @@ Item {
         {
 
             kombo.model=mixer.getDrinkList()
+             textchan.text=mixer.getactualName();
+
 
         }
 
@@ -76,19 +82,29 @@ Item {
           font.pixelSize: 14
       }
 
-    ComboBox {
-        id: kombo
-        x: 20
-        width: 559
-        height: 40
-        anchors.top: parent.top
-        anchors.topMargin: 20
-        model: mixer.getDrinkList()
+        ComboBox {
+            id: kombo
+            x: 20
+            width: 559
+            height: 40
+            anchors.top: parent.top
+            anchors.topMargin: 20
+            model: mixer.getDrinkList()
 
 
-        onCurrentIndexChanged: {mixer.itemIndexChanged(currentIndex);}
-    }
+            onCurrentIndexChanged: {mixer.itemIndexChanged(currentIndex); }
+        }
 
+        TextField {
+            id: textchan
+            width: 559
+            text: kombo.currentText
+            x:20
+            y: kombo.y+50
+          //  anchors.verticalCenterOffset: 96
+            //anchors.horizontalCenterOffset: -30
+
+        }
 
  Column {
 
@@ -188,8 +204,9 @@ Row {
             anchors.bottomMargin: 1
 
             onClicked: {  savingstate=true;
+                                            mixer.setActualName(textchan.text);
 
-                                              mixer.saveChanges(kombo.currentText,
+                                              mixer.saveChanges(textchan.text,
                                              comboslots.itemAt(0).children[0].currentIndex,comboslots.itemAt(0).children[1].text,
                                              comboslots.itemAt(1).children[0].currentIndex,comboslots.itemAt(1).children[1].text,
                                              comboslots.itemAt(2).children[0].currentIndex,comboslots.itemAt(2).children[1].text,

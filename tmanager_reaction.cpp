@@ -41,7 +41,7 @@ void TManager::Reaction(ParamPart &P)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if (P.Header("drn"))
+    if (P.Header("sch_i"))
     {
      m_Mixer_ptr->AddDrinkFromParams(P[0],P[1],P[2].toInt(),P[3],P[4].toInt(),P[5],P[6].toInt(),P[7],P[8].toInt());
 //Log(P[2]);
