@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDebug>
-#include "lib/ParamPart/src/parampart_pcs.h"
+#include "lib/ParamPart_PCSide/parampart_pcs.h"
 
 #include "slotmaster.h"
 #include "serialx.h"

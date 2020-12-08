@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QFile>
 #include <QDir>
-#include "lib/ParamPart/src/parampart_pcs.h"
+#include "lib/ParamPart_PCSide/parampart_pcs.h"
  #include <QtMultimedia/QMediaPlayer>
 #include "tstatustable.h"
 #include "clock.h"

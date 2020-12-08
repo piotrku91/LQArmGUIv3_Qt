@@ -22,7 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         clock.cpp \
-        lib/ParamPart/src/parampart_pcs.cpp \
+        lib/ParamPart_PCSide/parampart_pcs.cpp \
         main.cpp \
         mixer.cpp \
         serialx.cpp \
@@ -61,7 +61,7 @@ DISTFILES += \
 
 HEADERS += \
     clock.h \
-    lib/ParamPart/src/parampart_pcs.h \
+    lib/ParamPart_PCSide/parampart_pcs.h \
     mixer.h \
     serialx.h \
     slotmaster.h \
