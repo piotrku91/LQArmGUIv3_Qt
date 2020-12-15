@@ -62,6 +62,7 @@ public:
     bool isNotEmpty() {if (Views.size()) return 1; else return 0;} ; //Check if is any item on drinklist
     int LocalizeSlot(const QString& Code);
     int isOnDrinkList(const QString& NameIn);
+    void deleteItem(const int& ItemIndex)
 
 
 
