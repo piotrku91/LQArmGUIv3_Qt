@@ -258,6 +258,8 @@ Row {
             anchors.bottomMargin: 1
 
             onClicked: {
+                manager.drink_Delete(kombo.currentText);
+                mixer.deleteItem(kombo.currentIndex);
 
             }
         }

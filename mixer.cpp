@@ -89,10 +89,13 @@ callNewViewUpdate();
 
 void Mixer::deleteItem(const int& ItemIndex) // not tested!
 {
-
+if (ItemIndex!=0) {
 ActualView=nullptr;
 Views.erase(Views.begin()+ItemIndex);
-itemIndexChanged(0);
+itemIndexChanged(Views.size()-1);
+pushDrinkListUpdate(Views.size()-1);
+
+};
 
 };
 

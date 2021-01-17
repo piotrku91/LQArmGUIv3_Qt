@@ -116,7 +116,7 @@ void SerialX::Transaction (const QString& cmd)
                                  responseData += sP->readAll();
 
                              const QString response = QString::fromUtf8(responseData);
-                             m_Manager_ptr->Log(response);
+                            // m_Manager_ptr->Log(response);
                              //emit this->response(response);
 
                }
