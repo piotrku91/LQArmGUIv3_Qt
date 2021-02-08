@@ -74,6 +74,8 @@ public slots:
   void glass_Save();                                           // Save glass settings to device
   void glass_Load() {sendToDevice("<n_i;>",4);};               // Load glass settings from device
   void executeDisp();                                          // Start action (move and dispense)
+  void escape();
+  void  home();
 
   //////////////////////////////////
 

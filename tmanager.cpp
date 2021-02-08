@@ -37,6 +37,25 @@ void TManager::glass_Save()
      m_Serial_ptr->stopBusy();
  };
 
+
+ void TManager::escape()
+ {
+      m_Serial_ptr->startBusy();
+
+     m_Serial_ptr->Transaction("<srv_esc;>");
+
+     m_Serial_ptr->stopBusy();
+ };
+
+ void TManager::home()
+ {
+      m_Serial_ptr->startBusy();
+
+     m_Serial_ptr->Transaction("<srv_home;>");
+
+     m_Serial_ptr->stopBusy();
+ };
+
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  /// \brief TManager::slots_Save
  ///

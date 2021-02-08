@@ -5,6 +5,7 @@
 
 void TManager::Reaction(ParamPart &P)
 {
+    static bool Booting=true;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                                          /// REACTIONS TO MESSAGES FROM ARDUINO ///
@@ -17,7 +18,29 @@ void TManager::Reaction(ParamPart &P)
     if (P.Header("boot_ok"))
     {
       slots_Load();
-      unlockApp();
+   //   unlockApp();
+      P.ReadDone(true);
+    };
+
+    if (P.Header("boot2_ok"))
+    {
+      drink_Load();
+   //   unlockApp();
+      P.ReadDone(true);
+    };
+
+
+    if (P.Header("tsyn"))
+    {
+      QString Year, Month, Day, DoW, Hour, Min, Sec;
+      m_clocky_ptr->getTimeDateSplitted(Year, Month, Day, DoW, Hour, Min, Sec);
+      int SecTmp=Sec.toInt();
+
+       SecTmp+=2; // Minimize error of Serial delay .
+
+      if (SecTmp>59) SecTmp-=60;
+      sendToDevice("<t_set;"+Year+';'+ Month+';'+ Day+';'+ DoW+';'+Hour+';'+ Min+';'+QString::number(SecTmp)+";>",4);
+
       P.ReadDone(true);
     };
 
@@ -25,7 +48,7 @@ void TManager::Reaction(ParamPart &P)
 
     if ((P.Header("lq_i")) && P.Integrity(3,NUMBER,STRING,NUMBER))
     {
-      m_SM_ptr->ImportFromParams(P[0].toInt(),P[1],P[2].toInt(),P[3].toInt());
+      m_SM_ptr->ImportFromParams(P[0].toInt(),P[1],P[2].toInt(),1500);
 //Log(P[2]);
         P.ReadDone(true);
     };

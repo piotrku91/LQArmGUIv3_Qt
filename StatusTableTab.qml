@@ -426,7 +426,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { gtable.setActiveStateALL(false)
+        onClicked: { manager.escape();
 
 
 
@@ -455,7 +455,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { gtable.setActiveStateALL(false)
+        onClicked: { manager.home();
 
 
 

@@ -16,6 +16,7 @@ public:
     public slots:
     QString getTime();
     QString getDateReformated();
+    void getTimeDateSplitted(QString& Year, QString& Month, QString& Day, QString& DoW, QString& Hour, QString& Min, QString& Sec);
 
 };
 
