@@ -59,7 +59,7 @@ void TManager::Reaction(ParamPart &P)
         if ((P.Header("n_i")) && P.Integrity(4,NUMBER,NUMBER,NUMBER,STRING))
         {
           m_Table_ptr->ImportFromParams(P[0].toInt(),P[1].toInt(),P[2].toInt(),P[3]);
-
+       //    Log("ej");
             P.ReadDone(true);
         };
 
