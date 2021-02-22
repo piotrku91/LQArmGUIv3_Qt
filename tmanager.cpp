@@ -63,7 +63,7 @@ void TManager::glass_Save()
  void TManager::slots_Save()
  {
 
-     for (int i=0; i < 9; i++)
+     for (int i=0; i < 8; i++)
      {
              m_Serial_ptr->Transaction("<lq_s;"+QString::number(i)+';'+m_SM_ptr->Slot[i].IdName+';'+QString::number(m_SM_ptr->Slot[i].ActualML)+";>");
      }

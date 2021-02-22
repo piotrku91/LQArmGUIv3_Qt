@@ -13,7 +13,7 @@ void TStatusTable::ImportFromParams(const int& Index, const bool& LockState, con
 
     setLockFlag(Index,LockState);
     setMaxCap(Index,MaxCap);
-  //  setSchemeByIDX(Index,LocalizeDrink(SchemeName));
+   setSchemeByIDX(Index,LocalizeDrink(SchemeName));
 
 };
 

@@ -14,7 +14,7 @@ Item {
 
     function updatesl()
     {
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i < 8; i++) {
            slots.itemAt(i).children[5].text=slotmaster.getIDName(i);
            slots.itemAt(i).children[6].text=slotmaster.getActualML(i);
            slots.itemAt(i).children[7].text=slotmaster.getMaxML(i);
@@ -24,7 +24,7 @@ Item {
 
     function updatess()
     {
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i < 8; i++) {
 
            slotmaster.setIDName(i,slots.itemAt(i).children[5].text);
            slotmaster.setActualML(i,slots.itemAt(i).children[6].text);

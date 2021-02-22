@@ -24,7 +24,7 @@ private:
     QStringList ActualIDs;
 
 public:
-    TSlot Slot[9]; //Slots array
+    TSlot Slot[8]; //Slots array
     // Constructor
     explicit SlotMaster(Mixer *Mixer, QObject *parent = nullptr): QObject(parent),m_Mixer_ptr(Mixer)
     {GetActualIDs(); m_Mixer_ptr->IDListPtr=&ActualIDs; m_Mixer_ptr->pushIDListUpdate();};

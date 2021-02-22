@@ -101,7 +101,7 @@ void SerialX::readData(){
 void SerialX::Transaction (const QString& cmd)
 {
     IsTransaction=true;
-    int m_waitTimeout = 2000;
+    int m_waitTimeout = 1500;
     QString currentRequest;
     const QByteArray requestData = currentRequest.toUtf8();
 
