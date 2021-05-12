@@ -137,13 +137,8 @@ TabWidget {
 
 
 
-                Text {
-                    width: parent.width - 20
-                    anchors.centerIn: parent; horizontalAlignment: Qt.AlignHCenter
-                    text: "Flower stems are green"
-                    font.pixelSize: 20
-                    wrapMode: Text.WordWrap
-                }
+                ConfigurationTab {}
+
 
 
             }

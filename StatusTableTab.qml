@@ -85,7 +85,7 @@ ListModel { id: drinkMixList }
             slotsr.itemAt(i).color="lime";
                  }
                      else {
-                      slotsr.itemAt(i).color="#17b1aa";
+                      slotsr.itemAt(i).color="silver";
          }
 
         }
@@ -152,7 +152,7 @@ ListModel { id: drinkMixList }
         y: sY[index]
         width: boxWidth
         height: boxHeight
-        color: "#17b1aa"
+        color: "silver"
         radius: 20
 
 
