@@ -15,9 +15,12 @@ Item {
     function updatesl()
     {
         for (var i = 0; i < 8; i++) {
+
            slots.itemAt(i).children[5].text=slotmaster.getIDName(i);
            slots.itemAt(i).children[6].text=slotmaster.getActualML(i);
            slots.itemAt(i).children[7].text=slotmaster.getMaxML(i);
+
+
         }
 
     }
@@ -25,10 +28,10 @@ Item {
     function updatess()
     {
         for (var i = 0; i < 8; i++) {
-
            slotmaster.setIDName(i,slots.itemAt(i).children[5].text);
            slotmaster.setActualML(i,slots.itemAt(i).children[6].text);
            slotmaster.setMaxML(i,slots.itemAt(i).children[7].text);
+
 
         }
          manager.slots_Save();
@@ -136,7 +139,8 @@ Item {
                     text: slotmaster.getActualML(index);
                     width: parent.width
                     color: "black"
-                //    onTextChanged: {slotmaster.setActualML(index,text);}
+                    onTextChanged: {if (text==="0") {slots.itemAt(index).color="gray";} else {slots.itemAt(index).color="white";};
+}
 
 
                 }

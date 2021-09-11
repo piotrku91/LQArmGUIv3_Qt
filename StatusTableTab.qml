@@ -387,7 +387,7 @@ Row {
         width: 130
     Button {
         id: btn_go
-        text: qsTr("JEDŹ\n DO \n NASTĘPNEGO")
+        text: qsTr("POZYCJA \n DOK")
         font.bold: true
         height: 100
         width: 125
@@ -398,7 +398,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { gtable.setActiveStateALL(false)
+        onClicked: { manager.sink();
 
 
 

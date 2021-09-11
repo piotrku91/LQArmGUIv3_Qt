@@ -107,7 +107,9 @@ Item {
 
         }
 
+
  Column {
+      id:col;
 
      Text {
        id: label1
@@ -122,6 +124,13 @@ Item {
        font.family: "Verdana"
        font.pixelSize: 14
    }
+
+     Switch {
+         id: element
+         x: label1.x;
+         y: label1.y+60;
+         text: qsTr("Cytrynka")
+     }
 
      Text {
        id: label2
@@ -176,8 +185,11 @@ Row {
 }
 
 
+
         }
+
  }
+
 
 
 
@@ -307,6 +319,8 @@ Row {
 
 
     }
+
+
 
 
 

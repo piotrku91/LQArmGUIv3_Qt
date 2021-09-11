@@ -55,7 +55,7 @@ import QtQuick.Controls 2.0
 ApplicationWindow {
     property color layout_color_main1: "#f9842d"
     property color layout_color_main2: "#47b2ce"
-    property color layout_color_backgrounds: "#f7d9bc"
+    property color layout_color_backgrounds: "#ebb88e"
 
 
     id: window

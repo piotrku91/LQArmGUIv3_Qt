@@ -29,6 +29,8 @@ void TManager::glass_Save()
      for (auto &oneShot : m_Table_ptr->Glass)
      { tmpString+=QString::number(oneShot.Checked)+';'; }
      m_Serial_ptr->Transaction("<n_que;"+tmpString+'>');
+     player->setMedia(QUrl::fromLocalFile("/home/piotr/LQArmGUIv3/static/wavs/disp.wav"));
+     player->setVolume(30); player->play();
 
      glass_Save();
 
@@ -56,6 +58,15 @@ void TManager::glass_Save()
      m_Serial_ptr->stopBusy();
  };
 
+ void TManager::sink()
+ {
+      m_Serial_ptr->startBusy();
+
+     m_Serial_ptr->Transaction("<srv_dok;>");
+
+     m_Serial_ptr->stopBusy();
+ };
+
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  /// \brief TManager::slots_Save
  ///
@@ -79,6 +90,7 @@ void TManager::glass_Save()
                m_Mixer_ptr->getView()->m_LQ3_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ3_amount) +";"+
                m_Mixer_ptr->getView()->m_LQ4_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ4_amount) +
                ";>",4);
+
 
  };
 

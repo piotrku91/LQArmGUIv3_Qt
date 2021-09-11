@@ -76,6 +76,7 @@ public slots:
   void executeDisp();                                          // Start action (move and dispense)
   void escape();
   void  home();
+  void sink();
 
   //////////////////////////////////
 
