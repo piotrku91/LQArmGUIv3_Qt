@@ -17,6 +17,8 @@ Item {
         for (var i = 0; i < 8; i++) {
 
            slots.itemAt(i).children[5].text=slotmaster.getIDName(i);
+
+           if (slotmaster.getReady(i)===true) {slots.itemAt(i).children[0].text=i+" - Gotowy"; } else {slots.itemAt(i).children[0].text=i+" - Do zaciągnięcia"; }
            slots.itemAt(i).children[6].text=slotmaster.getActualML(i);
            slots.itemAt(i).children[7].text=slotmaster.getMaxML(i);
 
@@ -57,7 +59,7 @@ Item {
         anchors.leftMargin: 20
         Repeater {
             id: slots
-            model: 9
+            model: 8
             Rectangle {
                 width: lqstorage.width/9; height: 300
                 border.width: 1

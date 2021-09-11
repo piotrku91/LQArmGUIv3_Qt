@@ -29,6 +29,13 @@ void TManager::Reaction(ParamPart &P)
       P.ReadDone(true);
     };
 
+    if (P.Header("boot3_ok"))
+    {
+      glass_Load();
+   //   unlockApp();
+      P.ReadDone(true);
+    };
+
 
     if (P.Header("tsyn"))
     {
@@ -46,9 +53,9 @@ void TManager::Reaction(ParamPart &P)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if ((P.Header("lq_i")) && P.Integrity(3,NUMBER,STRING,NUMBER))
+    if ((P.Header("lq_i")) && P.Integrity(4,NUMBER,STRING,NUMBER,NUMBER))
     {
-      m_SM_ptr->ImportFromParams(P[0].toInt(),P[1],P[2].toInt(),1500);
+      m_SM_ptr->ImportFromParams(P[0].toInt(),P[1],P[2].toInt(),1500,P[3].toInt());
 //Log(P[2]);
         P.ReadDone(true);
     };

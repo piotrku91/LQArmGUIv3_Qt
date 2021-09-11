@@ -67,7 +67,7 @@ public slots:
   // Communication with device - main function
   void sendToDevice(const QString& cmd, const int& Interface); // Send normal message to device
   void slots_Save();                                           // Send slots to device
-  void slots_Load() {sendToDevice("<lq_i;>",4); };             // Load slots from device
+  void slots_Load() {sendToDevice("<lq_i;>",4); };             // Load slots from device                                          // Send slots to device           // Load slots from device
   void drink_Save();                                        // Save drink schemes to device
   void drink_Load() {sendToDevice("<sch_i;>",4);};            // Load drink schemes from device
   void drink_Delete(const QString& name) {sendToDevice("<sch_del;"+name+";>",4);};

@@ -65,7 +65,6 @@ Item {
         width: mixert.width;
         height: mixert.height;
       //  border.width: 1
-        color: layout_color_backgrounds
 
 
 
@@ -129,7 +128,7 @@ Item {
          id: element
          x: label1.x;
          y: label1.y+60;
-         text: qsTr("Cytrynka")
+         text: qsTr("Cytryna")
      }
 
      Text {

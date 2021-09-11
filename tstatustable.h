@@ -43,6 +43,7 @@ public slots:
     bool getLockFlag(const int& idx);;
     bool getActiveState(const int& idx);
     int getSchemeIDX(const int& idx) {return LocalizeDrink(Glass[idx].DrinkScheme);};
+    int getMaxCap(const int& idx) {return Glass[idx].MaxCap;};
 
 
 signals:

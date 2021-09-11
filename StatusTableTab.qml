@@ -43,17 +43,13 @@ ListModel { id: drinkMixList }
 
     function fillLists()
     {
-      slotsr.itemAt(0).children[1].model=mixer.getDrinkList();
-        slotsr.itemAt(1).children[1].model=mixer.getDrinkList();
-        slotsr.itemAt(2).children[1].model=mixer.getDrinkList();
-        slotsr.itemAt(3).children[1].model=mixer.getDrinkList();
-        slotsr.itemAt(4).children[1].model=mixer.getDrinkList();
 
-         slotsr.itemAt(0).children[1].currentIndex=gtable.getSchemeIDX(0);
-        slotsr.itemAt(1).children[1].currentIndex=gtable.getSchemeIDX(1);
-        slotsr.itemAt(2).children[1].currentIndex=gtable.getSchemeIDX(2);
-        slotsr.itemAt(3).children[1].currentIndex=gtable.getSchemeIDX(3);
-        slotsr.itemAt(4).children[1].currentIndex=gtable.getSchemeIDX(4);
+
+       for (var i=0; i<5; i++) {
+        slotsr.itemAt(i).children[1].model=mixer.getDrinkList();
+        slotsr.itemAt(i).children[2].text=gtable.getMaxCap(i); // Fill max capacties
+        slotsr.itemAt(i).children[1].currentIndex=gtable.getSchemeIDX(i);
+       };
 
         }
 
@@ -177,6 +173,15 @@ ListModel { id: drinkMixList }
             width: boxWidth
             model:;// mixer.getDrinkList()
             onCurrentIndexChanged: {gtable.setSchemeByIDX(index,currentIndex);}
+
+        }
+
+        TextField {
+            id: box0_mllist
+            y: (parent.height+box0_list.height)
+            width: boxWidth
+            onTextChanged: {gtable.setMaxCap(index,text);}
+
 
         }
 
