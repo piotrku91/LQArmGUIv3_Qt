@@ -26,7 +26,7 @@ QStringList* SlotMaster::GetActualIDs()
     for (auto OneSlot : Slot) {
     ActualIDs.append(OneSlot.IdName);
     };
-    ActualIDs.append("SRAK");
+    ActualIDs.append("BRAK");
   return &ActualIDs;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

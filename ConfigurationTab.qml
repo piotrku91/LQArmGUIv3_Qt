@@ -58,7 +58,7 @@ Item {
             width: 105
         Button {
             id: btn_savelqslots
-            text: qsTr("WYŚLIJ \n DO \n URZĄDZENIA")
+            text: qsTr("WYMUŚ \N ZAPIS")
             height: 100
             width: 100
           //  anchors.bottom: parent.bottom

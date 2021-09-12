@@ -89,6 +89,26 @@ void TManager::Reaction(ParamPart &P)
         P.ReadDone(true);
     };
 
+    if (P.Header("sek"))
+    {
+     m_Serial_ptr->setTime(P[0].toInt(),P[1].toInt(),P[2].toInt());
+        P.ReadDone(true);
+    };
+
+    if (P.Header("ns"))
+    {
+     if (P[0].toInt()==0) {m_Serial_ptr->jobFinish();};
+        P.ReadDone(true);
+    };
+
+    if (P.Header("sekfin"))
+    {
+     m_Serial_ptr->setTime(0,0,P[0].toInt());
+     player->setMedia(QUrl::fromLocalFile("/home/piotr/LQArmGUIv3/static/wavs/"+QString::number(P[0].toInt())+".wav"));
+     player->setVolume(30); player->play();
+        P.ReadDone(true);
+    };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                                      /// CONFIRMATION RETURN MESSAGES FROM ARDUINO ///

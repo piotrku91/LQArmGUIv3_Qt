@@ -73,7 +73,8 @@ public slots:
   void drink_Delete(const QString& name) {sendToDevice("<sch_del;"+name+";>",4);};
   void glass_Save(bool Force=false);                                           // Save glass settings to device
   void glass_Load() {sendToDevice("<n_i;>",4);};               // Load glass settings from device
-  void fuel_Force(int Idx) {sendToDevice("<rl_fuel;"+QString::number(Idx)+";>",4);};               // Load glass settings from device
+  void fuel_Force(int Idx) {sendToDevice("<rl_fuel;"+QString::number(Idx)+";>",4);};
+  void sett_ForceSave();// Save settings on device
   void executeDisp();
   void makeQue();// Start action (move and dispense)
   void escape();

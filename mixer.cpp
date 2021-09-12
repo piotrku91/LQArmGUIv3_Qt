@@ -110,13 +110,13 @@ void Mixer::callNewViewUpdate() {
            idx4=LocalizeSlot(ActualView->m_LQ4_Code);
 
    StatusTxt+=" 1: ";
-   if (idx1<9) StatusTxt+=ActualView->m_LQ1_Code+" - OK,  \n";  else  StatusTxt+=ActualView->m_LQ1_Code+" - NOT FOUND, \n";
+   if (idx1<8) StatusTxt+=ActualView->m_LQ1_Code+" - OK,  \n";  else  StatusTxt+=ActualView->m_LQ1_Code+" - Nie znaleziono, \n";
    StatusTxt+=" 2: ";
-   if (idx2<9) StatusTxt+=ActualView->m_LQ2_Code+" - OK, \n";  else  StatusTxt+=ActualView->m_LQ2_Code+" - NOT FOUND, \n";
+   if (idx2<8) StatusTxt+=ActualView->m_LQ2_Code+" - OK, \n";  else  StatusTxt+=ActualView->m_LQ2_Code+" - Nie znaleziono, \n";
    StatusTxt+=" 3: ";
-   if (idx3<9) StatusTxt+=ActualView->m_LQ3_Code+" - OK, \n";  else  StatusTxt+=ActualView->m_LQ3_Code+" - NOT FOUND, \n";
+   if (idx3<8) StatusTxt+=ActualView->m_LQ3_Code+" - OK, \n";  else  StatusTxt+=ActualView->m_LQ3_Code+" - Nie znaleziono, \n";
    StatusTxt+=" 4: ";
-   if (idx4<9) StatusTxt+=ActualView->m_LQ4_Code+" - OK \n";  else  StatusTxt+=ActualView->m_LQ4_Code+" - NOT FOUND \n";
+   if (idx4<8) StatusTxt+=ActualView->m_LQ4_Code+" - OK \n";  else  StatusTxt+=ActualView->m_LQ4_Code+" - Nie znaleziono \n";
 
     pushNewViewUpdate(idx1,ActualView->m_LQ1_amount,idx2,ActualView->m_LQ2_amount,idx3,ActualView->m_LQ3_amount,idx4,ActualView->m_LQ4_amount);
 };
@@ -129,7 +129,7 @@ int Mixer::LocalizeSlot(const QString& Code)
         if (IDListPtr->at(i)==Code) return i; // If found return itemIndex of Slot
 
     }
-    return 9; // If not found return itemIndex of none slot
+    return 8; // If not found return itemIndex of none slot
 
 }
 

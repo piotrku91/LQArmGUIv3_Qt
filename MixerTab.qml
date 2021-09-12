@@ -64,6 +64,7 @@ Item {
         y: 0
         width: mixert.width;
         height: mixert.height;
+        color:layout_color_backgrounds
       //  border.width: 1
 
 
@@ -124,7 +125,25 @@ Item {
             height: 1
             color: "red"
             radius: 5
+
+            Text {
+              id: i1cap
+              x: (preview_i1.x+(preview_i1.width/4));
+              y: (preview_i1.y+(preview_i1.heigth/2));
+              width: 25
+              height: 25
+              text: qsTr("1")
+
+              styleColor: "red"
+              color:"white"
+              font.bold: true
+              font.family: "Verdana"
+              font.pixelSize: 12
+          }
+
         }
+
+
 
         Rectangle {
             id: preview_i2
@@ -134,6 +153,21 @@ Item {
             height: 1
             color: "blue"
             radius: 5
+
+            Text {
+              id: i2cap
+              x: (preview_i2.x+(preview_i2.width/4));
+              y: (preview_i2.y+(preview_i2.heigth/2));
+              width: 25
+              height: 25
+              text: qsTr("1")
+
+              styleColor: "red"
+              color:"white"
+              font.bold: true
+              font.family: "Verdana"
+              font.pixelSize: 12
+          }
         }
 
         Rectangle {
@@ -144,6 +178,20 @@ Item {
             height: 1
             color: "green"
             radius: 5
+            Text {
+              id: i3cap
+              x: (preview_i3.x+(preview_i3.width/4));
+              y: (preview_i3.y+(preview_i3.heigth/2));
+              width: 25
+              height: 25
+              text: qsTr("1")
+
+              styleColor: "red"
+              color:"white"
+              font.bold: true
+              font.family: "Verdana"
+              font.pixelSize: 12
+          }
         }
 
         Rectangle {
@@ -154,7 +202,37 @@ Item {
             height: 1
             color: "black"
             radius: 5
+
+            Text {
+              id: i4cap
+              x: (preview_i4.x+(preview_i4.width/4));
+              y: (preview_i4.y+(preview_i4.heigth/2));
+              width: 25
+              height: 25
+              text: qsTr("1")
+
+              styleColor: "red"
+              color:"white"
+              font.bold: true
+              font.family: "Verdana"
+              font.pixelSize: 12
+          }
         }
+
+        Text {
+          id: sumcap
+          x: preview_back.x+(preview_back.width/2);
+          y: preview_back.y
+          width: 25
+          height: 25
+          text: qsTr("Razem ml: 0")
+
+          styleColor: "black"
+          color:"black"
+          font.bold: true
+          font.family: "Verdana"
+          font.pixelSize: 12
+      }
 
 
 
@@ -216,7 +294,11 @@ Row {
                 model: mixer.getIDList()
 
 
-                onCurrentIndexChanged: {
+                onCurrentTextChanged: {
+                    i1cap.text=comboslots.itemAt(0).children[0].currentText+" ("+comboslots.itemAt(0).children[1].text+" ml)";
+                    i2cap.text=comboslots.itemAt(1).children[0].currentText+" ("+comboslots.itemAt(1).children[1].text+" ml)";
+                    i3cap.text=comboslots.itemAt(2).children[0].currentText+" ("+comboslots.itemAt(2).children[1].text+" ml)";
+                    i4cap.text=comboslots.itemAt(3).children[0].currentText+" ("+comboslots.itemAt(3).children[1].text+" ml)";
 
                 }
             }
@@ -237,14 +319,33 @@ Row {
                     sum=sum+parseInt(comboslots.itemAt(i).children[1].text);
                     }
 //label2.text=sum;
-
+                    comboslots.itemAt(0).children[0].onCurrentTextChanged();
                    // label1.text=preview_i1.height=parseInt(comboslots.itemAt(index).children[1].text)/sum*100;
+                    if (sum===0) {
+                         preview_i1.height=0;
+                         preview_i2.height=0;
+                        preview_i3.height=0;
+                        preview_i4.height=0;
+                        i1cap.visible=false;
+                        i2cap.visible=false;
+                        i3cap.visible=false;
+                        i4cap.visible=false;
+                        sumcap.text="Razem "+sum+" ml";
 
+                    } else
+                    {
+    sumcap.text="Razem "+sum+" ml";
                     preview_i1.height=(parseInt(comboslots.itemAt(0).children[1].text)/sum*100)*3
                     preview_i2.height=(parseInt(comboslots.itemAt(1).children[1].text)/sum*100)*3
                     preview_i3.height=(parseInt(comboslots.itemAt(2).children[1].text)/sum*100)*3
                     preview_i4.height=(parseInt(comboslots.itemAt(3).children[1].text)/sum*100)*3
 
+                        if (preview_i1.height>0) i1cap.visible=true; else i1cap.visible=false;
+                        if (preview_i2.height>0) i2cap.visible=true; else i2cap.visible=false;
+                        if (preview_i3.height>0) i3cap.visible=true; else i3cap.visible=false;
+                        if (preview_i4.height>0) i4cap.visible=true; else i4cap.visible=false;
+
+}
                 }
 
             }

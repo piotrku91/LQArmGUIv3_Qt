@@ -49,6 +49,19 @@ ListModel { id: drinkMixList }
 
     }
 
+    function setTime(h,m,s)
+    {
+       if (parseInt(h)<10) h="0"+h;
+       if (parseInt(m)<10) m="0"+m;
+       if (parseInt(s)<10) s="0"+s;
+       party_counter.text=h+":"+m+":"+s;
+       party_counter.visible=true;
+       party_info.visible=true;
+       setStatus("TRYB IMPREZY");
+
+
+    }
+
     function fillLists()
     {
 
@@ -121,6 +134,11 @@ ListModel { id: drinkMixList }
         {
 
             setStatus(message);
+        }
+
+        onSetTime:
+        {
+            setTime(h,m,s);
         }
 
     }
@@ -284,6 +302,37 @@ ListModel { id: drinkMixList }
         }
 
 
+        Text {
+          id: party_info
+          width: 70
+          height: 20
+          text: qsTr("Czas do następnego nalewania: ")
+
+          styleColor: "red"
+          font.bold: true
+          font.family: "Verdana"
+          font.pixelSize: 14
+          visible: false;
+        }
+        Text {
+          id: party_counter
+          width: 70
+          height: 20
+          text: qsTr("00:00:00")
+
+          styleColor: "red"
+          color:"red"
+          font.bold: true
+          font.family: "Verdana"
+          font.pixelSize: 18
+          visible: false;
+        }
+
+
+
+
+
+
 
 
         }
@@ -430,7 +479,7 @@ Row {
         width: 130
     Button {
         id: btn_exeone
-        text: qsTr("NALEWANIE \n KROKOWE")
+        text: qsTr("TRYB \n IMPREZY")
         font.bold: true
         height: 100
         width: 125
@@ -441,7 +490,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { gtable.setActiveStateALL(false)
+        onClicked: { manager.glass_Save(true); manager.sendToDevice("<proc_clq;1;>",4);
 
 
 
@@ -485,7 +534,7 @@ Row {
         width: 130
     Button {
         id: btn_escape
-        text: qsTr("ODJAZD")
+        text: qsTr("POZYCJA \N ODJAZD")
         font.bold: true
         height: 100
         width: 125
@@ -571,7 +620,7 @@ Row {
         width: 130
     Button {
         id: btn_savegl
-        text: qsTr("TYLKO \n ZAPIS")
+        text: qsTr("ZAPISZ \n ZMIANY")
         font.bold: true
         height: 100
         width: 125

@@ -42,6 +42,7 @@ signals:
     QString stopBusy();
     QString jobFinish();
     QString jobStart(const QString& message);
+    QString setTime(int h, int m, int s);
 
 
 

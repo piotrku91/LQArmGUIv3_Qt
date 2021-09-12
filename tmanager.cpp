@@ -7,17 +7,23 @@
 
 void TManager::glass_Save(bool Force)
 {
+    makeQue();
     for (int i=0; i < 4; i++)
     {
            QString Version = (!Force)?"":"2";
            m_Serial_ptr->Transaction("<n_set"+Version+";"+QString::number(i)+';'+QString::number(m_Table_ptr->Glass[i].MaxCap)+';'+QString::number(m_Table_ptr->Glass[i].Locked)+';'+m_Table_ptr->Glass[i].DrinkScheme+";>");
 
    }
-     if (Force) {m_Serial_ptr->Transaction("<l_br;>"); m_Serial_ptr->Transaction("<sett_s;>");};
+     if (Force) {m_Serial_ptr->Transaction("<l_br;>"); sett_ForceSave();};
 
 };
 
+void TManager::sett_ForceSave()
+{
+m_Serial_ptr->Transaction("<sett_s;>");
 
+
+                        }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief TManager::executeDisp
 ///
@@ -40,7 +46,7 @@ void TManager::makeQue()
       player->setVolume(30); player->play();
      // m_Serial_ptr->startBusy();
 
-     makeQue();
+
      glass_Save();
 
      m_Serial_ptr->Transaction("<srv_nalall;>");

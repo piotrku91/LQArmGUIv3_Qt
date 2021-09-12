@@ -229,7 +229,7 @@ Item {
           //  anchors.left: parent.left
             anchors.bottomMargin: 1
 
-            onClicked: { updatess();
+            onClicked: { updatess(); manager.sett_ForceSave();
 
             }
         }
@@ -272,6 +272,27 @@ Item {
             anchors.bottomMargin: 1
 
             onClicked: {  updatesl();   }
+        }
+
+        }
+
+
+        ////////////////////////////////////////// BUTTON
+
+        Rectangle {
+            color:"black"
+            height: 100
+            width: 105
+        Button {
+            id: btn_settsforce
+            text: qsTr("")
+            height: 100
+            width: 100
+          //  anchors.bottom: parent.bottom
+          //  anchors.left: parent.left
+            anchors.bottomMargin: 1
+
+            onClicked: {  }
         }
 
         }
