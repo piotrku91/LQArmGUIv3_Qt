@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.0
 //import io.qt.examples.backend 1.0
 
 
+
 Item {
     id: table
     anchors.fill: parent
@@ -127,6 +128,7 @@ ListModel { id: drinkMixList }
     Connections {
         target: gtable
         onPresentVersion:
+
         {
        element.text="LQArm "+version.toFixed(2);
         }

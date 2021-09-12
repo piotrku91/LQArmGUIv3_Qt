@@ -106,6 +106,57 @@ Item {
 
         }
 
+        Rectangle {
+            id: preview_back
+            x: 50
+            y: mixert.height/3;
+            width: 200
+            height: 110*3
+            color: "silver"
+            radius: 5
+        }
+
+        Rectangle {
+            id: preview_i1
+            x: 50
+            y: preview_back.y+(preview_back.height-height)
+            width: 200
+            height: 1
+            color: "red"
+            radius: 5
+        }
+
+        Rectangle {
+            id: preview_i2
+            x: 50
+            y: preview_i1.y - height
+            width: 200
+            height: 1
+            color: "blue"
+            radius: 5
+        }
+
+        Rectangle {
+            id: preview_i3
+            x: 50
+            y: preview_i2.y - height
+            width: 200
+            height: 1
+            color: "green"
+            radius: 5
+        }
+
+        Rectangle {
+            id: preview_i4
+            x: 50
+            y: preview_i3.y - height
+            width: 200
+            height: 1
+            color: "black"
+            radius: 5
+        }
+
+
 
  Column {
       id:col;
@@ -165,7 +216,9 @@ Row {
                 model: mixer.getIDList()
 
 
-              //  onCurrentIndexChanged: {mixer.itemIndex=currentIndex}
+                onCurrentIndexChanged: {
+
+                }
             }
 
             TextField
@@ -178,6 +231,21 @@ Row {
 
                 width: 100
                 color: "black"
+                onTextChanged: {
+                    var sum=0;
+                    for (var i=0; i<4; i++) {
+                    sum=sum+parseInt(comboslots.itemAt(i).children[1].text);
+                    }
+//label2.text=sum;
+
+                   // label1.text=preview_i1.height=parseInt(comboslots.itemAt(index).children[1].text)/sum*100;
+
+                    preview_i1.height=(parseInt(comboslots.itemAt(0).children[1].text)/sum*100)*3
+                    preview_i2.height=(parseInt(comboslots.itemAt(1).children[1].text)/sum*100)*3
+                    preview_i3.height=(parseInt(comboslots.itemAt(2).children[1].text)/sum*100)*3
+                    preview_i4.height=(parseInt(comboslots.itemAt(3).children[1].text)/sum*100)*3
+
+                }
 
             }
 
