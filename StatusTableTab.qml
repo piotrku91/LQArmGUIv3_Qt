@@ -25,7 +25,7 @@ default property alias boxA: table.children
                           ((positionrow.height/2-positionrow.height/6)-boxHeight/2), // Y1
                           (positionrow.height/2-boxHeight/2),                        // Y2
                           ((positionrow.height/2-positionrow.height/6)-boxHeight/2), // Y3
-                          ((positionrow.height/2-positionrow.height/3)-boxHeight/2)] // Y4
+                          ((positionrow.height/2-positionrow.height/4)-boxHeight/2)] // Y4
 
 ListModel { id: drinkMixList }
 
@@ -41,11 +41,18 @@ ListModel { id: drinkMixList }
 
     }
 
+    function setStatus(newStatus)
+    {
+       actualstatus.text=newStatus;
+
+
+    }
+
     function fillLists()
     {
 
 
-       for (var i=0; i<5; i++) {
+       for (var i=0; i<4; i++) {
         slotsr.itemAt(i).children[1].model=mixer.getDrinkList();
         slotsr.itemAt(i).children[2].text=gtable.getMaxCap(i); // Fill max capacties
         slotsr.itemAt(i).children[1].currentIndex=gtable.getSchemeIDX(i);
@@ -57,7 +64,7 @@ ListModel { id: drinkMixList }
     function fillImages()
     {
 
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 4; i++) {
 
          if  (gtable.getLockFlag(i))
                  {
@@ -74,7 +81,7 @@ ListModel { id: drinkMixList }
     function fillStates()
     {
 
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 4; i++) {
 
          if  (gtable.getActiveState(i))
                  {
@@ -93,19 +100,36 @@ ListModel { id: drinkMixList }
 
         onStartBusy:
         {
-       busy.visible=true;
+
+            busy.running=true;
         }
 
         onStopBusy:
         {
-       busy.visible=false;
+
+            busy.running=false;
+        }
+
+        onJobFinish:
+        {
+
+            setStatus("OCZEKIWANIE");
+        }
+
+        onJobStart:
+        {
+
+            setStatus(message);
         }
 
     }
 
     Connections {
         target: gtable
-
+        onPresentVersion:
+        {
+       element.text="LQArm "+version.toFixed(2);
+        }
 
 
 
@@ -113,6 +137,8 @@ ListModel { id: drinkMixList }
         {
        fillLists();
         }
+
+
 
 
 
@@ -140,7 +166,7 @@ ListModel { id: drinkMixList }
         anchors.left: parent.left
         Repeater {
             id: slotsr
-            model: 5
+            model: 4
 
     Rectangle {
         id: box0
@@ -215,14 +241,51 @@ ListModel { id: drinkMixList }
             position: 0
             onCheckedChanged: { btn_lck.enabled=position }
         }
+        Column {
+            x: sX[4];
+            y: sY[4];
 
-        BusyIndicator {
-           id: busy
-           x: 400
-           y: table.height-200;
-           visible: true;
-           running: false;
-       }
+            BusyIndicator {
+               id: busy
+
+               visible: true;
+               running: false;
+           }
+
+        Row {
+        Text {
+          id: progstattxt
+          width: 75
+          height: 37
+          text: qsTr("STATUS: ")
+
+          styleColor: "red"
+          font.bold: true
+          font.family: "Verdana"
+          font.pixelSize: 14
+        }
+        Text {
+          id: actualstatus
+          width: 60
+          height: 37
+          text: qsTr("...")
+
+          styleColor: "red"
+          color:"red"
+          font.bold: true
+          font.family: "Verdana"
+          font.pixelSize: 14
+        }
+
+
+
+        }
+
+
+
+
+        }
+
 
 Row {
     anchors.bottom: parent.bottom
@@ -349,7 +412,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { busy.running=true; manager.executeDisp()
+        onClicked: { setStatus("NALEWANIE"); manager.executeDisp()
 
 
         }
@@ -403,7 +466,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { manager.sink();
+        onClicked: { setStatus("JAZDA DO DOKU"); manager.sink();
 
 
 
@@ -431,7 +494,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { manager.escape();
+        onClicked: {setStatus("ODJAZD"); manager.escape();
 
 
 
@@ -460,7 +523,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { manager.home();
+        onClicked: {setStatus("JAZDA POZYCJA DOMOWA"); manager.home();
 
 
 
@@ -498,6 +561,35 @@ Row {
 
 }
 
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 130
+    Button {
+        id: btn_savegl
+        text: qsTr("TYLKO \n ZAPIS")
+        font.bold: true
+        height: 100
+        width: 125
+
+
+
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { manager.glass_Save(true);
+
+
+
+        }
+    }
+
+}
+
 
 
 
@@ -509,7 +601,7 @@ Row {
     Text {
         id: element
         x: parent.width/2-width/2
-        y: parent.height/4
+        y: parent.height/6
         width: 52
         height: 37
         text: qsTr("LQArm ")

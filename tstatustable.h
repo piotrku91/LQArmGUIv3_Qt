@@ -50,6 +50,7 @@ signals:
     void pushSchemesUpdate();
     void pushImagesUpdate();
     void pushStatesUpdate();
+    void presentVersion(float version);
 };
 
 #endif // TSTATUSTABLE_H

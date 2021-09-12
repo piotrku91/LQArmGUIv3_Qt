@@ -17,10 +17,15 @@ Item {
         title: qsTr("Group Box")
 
         Switch {
-            id: element
+            id: sim
             x: 8
             y: 18
+            checked: true;
             text: qsTr("Symulacja nalewania")
+            onCheckedChanged: {
+                if (checked) { manager.sendToDevice("<rl_simon;>",4);} else {manager.sendToDevice("<rl_simoff;>",4);};
+
+            }
         }
     }
 
@@ -41,10 +46,38 @@ Item {
     }
 
 
+    Row {
+        anchors.bottom: configuration.bottom
+        anchors.left: configuration.left
+
+        ////////////////////////////////////////// BUTTON
+
+        Rectangle {
+            color:"black"
+            height: 100
+            width: 105
+        Button {
+            id: btn_savelqslots
+            text: qsTr("WYŚLIJ \n DO \n URZĄDZENIA")
+            height: 100
+            width: 100
+          //  anchors.bottom: parent.bottom
+          //  anchors.left: parent.left
+            anchors.bottomMargin: 1
+
+            onClicked: {
+            }
+        }
 
 
 
 
+
+
+
+}
+
+}
 }
 
 

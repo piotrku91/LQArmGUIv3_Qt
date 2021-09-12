@@ -17,6 +17,7 @@ void TManager::Reaction(ParamPart &P)
 
     if (P.Header("boot_ok"))
     {
+        m_Serial_ptr->jobStart("BOOTOWANIE");
       slots_Load();
    //   unlockApp();
       P.ReadDone(true);
@@ -33,6 +34,7 @@ void TManager::Reaction(ParamPart &P)
     {
       glass_Load();
    //   unlockApp();
+      m_Serial_ptr->jobFinish();
       P.ReadDone(true);
     };
 
@@ -50,6 +52,14 @@ void TManager::Reaction(ParamPart &P)
 
       P.ReadDone(true);
     };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        if ((P.Header("v")))
+        {
+            m_Table_ptr->presentVersion(P[0].toFloat());
+            P.ReadDone(false);
+        };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -93,6 +103,27 @@ void TManager::Reaction(ParamPart &P)
         {
             Log("jestem");
             P.ReadDone(false); //Mark as Read but nothing to return
+        };
+
+        if (P.UseAsHeader("srv_nalall"))
+        {
+            m_Serial_ptr->stopBusy();
+            m_Serial_ptr->jobFinish();
+            P.ReadDone(false); //Mark as Read but nothing to return
+        };
+
+        if (P.UseAsHeader("srv_home") || P.UseAsHeader("srv_esc"))
+        {
+            m_SM_ptr->dockPositionLeft();
+            m_Serial_ptr->jobFinish();
+
+        };
+
+        if (P.UseAsHeader("srv_dok"))
+        {
+            m_SM_ptr->dockPosition();
+            m_Serial_ptr->jobFinish();
+
         };
 
         if (P.UseAsHeader("db"))

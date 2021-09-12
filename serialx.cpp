@@ -1,7 +1,7 @@
 #include "serialx.h"
 #include "tmanager.h"
 #include <QtSerialPort/QSerialPort>
-
+#include <thread>
 
 
 SerialX::SerialX(): sP(new QSerialPort(this)),IsTransaction(false)
@@ -100,7 +100,8 @@ void SerialX::readData(){
 
 void SerialX::Transaction (const QString& cmd)
 {
-    IsTransaction=true;
+
+        IsTransaction=true;
     int m_waitTimeout = 1500;
     QString currentRequest;
     const QByteArray requestData = currentRequest.toUtf8();
@@ -125,10 +126,14 @@ void SerialX::Transaction (const QString& cmd)
  };
 
  IsTransaction=false;
+    };
 
 
 
-}
+
+
+
+
 
 
 

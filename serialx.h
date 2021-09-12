@@ -40,6 +40,8 @@ signals:
     QString getNewData(const QString& data);
     QString startBusy();
     QString stopBusy();
+    QString jobFinish();
+    QString jobStart(const QString& message);
 
 
 

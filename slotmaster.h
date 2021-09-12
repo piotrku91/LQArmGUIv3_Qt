@@ -51,6 +51,8 @@ public slots:
 
 signals:
     QString pushUpdate();
+    QString dockPosition();
+    QString dockPositionLeft();
 
 };
 

@@ -2,17 +2,19 @@
 #include "slotmaster.h"
 #include "tmanager.h"
 #include "tstatustable.h"
+#include <thread>
 
 
-void TManager::glass_Save()
+void TManager::glass_Save(bool Force)
 {
-    for (int i=0; i < 5; i++)
+    for (int i=0; i < 4; i++)
     {
-        if (m_Table_ptr->Glass[i].Checked)
-        {
-           m_Serial_ptr->Transaction("<n_set;"+QString::number(i)+';'+QString::number(m_Table_ptr->Glass[i].MaxCap)+';'+QString::number(m_Table_ptr->Glass[i].Locked)+';'+m_Table_ptr->Glass[i].DrinkScheme+";>");
-       }
+           QString Version = (!Force)?"":"2";
+           m_Serial_ptr->Transaction("<n_set"+Version+";"+QString::number(i)+';'+QString::number(m_Table_ptr->Glass[i].MaxCap)+';'+QString::number(m_Table_ptr->Glass[i].Locked)+';'+m_Table_ptr->Glass[i].DrinkScheme+";>");
+
    }
+     if (Force) {m_Serial_ptr->Transaction("<l_br;>"); m_Serial_ptr->Transaction("<sett_s;>");};
+
 };
 
 
@@ -21,50 +23,57 @@ void TManager::glass_Save()
 ///
 ///
 ///
+///
+void TManager::makeQue()
+{
+    QString tmpString;
+    for (auto &oneShot : m_Table_ptr->Glass)
+    { tmpString+=QString::number(oneShot.Checked)+';'; }
+    m_Serial_ptr->Transaction("<n_que;"+tmpString+'>');
+
+};
 
  void TManager::executeDisp()
  {
-      m_Serial_ptr->startBusy();
-     QString tmpString;
-     for (auto &oneShot : m_Table_ptr->Glass)
-     { tmpString+=QString::number(oneShot.Checked)+';'; }
-     m_Serial_ptr->Transaction("<n_que;"+tmpString+'>');
-     player->setMedia(QUrl::fromLocalFile("/home/piotr/LQArmGUIv3/static/wavs/disp.wav"));
-     player->setVolume(30); player->play();
+      std::thread t1(&SerialX::startBusy,std::ref(m_Serial_ptr));
+      player->setMedia(QUrl::fromLocalFile("/home/piotr/LQArmGUIv3/static/wavs/disp.wav"));
+      player->setVolume(30); player->play();
+     // m_Serial_ptr->startBusy();
 
+     makeQue();
      glass_Save();
 
      m_Serial_ptr->Transaction("<srv_nalall;>");
 
-     m_Serial_ptr->stopBusy();
+     t1.join();
+
  };
 
 
  void TManager::escape()
  {
-      m_Serial_ptr->startBusy();
+   //   m_Serial_ptr->startBusy();
 
      m_Serial_ptr->Transaction("<srv_esc;>");
 
-     m_Serial_ptr->stopBusy();
+    // m_Serial_ptr->stopBusy();
  };
 
  void TManager::home()
  {
-      m_Serial_ptr->startBusy();
-
+    //  m_Serial_ptr->startBusy();
      m_Serial_ptr->Transaction("<srv_home;>");
 
-     m_Serial_ptr->stopBusy();
+    // m_Serial_ptr->stopBusy();
  };
 
  void TManager::sink()
  {
-      m_Serial_ptr->startBusy();
+    //  m_Serial_ptr->startBusy();
 
      m_Serial_ptr->Transaction("<srv_dok;>");
 
-     m_Serial_ptr->stopBusy();
+ //    m_Serial_ptr->stopBusy();
  };
 
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -18,7 +18,13 @@ Item {
 
            slots.itemAt(i).children[5].text=slotmaster.getIDName(i);
 
-           if (slotmaster.getReady(i)===true) {slots.itemAt(i).children[0].text=i+" - Gotowy"; } else {slots.itemAt(i).children[0].text=i+" - Do zaciągnięcia"; }
+           if (slotmaster.getReady(i)===true) {
+               slots.itemAt(i).children[0].text=i+" - Gotowy";
+               slots.itemAt(i).children[8].visible=false;
+           } else {
+               slots.itemAt(i).children[8].visible=true;
+               slots.itemAt(i).children[0].text=i+" - Do zaciągnięcia";
+           }
            slots.itemAt(i).children[6].text=slotmaster.getActualML(i);
            slots.itemAt(i).children[7].text=slotmaster.getMaxML(i);
 
@@ -48,6 +54,27 @@ Item {
         {
           updatesl();
         }
+
+        onDockPosition:
+        {
+            for (var i = 0; i < 8; i++) {
+               slots.itemAt(i).children[8].enabled=true;
+
+            }
+        }
+
+        onDockPositionLeft:
+        {
+            for (var i = 0; i < 8; i++) {
+               slots.itemAt(i).children[8].enabled=false;
+
+            }
+        }
+
+
+
+
+
                 }
 
 
@@ -155,6 +182,20 @@ Item {
                     width: parent.width
                     color: "black"
                    // onTextChanged: {slotmaster.setMaxML(index,text);}
+                }
+
+                Button { // # children: 8
+                    id: btn_zaciag
+                    y: slot_maxml.y+40
+                    text: qsTr("ZACIĄGNIJ")
+                    height: 50
+                    enabled: false;
+                    width: 100
+                  //  anchors.bottom: parent.bottom
+                  //  anchors.left: parent.left
+                    anchors.bottomMargin: 1
+
+                    onClicked: { manager.fuel_Force(index); }
                 }
 
 
