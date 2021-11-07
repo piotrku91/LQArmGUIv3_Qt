@@ -38,6 +38,7 @@ Item {
         comboslots.itemAt(2).children[1].text=LQ3_amo;
         comboslots.itemAt(3).children[0].currentIndex=AV_LQ4_itemIndex;
         comboslots.itemAt(3).children[1].text=LQ4_amo;
+        lemonswitch.checked=Lemon;
         statustxt.text=mixer.getStatusTxt();
             //textchan.text=mixer.getactualName();
 
@@ -255,7 +256,7 @@ Item {
    }
 
      Switch {
-         id: element
+         id: lemonswitch
          x: label1.x;
          y: label1.y+60;
          text: qsTr("Cytryna")
@@ -392,7 +393,7 @@ Row {
                                              comboslots.itemAt(0).children[0].currentIndex,comboslots.itemAt(0).children[1].text,
                                              comboslots.itemAt(1).children[0].currentIndex,comboslots.itemAt(1).children[1].text,
                                              comboslots.itemAt(2).children[0].currentIndex,comboslots.itemAt(2).children[1].text,
-                                             comboslots.itemAt(3).children[0].currentIndex,comboslots.itemAt(3).children[1].text)
+                                             comboslots.itemAt(3).children[0].currentIndex,comboslots.itemAt(3).children[1].text, lemonswitch.checked)
                                              mixer.setActualName(textchan.text,kombo.currentIndex);
                            savingstate=false;
 
@@ -439,9 +440,10 @@ Row {
             anchors.bottomMargin: 1
 
             onClicked: {
+                if (kombo.currentText!="default") {
                 manager.drink_Delete(kombo.currentText);
                 mixer.deleteItem(kombo.currentIndex);
-
+};
             }
         }
 

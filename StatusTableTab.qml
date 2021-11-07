@@ -490,7 +490,7 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { manager.glass_Save(true); manager.sendToDevice("<proc_clq;1;>",4);
+        onClicked: { manager.glass_Save(true); manager.sendToDevice("<proc_clk;1;>",4);
 
 
 

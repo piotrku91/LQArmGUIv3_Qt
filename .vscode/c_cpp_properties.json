@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "../Qt5.12.9/5.12.9/gcc_64/include/"
+                "/home/piotr/Qt/5.13.2/"
         
             ],
             "defines": [],

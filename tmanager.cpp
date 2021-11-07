@@ -103,7 +103,8 @@ void TManager::makeQue()
                m_Mixer_ptr->getView()->m_LQ1_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ1_amount)+";"+
                m_Mixer_ptr->getView()->m_LQ2_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ2_amount) +";"+
                m_Mixer_ptr->getView()->m_LQ3_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ3_amount) +";"+
-               m_Mixer_ptr->getView()->m_LQ4_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ4_amount) +
+               m_Mixer_ptr->getView()->m_LQ4_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ4_amount) +";"+
+               QString::number(m_Mixer_ptr->getView()->isLemon)+
                ";>",4);
 
 

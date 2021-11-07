@@ -5,25 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "clang++ - Kompiluj",
+            "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "program": "wprowadź nazwę programu, na przykład ${workspaceFolder}/a.out",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
+            "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "lldb",
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Włącz formatowanie kodu dla gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ],
-            "preLaunchTask": "C/C++: clang++ build active file",
-            "miDebuggerPath": "/usr/bin/lldb-mi"
+            ]
         }
     ]
 }

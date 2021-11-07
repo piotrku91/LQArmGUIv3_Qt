@@ -20,6 +20,7 @@ private:
  TManager * m_Manager_ptr;
  bool IsTransaction;
 
+
 public:
     SerialX();
     void InstallToManager(TManager * M) {m_Manager_ptr=M;};
