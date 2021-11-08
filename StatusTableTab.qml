@@ -80,6 +80,12 @@ ListModel { id: drinkMixList }
 
         for (var i = 0; i < 4; i++) {
 
+            if (gtable.getLemonToThrow(i)) {
+             slotsr.itemAt(i).children[3].visible=true;
+            } else {
+            slotsr.itemAt(i).children[3].visible=false;
+            };
+
          if  (gtable.getLockFlag(i))
                  {
             slotsr.itemAt(i).children[0].source="static/shot-glass_full.png"
@@ -218,7 +224,7 @@ ListModel { id: drinkMixList }
             y: (parent.height)
             width: boxWidth
             model:;// mixer.getDrinkList()
-            onCurrentIndexChanged: {gtable.setSchemeByIDX(index,currentIndex);}
+            onCurrentIndexChanged: {gtable.setSchemeByIDX(index,currentIndex); fillImages();}
 
         }
 
@@ -227,6 +233,26 @@ ListModel { id: drinkMixList }
             y: (parent.height+box0_list.height)
             width: boxWidth
             onTextChanged: {gtable.setMaxCap(index,text);}
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: {
+                    if (parseInt(box0_mllist.text)>=300) { box0_mllist.text="0"; } else {
+                    box0_mllist.text=parseInt(box0_mllist.text)+25;
+                    };
+                }
+            }
+        }
+
+        Image {
+            id: lem_ico
+            x: x+boxWidth
+            y: (parent.height+box0_mllist.height+5)
+            width: 24
+            height: 24
+            source: "static/lemon-ico.png"
+            fillMode: Image.PreserveAspectFit
+            mipmap: true
 
 
         }
@@ -534,7 +560,7 @@ Row {
         width: 130
     Button {
         id: btn_escape
-        text: qsTr("POZYCJA \N ODJAZD")
+        text: qsTr("POZYCJA \n ODJAZD")
         font.bold: true
         height: 100
         width: 125

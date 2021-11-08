@@ -2,7 +2,8 @@
 #define TSTATUSTABLE_H
 
 #include <QObject>
-
+#include <vector>
+#include "TView.h"
 
 class TGlassInfo
 {
@@ -26,6 +27,7 @@ public:
 
 public:
     QStringList *m_DrinkList_ptr;
+    std::vector<TView> *m_MixerViews_ptr;
     TGlassInfo Glass[5];
 
     void ImportFromParams(const int& Index, const bool& LockState, const int& MaxCap, const QString& SchemeName);
@@ -40,7 +42,8 @@ public slots:
     void setMaxCap(const int& idx, const int&  capacity);
     void setLockForActive(const bool&  newlockflag);
 
-    bool getLockFlag(const int& idx);;
+    bool getLemonToThrow(const int& idx);
+    bool getLockFlag(const int& idx);
     bool getActiveState(const int& idx);
     int getSchemeIDX(const int& idx) {return LocalizeDrink(Glass[idx].DrinkScheme);};
     int getMaxCap(const int& idx) {return Glass[idx].MaxCap;};

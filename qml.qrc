@@ -19,5 +19,6 @@
         <file>LQStorageTab.qml</file>
         <file>ConfigurationTab.qml</file>
         <file>MixerTab.qml</file>
+        <file>static/lemon-ico.png</file>
     </qresource>
 </RCC>

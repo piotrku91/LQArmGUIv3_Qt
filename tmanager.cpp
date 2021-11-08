@@ -106,8 +106,8 @@ void TManager::makeQue()
                m_Mixer_ptr->getView()->m_LQ4_Code+";"+QString::number(m_Mixer_ptr->getView()->m_LQ4_amount) +";"+
                QString::number(m_Mixer_ptr->getView()->isLemon)+
                ";>",4);
-
-
+emit m_Table_ptr->pushSchemesUpdate();
+emit m_Table_ptr->pushImagesUpdate();
  };
 
 

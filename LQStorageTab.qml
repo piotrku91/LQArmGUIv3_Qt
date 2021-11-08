@@ -71,16 +71,7 @@ Item {
             }
         }
 
-
-
-
-
                 }
-
-
-
-
-
 
     Row {
         anchors.leftMargin: 20
@@ -196,6 +187,20 @@ Item {
                     anchors.bottomMargin: 1
 
                     onClicked: { manager.fuel_Force(index); }
+                }
+
+                Button { // # children: 9
+                    id: btn_unpomp
+                    y: btn_zaciag.y+40
+                    text: qsTr("SPUŚĆ")
+                    height: 50
+                    enabled: false;
+                    width: 100
+                  //  anchors.bottom: parent.bottom
+                  //  anchors.left: parent.left
+                    anchors.bottomMargin: 1
+
+                    onClicked: {  }
                 }
 
 

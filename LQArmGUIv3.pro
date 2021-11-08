@@ -51,6 +51,7 @@ DISTFILES += \
     static/cmp.png \
     static/console.png \
     static/cpu.png \
+    static/lemon-ico.png \
     static/list.png \
     static/s.png \
     static/shot-glass_empty.png \
@@ -60,6 +61,7 @@ DISTFILES += \
     static/whiskey.png
 
 HEADERS += \
+    TView.h \
     clock.h \
     lib/ParamPart_PCSide/parampart_pcs.h \
     mixer.h \
