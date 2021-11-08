@@ -20,5 +20,6 @@
         <file>ConfigurationTab.qml</file>
         <file>MixerTab.qml</file>
         <file>static/lemon-ico.png</file>
+        <file>static/no-entry.png</file>
     </qresource>
 </RCC>

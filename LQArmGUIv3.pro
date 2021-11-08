@@ -53,6 +53,7 @@ DISTFILES += \
     static/cpu.png \
     static/lemon-ico.png \
     static/list.png \
+    static/no-entry.png \
     static/s.png \
     static/shot-glass_empty.png \
     static/shot-glass_full.png \

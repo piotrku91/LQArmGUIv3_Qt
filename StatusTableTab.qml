@@ -147,6 +147,7 @@ ListModel { id: drinkMixList }
             setTime(h,m,s);
         }
 
+
     }
 
     Connections {
@@ -176,6 +177,11 @@ ListModel { id: drinkMixList }
         onPushStatesUpdate:
         {
        fillStates();
+        }
+
+        onPushEmergencyState:
+        {
+        if (State) {stopimage.visible=true; setStatus("STOP!!!");} else {stopimage.visible=false; setStatus("STOP ANULOWANY!");};
         }
 
     }
@@ -352,6 +358,20 @@ ListModel { id: drinkMixList }
           font.family: "Verdana"
           font.pixelSize: 18
           visible: false;
+        }
+
+        Image {
+            id: stopimage
+            x: x+boxWidth
+            y: party_counter.y+100
+            width: 120
+            height: 120
+            source: "static/no-entry.png"
+            fillMode: Image.PreserveAspectFit
+            mipmap: true
+            visible: false
+
+
         }
 
 
@@ -557,13 +577,13 @@ Row {
     Rectangle {
         color:"black"
         height: 100
-        width: 130
+        width: 105
     Button {
         id: btn_escape
         text: qsTr("POZYCJA \n ODJAZD")
         font.bold: true
         height: 100
-        width: 125
+        width: 100
 
 
     //    anchors.bottom: parent.bottom
@@ -585,13 +605,13 @@ Row {
     Rectangle {
         color:"black"
         height: 100
-        width: 130
+        width: 105
     Button {
         id: btn_home
         text: qsTr("POZYCJA \n DOMOWA")
         font.bold: true
         height: 100
-        width: 125
+        width: 100
 
 
 
@@ -614,13 +634,13 @@ Row {
     Rectangle {
         color:"black"
         height: 100
-        width: 130
+        width: 105
     Button {
         id: btn_stop
-        text: qsTr("STOP")
+        text: qsTr("STOP \n AWARYJNY")
         font.bold: true
         height: 100
-        width: 125
+        width: 100
 
 
 
@@ -629,10 +649,33 @@ Row {
         anchors.leftMargin: 10
         anchors.bottomMargin: 1
 
-        onClicked: { gtable.setActiveStateALL(false)
+        onClicked: { manager.sendToDevice("<proc_stop;>",4);
+        }
+    }
+
+}
+
+    ////////////////////////////////////////// BUTTON
+
+    Rectangle {
+        color:"black"
+        height: 100
+        width: 105
+    Button {
+        id: btn_stopcancel
+        text: qsTr("SKASUJ \n STOP")
+        font.bold: true
+        height: 100
+        width: 100
 
 
 
+    //    anchors.bottom: parent.bottom
+     //   anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 1
+
+        onClicked: { manager.sendToDevice("<proc_ok;>",4);
         }
     }
 
@@ -685,9 +728,10 @@ Row {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         styleColor: "#650000"
+        rotation: 4
         style: Text.Outline
         font.bold: true
-        font.family: "Verdana"
+        font.family: "Sans"
         font.pixelSize: 36
     }
 

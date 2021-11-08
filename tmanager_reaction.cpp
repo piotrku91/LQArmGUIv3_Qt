@@ -8,8 +8,7 @@ void TManager::Reaction(ParamPart &P)
     static bool Booting=true;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                                         /// REACTIONS TO MESSAGES FROM ARDUINO ///
-
+                                         /// REACTIONS TO MESSAGES FROM ARDUINO //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,6 +79,12 @@ void TManager::Reaction(ParamPart &P)
             P.ReadDone(true);
         };
 
+        if ((P.Header("n_un")) && P.Integrity(1,NUMBER))
+        {
+          m_Table_ptr->setLockFlag(P[0].toInt(),false);
+            P.ReadDone(true);
+        };
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (P.Header("sch_i"))
@@ -92,6 +97,18 @@ void TManager::Reaction(ParamPart &P)
     if (P.Header("sek"))
     {
      m_Serial_ptr->setTime(P[0].toInt(),P[1].toInt(),P[2].toInt());
+        P.ReadDone(true);
+    };
+
+    if (P.Header("emg!"))
+    {
+     m_Table_ptr->pushEmergencyState(true);
+        P.ReadDone(true);
+    };
+
+    if (P.Header("emg_ok"))
+    {
+     m_Table_ptr->pushEmergencyState(false);
         P.ReadDone(true);
     };
 
@@ -131,6 +148,7 @@ void TManager::Reaction(ParamPart &P)
             m_Serial_ptr->jobFinish();
             P.ReadDone(false); //Mark as Read but nothing to return
         };
+
 
         if (P.UseAsHeader("srv_home") || P.UseAsHeader("srv_esc"))
         {

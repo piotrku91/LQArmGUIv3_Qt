@@ -54,6 +54,7 @@ signals:
     void pushImagesUpdate();
     void pushStatesUpdate();
     void presentVersion(float version);
+    void pushEmergencyState(bool State);
 };
 
 #endif // TSTATUSTABLE_H

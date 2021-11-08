@@ -12,10 +12,10 @@ Item {
         id: ustawienia
         x: 37
         y: 26
-        width: 250
+        width: 271
         height: 294
         anchors.right: groupBox.left
-        anchors.rightMargin: 6
+        anchors.rightMargin: -15
         title: qsTr("Ustawienia ogólne")
 
         Switch {
@@ -34,10 +34,51 @@ Item {
             id: switch1
             x: 8
             y: 64
-            text: qsTr("Włącz podajnik cytryny")
+            text: qsTr("Podajnik cytryny")
             anchors.left: sim.left
             anchors.top: sim.bottom
+            checked: true
             anchors.topMargin: -3
+        }
+
+        Text {
+            id: timetext
+            x: 899
+            y: 46
+            width: 24
+            height: 34
+            color: "#f30505"
+            text: slidertime.value
+            font.pixelSize: 12
+            rotation: 8.599
+
+        }
+
+        Text {
+            id: text7
+            x: 108
+            y: 68
+            text: qsTr("min")
+            anchors.verticalCenter: switch1.verticalCenter
+            font.pixelSize: 12
+            anchors.verticalCenterOffset: 0
+            anchors.horizontalCenterOffset: 814
+            anchors.horizontalCenter: switch1.horizontalCenter
+        }
+
+        Switch {
+            id: switch3
+            x: 8
+            y: 101
+            width: 221
+            height: 40
+            text: qsTr("Przyciski potwierdzeń")
+            anchors.left: sim.left
+            anchors.right: switch1.right
+            anchors.top: switch1.bottom
+            checked: true
+            anchors.rightMargin: -40
+            anchors.topMargin: 0
         }
     }
 
@@ -69,6 +110,7 @@ GroupBox {
         text: "SYNCHRONIZACJA \n CZASU"
         anchors.left: parent.left
         anchors.leftMargin: 5
+        onClicked: {manager.sendToDevice("<proc_sync;>",4);}
     }
 }
 
@@ -77,10 +119,10 @@ GroupBox {
     x: 37
     y: 332
     width: 662
-    height: 315
+    height: 339
     anchors.left: ustawienia.left
     anchors.right: groupBox.right
-    anchors.rightMargin: 6
+    anchors.rightMargin: -19
     anchors.leftMargin: -6
     title: qsTr("Ręczne sterowanie ramieniem (Inkrementalnie)")
 
@@ -91,8 +133,11 @@ GroupBox {
         width: 86
         height: 90
         text: qsTr("+")
+        flat: false
+        highlighted: false
         anchors.horizontalCenterOffset: -268
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;1;"+moveamount.value+";>",4);}
     }
 
     Button {
@@ -104,6 +149,7 @@ GroupBox {
         text: qsTr("-")
         anchors.horizontalCenterOffset: -268
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;1;-"+moveamount.value+";>",4);}
     }
 
     Text {
@@ -127,6 +173,7 @@ GroupBox {
         anchors.bottom: button1.bottom
         anchors.horizontalCenterOffset: -145
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;2;"+moveamount.value+";>",4);}
     }
 
     Button {
@@ -141,6 +188,7 @@ GroupBox {
         anchors.bottom: button2.bottom
         anchors.horizontalCenterOffset: -145
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;2;-"+moveamount.value+";>",4);}
     }
 
     Text {
@@ -167,6 +215,7 @@ GroupBox {
         anchors.bottom: button1.bottom
         anchors.horizontalCenterOffset: -21
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;3;"+moveamount.value+";>",4);}
     }
 
     Button {
@@ -181,6 +230,7 @@ GroupBox {
         anchors.bottom: button2.bottom
         anchors.horizontalCenterOffset: -21
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;3;-"+moveamount.value+";>",4);}
     }
 
     Text {
@@ -204,6 +254,7 @@ GroupBox {
         text: qsTr("+")
         anchors.horizontalCenterOffset: 100
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;4;"+moveamount.value+";>",4);}
     }
 
     Button {
@@ -215,6 +266,7 @@ GroupBox {
         text: qsTr("-")
         anchors.horizontalCenterOffset: 100
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;4;-"+moveamount.value+";>",4);}
     }
 
     Text {
@@ -238,6 +290,8 @@ GroupBox {
         anchors.bottom: button7.bottom
         anchors.horizontalCenterOffset: 223
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;5;"+moveamount.value+";>",4);}
+
     }
 
     Button {
@@ -252,6 +306,7 @@ GroupBox {
         anchors.bottom: button8.bottom
         anchors.horizontalCenterOffset: 223
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {manager.sendToDevice("<srv_hi;5;-"+moveamount.value+";>",4);}
     }
 
     Text {
@@ -264,6 +319,94 @@ GroupBox {
         anchors.bottom: text4.bottom
         font.pixelSize: 20
         font.bold: true
+    }
+
+    Text {
+        id: servo1pos
+        x: 35
+        y: 291
+        width: 0
+        height: 24
+        color: "#d81010"
+        text: "0"
+        anchors.bottom: parent.bottom
+        font.pixelSize: 20
+        anchors.bottomMargin: 0
+        font.bold: true
+    }
+
+    Text {
+        id: servo2pos
+        x: 159
+        y: 291
+        color: "#d81010"
+        text: "0"
+        anchors.verticalCenter: servo1pos.verticalCenter
+        anchors.top: servo1pos.top
+        anchors.bottom: parent.bottom
+        font.pixelSize: 20
+        font.bold: true
+    }
+
+    Text {
+        id: servo3pos
+        x: 285
+        y: 291
+        width: 24
+        height: 24
+        color: "#d81010"
+        text: "0"
+        anchors.verticalCenter: servo1pos.verticalCenter
+        anchors.left: text3.left
+        anchors.right: servo2pos.right
+        anchors.top: servo1pos.top
+        anchors.bottom: parent.bottom
+        font.pixelSize: 20
+        anchors.rightMargin: -136
+        anchors.bottomMargin: 0
+        font.bold: true
+    }
+
+    Text {
+        id: servo4pos
+        x: 399
+        y: 291
+        width: 24
+        height: 24
+        color: "#d81010"
+        text: "0"
+        anchors.verticalCenter: servo1pos.verticalCenter
+        anchors.left: text3.left
+        anchors.right: text4.right
+        anchors.top: servo1pos.top
+        anchors.bottom: parent.bottom
+        font.pixelSize: 20
+        anchors.verticalCenterOffset: 0
+        anchors.leftMargin: 111
+        anchors.bottomMargin: 0
+        font.bold: true
+        anchors.rightMargin: -8
+    }
+
+    Text {
+        id: servo5pos
+        x: 519
+        y: 291
+        width: 24
+        height: 24
+        color: "#d81010"
+        text: "0"
+        anchors.verticalCenter: servo1pos.verticalCenter
+        anchors.left: text3.left
+        anchors.right: text5.right
+        anchors.top: servo1pos.top
+        anchors.bottom: parent.bottom
+        font.pixelSize: 20
+        anchors.leftMargin: 231
+        anchors.verticalCenterOffset: 0
+        anchors.bottomMargin: 0
+        font.bold: true
+        anchors.rightMargin: -120
     }
 }
 
@@ -278,10 +421,14 @@ GroupBox {
     title: qsTr("Ustawienia trybu imprezy")
 
     Slider {
-        id: slider
+        id: slidertime
         x: 9
         y: 46
-        value: 0.5
+        stepSize: 1
+        to: 30
+        from: 4
+        value: 4
+        onValueChanged: {manager.sendToDevice("<proc_sclk;"+value+";>",4);}
     }
 
     Text {
@@ -289,8 +436,8 @@ GroupBox {
         x: 9
         y: 25
         text: qsTr("Czas pomiędzy rozlaniami")
-        anchors.left: slider.left
-        anchors.bottom: slider.top
+        anchors.left: slidertime.left
+        anchors.bottom: slidertime.top
         font.pixelSize: 12
         anchors.bottomMargin: 6
     }
@@ -304,11 +451,40 @@ Switch {
     anchors.horizontalCenterOffset: -27
     anchors.horizontalCenter: groupBox2.horizontalCenter
 }
+
+Slider {
+    id: moveamount
+    x: 579
+    y: 483
+    stepSize: 1
+    to: 1000
+    from: 0
+    rotation: 90
+    value: 200
+    onValueChanged: {valueformove.text=moveamount.value;}
+}
+
+Text {
+    id: valueformove
+    x: 659
+    y: 362
+    width: 60
+    height: 15
+    text: qsTr("200")
+    anchors.left: moveamount.left
+    anchors.right: groupBox.right
+    anchors.bottom: groupBox1.bottom
+    font.pixelSize: 12
+    anchors.rightMargin: -6
+    anchors.bottomMargin: 270
+    anchors.leftMargin: 89
+}
 }
 
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;formeditorZoom:0.66;height:768;width:1024}D{i:9}
+    D{i:0;autoSize:true;formeditorZoom:0.9;height:768;width:1024}D{i:6}D{i:12}D{i:27}
+D{i:28}D{i:29}D{i:30}
 }
 ##^##*/
