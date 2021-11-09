@@ -61,8 +61,12 @@ Item {
 
 
 
-   Item {
-       anchors.fill: parent
+    Item {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+       anchors.bottom: newcmd.bottom
+       anchors.bottomMargin: 0
        focus: true
        Keys.onPressed: {
        if (event.key === Qt.Key_Left) {
@@ -87,7 +91,7 @@ Item {
     Rectangle {
         width: parent.width
         height: parent.height
-        anchors.fill: parent; anchors.bottomMargin: 45;
+        anchors.fill: parent; anchors.bottomMargin: 100;
         color: "#000008"   // Color of console background
 
         Flickable {
@@ -164,17 +168,192 @@ ScrollBar.vertical: ScrollBar {}
     }
 
     }
+Row {
+    anchors.bottom: parent.bottom
+    anchors.bottomMargin: 40
+    anchors.verticalCenterOffset: 96
+    anchors.horizontalCenterOffset: -30
 
+////////////////////////////////////////////// BUTTON
+    Rectangle {
+        color:"black"
+        height: 60
+        width: 85
+    Button {
+        id: btn_servopos
+        text: qsTr("SERWO \n POZYCJE")
+        height: 60
+        width: 80
+        onClicked: {manager.sendToDevice("<srv_stat;>",4);}
+        }
+    }
+
+
+///////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////// BUTTON
+        Rectangle {
+            color:"black"
+            height: 60
+            width: 85
+        Button {
+            id: btn_filelist
+            text: qsTr("LISTA \n PLIKÓW")
+            height: 60
+            width: 80
+            onClicked: {manager.sendToDevice("<sd_ls;>",4);}
+            }
+        }
+    ///////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////// BUTTON
+            Rectangle {
+                color:"black"
+                height: 60
+                width: 85
+            Button {
+                id: btn_pinlist
+                text: qsTr("LISTA \n PINÓW")
+                height: 60
+                width: 80
+                onClicked: {manager.sendToDevice("<pin_st;>",4);}
+                }
+            }
+        ///////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////// BUTTON
+                Rectangle {
+                    color:"black"
+                    height: 60
+                    width: 85
+                Button {
+                    id: btn_dump
+                    text: qsTr("ZRZUT \n KOMEND")
+                    height: 60
+                    width: 80
+                    onClicked: {manager.sendToDevice("<proc_dmp;>",4);}
+                    }
+                }
+            ///////////////////////////////////////////////////////////////////////
+                ////////////////////////////////////////////// BUTTON
+                    Rectangle {
+                        color:"black"
+                        height: 60
+                        width: 85
+                    Button {
+                        id: btn_saves
+                        text: qsTr("ZAPISZ \n UST.")
+                        height: 60
+                        width: 80
+                        onClicked: {manager.sendToDevice("<sett_s;>",4);}
+                        }
+                    }
+                ///////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////// BUTTON
+                        Rectangle {
+                            color:"black"
+                            height: 60
+                            width: 85
+                        Button {
+                            id: btn_loads
+                            text: qsTr("WCZYTAJ \n UST.")
+                            height: 60
+                            width: 80
+                            onClicked: {manager.sendToDevice("<sett_l;>",4);}
+                            }
+                        }
+                    ///////////////////////////////////////////////////////////////////////
+                        ////////////////////////////////////////////// BUTTON
+                            Rectangle {
+                                color:"black"
+                                height: 60
+                                width: 85
+                            Button {
+                                id: btn_time
+                                text: qsTr("CZAS")
+                                height: 60
+                                width: 80
+                                onClicked: {manager.sendToDevice("<t_a;>",4);}
+                                }
+                            }
+                        ///////////////////////////////////////////////////////////////////////
+                            ////////////////////////////////////////////// BUTTON
+                                Rectangle {
+                                    color:"black"
+                                    height: 60
+                                    width: 85
+                                Button {
+                                    id: btn_eepr
+                                    text: qsTr("ZRZUT \n EEPROM")
+                                    height: 60
+                                    width: 80
+                                    onClicked: {manager.sendToDevice("<ep_du;>",4);}
+                                    }
+                                }
+                            ///////////////////////////////////////////////////////////////////////
+                                ////////////////////////////////////////////// BUTTON
+                                    Rectangle {
+                                        color:"black"
+                                        height: 60
+                                        width: 85
+                                    Button {
+                                        id: btn_ledoff
+                                        text: qsTr("ZGAŚ \n LED")
+                                        height: 60
+                                        width: 80
+                                        onClicked: {manager.sendToDevice("<l_cls;>",4);}
+                                        }
+                                    }
+                                ///////////////////////////////////////////////////////////////////////
+                                    ////////////////////////////////////////////// BUTTON
+                                        Rectangle {
+                                            color:"black"
+                                            height: 60
+                                            width: 85
+                                        Button {
+                                            id: btn_bret
+                                            text: qsTr("ODDYCHAJ \n LED")
+                                            height: 60
+                                            width: 80
+                                            onClicked: {manager.sendToDevice("<l_br;>",4);}
+                                            }
+                                        }
+                                    ///////////////////////////////////////////////////////////////////////
+                                        ////////////////////////////////////////////// BUTTON
+                                            Rectangle {
+                                                color:"black"
+                                                height: 60
+                                                width: 85
+                                            Button {
+                                                id: btn_scrst
+                                                text: qsTr("SKRYPT \n STOP")
+                                                height: 60
+                                                width: 80
+                                                onClicked: {manager.sendToDevice("<scr_stop;>",4);}
+                                                }
+                                            }
+                                        ///////////////////////////////////////////////////////////////////////
+                                            ////////////////////////////////////////////// BUTTON
+                                                Rectangle {
+                                                    color:"black"
+                                                    height: 60
+                                                    width: 85
+                                                Button {
+                                                    id: btn_tablest
+                                                    text: qsTr("STAN \n STOŁU")
+                                                    height: 60
+                                                    width: 80
+                                                    onClicked: {manager.sendToDevice("<n_i;>",4);}
+                                                    }
+                                                }
+                                            ///////////////////////////////////////////////////////////////////////
+}
 
     TextField {
         id: newcmd
         width: parent.width-50
-        text: "<cmp;3;3;>";
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 1
         anchors.verticalCenterOffset: 96
         anchors.horizontalCenterOffset: -30
-        placeholderText: qsTr("Send some command to device")
+        placeholderText: qsTr("Twoje polecenie...")
 
 
 

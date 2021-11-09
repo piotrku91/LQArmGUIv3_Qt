@@ -12,10 +12,10 @@ Item {
         id: ustawienia
         x: 37
         y: 26
-        width: 271
+        width: 239
         height: 294
         anchors.right: groupBox.left
-        anchors.rightMargin: -15
+        anchors.rightMargin: 17
         title: qsTr("Ustawienia ogólne")
 
         Switch {
@@ -106,7 +106,7 @@ GroupBox {
         x: 0
         y: 13
         width: 182
-        height: 106
+        height: 85
         text: "SYNCHRONIZACJA \n CZASU"
         anchors.left: parent.left
         anchors.leftMargin: 5
@@ -478,6 +478,63 @@ Text {
     anchors.rightMargin: -6
     anchors.bottomMargin: 270
     anchors.leftMargin: 89
+}
+
+GroupBox {
+    id: groupBox3
+    x: 762
+    y: 332
+    width: 259
+    height: 339
+    anchors.top: groupBox1.top
+    anchors.bottom: groupBox1.bottom
+    anchors.topMargin: 0
+    anchors.horizontalCenterOffset: 0
+    title: qsTr("Połączenie z urządzeniem")
+    anchors.horizontalCenter: groupBox2.horizontalCenter
+
+    Button {
+        id: button11
+        x: 0
+        y: 200
+        width: 100
+        height: 67
+        text: qsTr("POŁĄCZ")
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+
+        ComboBox {
+            id: comboBox
+            x: 0
+            y: -149
+            width: 225
+            height: 40
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: 4
+            anchors.bottomMargin: 176
+        }
+    }
+
+    Button {
+        id: button12
+        x: 122
+        y: 275
+        text: qsTr("ROZŁĄCZ")
+        anchors.verticalCenter: button11.verticalCenter
+        anchors.top: button11.top
+    }
+
+    Text {
+        id: text8
+        x: 0
+        y: 27
+        width: 42
+        height: 21
+        text: qsTr("PORT:")
+        anchors.left: parent.left
+        font.pixelSize: 12
+    }
 }
 }
 
